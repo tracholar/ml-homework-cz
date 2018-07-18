@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from keras.models import Sequential
 from keras.datasets import mnist
+from keras.optimizers import Adam
 
 
 def build_model():
@@ -24,6 +25,7 @@ def gen_dae_data(p = 0.3):
     你需要实现训练集和验证集的划分, mnist.load_data 函数可以直接返回划分好的数据
     :return: (X_noise, X, X_val_noise, X_val)
     """
+    # TODO 你的代码
     raise NotImplementedError()
 
 def compare_image(noise, denoise):
@@ -38,8 +40,11 @@ def compare_image(noise, denoise):
 def train():
     (X_noise, X, X_val_noise, X_val) = gen_dae_data()
     model = build_model()
-    model.fit(X_noise, X, batch_size=32, epochs=5, verbose=1)
+    # TODO 训练模型
+    # 你的代码
 
+
+    # 测试一个例子
     im_noise = X_val_noise[0, :]
     im = model.predict(im_noise)
 
