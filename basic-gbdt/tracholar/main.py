@@ -1,6 +1,7 @@
 #coding:utf-8
 
 import numpy as np
+from sklearn.tree import DecisionTreeRegressor
 
 def load_data():
     """
@@ -9,24 +10,31 @@ def load_data():
     y (n_samples,)           一维数组,取值为 +1  和  -1
     """
 
-    # TODO: 你的代码
-    raise NotImplementedError()
+    from sklearn.datasets import load_iris
+    data, target = load_iris(return_X_y=True)
+    target = (target == 0).astype(int)
+    return data, target
 
-def logloss(X, y, theta):
+def sigmoid(x):
+    """
+    请实现 sigmoid 函数
+    :param x:
+    :return:
+    """
+    return 1/(1+np.exp(-x))
+
+def logloss(z, y):
     """
     请实现logloss的计算和梯度的计算
-    :param X: 特征 np.array (n_samples, n_feature)
-    :param y: 标签 np.array (n_samples,)
-    :param theta: 参数,类型 np.array, 其中 theta[0] 表示 b, theta[1:] 表示w
     :return: 返回二元组 (loss, gradient)
     """
-    b = theta[0]
-    w = theta[1:]
 
     loss = 0.0
-    gradient = np.zeros(theta.shape)
+    gradient = np.zeros(y.shape)
 
     # TODO: 你的代码
+    loss = np.sum(- y * np.log(sigmoid(z)) - (1 - y) * np.log(1 - sigmoid(z)))
+    gradient = sigmoid(z) - y
 
     return loss, gradient
 
@@ -37,18 +45,28 @@ def predict(X, trees):
     :param theta: 回归树列表
     :return: y
     """
-    raise NotImplementedError()
+    z = 0.5
+    for t in trees:
+        z += t.predict(X)
+    return (sigmoid(z) > 0.5).astype(int)
 
-def train(X, y, ntrees = 10, alpha = 0.1):
+def train(X, y, ntrees = 10, alpha = 0.5):
     """
     训练模型
     :return: 返回参数 trees 返回回归树列表
     """
 
     trees = []
+    z = 0.5
     for i in range(0, ntrees):
         # TODO: 你的代码
-        pass
+        loss, gradient = logloss(z, y)
+        clf = DecisionTreeRegressor(max_depth=3)
+        clf.fit(X, - alpha * gradient)
+        z += clf.predict(X)
+        trees.append(clf)
+
+        print i, loss
 
     return trees
 
