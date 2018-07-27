@@ -55,9 +55,14 @@ def predict_score(X, trees):
     #TODO 你的代码
 
     return score
-def train(X, y, ntrees = 10, alpha = 0.5):
+def train(X, y, ntrees = 10, alpha = 0.5, mode='gbdt'):
     """
     训练模型
+    :param X: 特征
+    :param y: 标签
+    :param ntrees: 树的棵树
+    :param alpha: 学习率
+    :param mode: 学习模式, gbdt 一阶算法, xgboost 二阶算法
     :return: 返回参数 trees 返回回归树列表
     """
 
@@ -97,6 +102,14 @@ if __name__ == '__main__':
     X, y = load_data()
     n_trees = kfold(X, y, k=3) #3折叠交叉验证选出最佳树的棵树
     trees = train(X, y, ntrees=n_trees) #以最佳参数重新训练模型
+    yhat = predict(X, trees)
+    print('ACC:{0}'.format(np.mean(yhat == y)))
+
+    score = predict_score(X, trees)
+    print('AUC:{0}'.format(auc(y, score)))
+
+    # 二阶算法
+    trees = train(X, y, ntrees=n_trees, mode='xgboost')
     yhat = predict(X, trees)
     print('ACC:{0}'.format(np.mean(yhat == y)))
 
