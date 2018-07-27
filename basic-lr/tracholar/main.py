@@ -41,6 +41,23 @@ def logloss(X, y, theta):
 
     return loss, gradient
 
+def gradient_check(f, x0, epsilon=1e-4):
+    x1 = np.zeros(x0.shape)
+    x2 = np.zeros(x0.shape)
+
+
+    g = np.zeros(x0.shape)
+    for i in range(x0.shape[0]):
+        x1[:] = x0
+        x2[:] = x0
+
+        x1[i] += epsilon
+        x2[i] -= epsilon
+        y1 = f(x1)
+        y2 = f(x2)
+        g[i] = (y1 - y2)/2/epsilon
+    return g
+
 def predict(X, theta):
     """
     实现预测逻辑
@@ -59,20 +76,36 @@ def train(X, y):
     :return: 返回参数 theta
     """
 
-    theta = np.zeros(X.shape[1]+1)
-    max_iter = 100
+    theta = np.random.rand(X.shape[1]+1)
+    max_iter = 100000
+
+    loss0 = 0
     for i in range(0, max_iter):
         # TODO: 你的代码
         loss, gradient = logloss(X, y, theta)
         theta -= 0.01*gradient
-        print('{0} {1}'.format(i, loss))
+        #print('{0} {1}'.format(i, loss))
+
+        if abs(loss - loss0) < 1e-6:  # 收敛准则
+            break
+        else:
+            loss0 = loss
 
     return theta
 
 
 if __name__ == '__main__':
     X, y = load_data()
+
+    theta = np.random.rand(X.shape[1]+1)
+    _, g = logloss(X, y, theta)
+    print 'gradient diff:', np.linalg.norm(gradient_check(lambda x: logloss(X, y, x)[0], theta) - g)
+    print g
+    print gradient_check(lambda x: logloss(X, y, x)[0], theta)
+
+
     theta = train(X, y)
+
     yhat = predict(X, theta)
     print('ACC:{0}'.format(np.mean(yhat == y)))
     print('theta:', theta)
