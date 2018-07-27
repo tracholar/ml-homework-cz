@@ -35,8 +35,8 @@ def logloss(X, y, theta):
     # TODO: 你的代码
     reg = 1
     margin = np.dot(X, w) + b
-    loss = np.sum(np.log(1 + np.exp(- y * margin))) + 0.5*reg*np.sum(w*w)
-    gradient[0] = - np.sum(y * np.exp( - y * margin) / (1 + np.exp(- y * margin)))
+    loss = np.sum(np.log(1 + np.exp(- y * margin))) + 0.5*reg*np.sum(theta*theta)
+    gradient[0] = - np.sum(y * np.exp( - y * margin) / (1 + np.exp(- y * margin))) + reg * b
     gradient[1:] = - np.dot(X.T, y * np.exp( - y * margin) / (1 + np.exp(- y * margin))) + reg * w
 
     return loss, gradient
