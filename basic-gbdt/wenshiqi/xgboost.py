@@ -278,7 +278,7 @@ if __name__ == '__main__':
 
     # kfold to choose best 'eta', 'max_depth'
     cv_params = zip((0.02, 0.02, 0.02), (4, 5, 6))
-    tgb = xgboost()
+    xgb = xgboost()
     max_auc = -np.inf
     best_eta = 0.1
     best_depth = 3
@@ -300,11 +300,11 @@ if __name__ == '__main__':
             train_label = pd.Series(train_label)
             train_data = pd.DataFrame(train_data)
 
-            test_data = pd.DataFrame(test_data)
             test_label = pd.Series(test_label)
+            test_data = pd.DataFrame(test_data)
 
-            tgb.fit(train_data, train_label, **params)
-            pred_res = tgb.predict(test_data)
+            xgb.fit(train_data, train_label, **params)
+            pred_res = xgb.predict(test_data)
             tmp_auc.append(auc(pred_res, test_label))
             print "auc:", auc(pred_res, test_label)
         if np.mean(tmp_auc) > max_auc:
@@ -326,8 +326,8 @@ if __name__ == '__main__':
               'gamma': 0,
               'num_thread': 16}
 
-    # tgb = xgboost()
-    tgb.fit(train_X, train_Y, **params)
+    # xgb = xgboost()
+    xgb.fit(train_X, train_Y, **params)
 
-    pred_res = tgb.predict(test_X)
+    pred_res = xgb.predict(test_X)
     print "AUC:{}".format(auc(pred_res, test_Y))
