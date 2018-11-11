@@ -22,9 +22,8 @@ def loadDataSet():
     X_val = scaler.transform(X_val)
     return  X_train,X_val,y_train,y_val
 
-def sigmoid(inx):
-    #return 1. / (1. + np.exp(-max(min(inx, 15.), -15.)))
-    return 1.0 / (1 + exp(-inx))
+def sigmoid(z):
+    return 1.0 / (1 + exp(-z))
 
 def train(X_train,X_label,k,iter):
     alpha = 0.01
@@ -49,7 +48,7 @@ def train(X_train,X_label,k,iter):
             pre = sigmoid(p[0,0])
             loss_value+=(X_label[x]-pre)*(X_label[x]-pre)
 
-            #loss = sigmoid(X_label[x]*p[0,0])-1 #为什么这里是p[0,0]
+        
             loss = sigmoid(X_label[x]*p[0,0]) - 1
 
 
@@ -98,9 +97,9 @@ if __name__ == '__main__':
     X_train, X_val, y_train, y_val=loadDataSet()
     date_startTrain = datetime.now()
     print "开始训练"
-    w_0, w, v = train(mat(X_train), y_train, 10, 25)
-    print "训练准确性为：%f" % (1 - getAccuracy(mat(X_train), y_train, w_0, w, v))
+    w_0, w, v = train(mat(X_train), y_train, 10, 15)
+    print "训练准确性为：%f" %  getAccuracy(mat(X_train), y_train, w_0, w, v)
     date_endTrain = datetime.now()
     print "训练时间为：%s" % (date_endTrain - date_startTrain)
     print "开始测试"
-    print "测试准确性为：%f" % (1 - getAccuracy(mat(X_val), y_val, w_0, w, v))
+    print "测试准确性为：%f" % getAccuracy(mat(X_val), y_val, w_0, w, v)
