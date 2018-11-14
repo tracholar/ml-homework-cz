@@ -3,3 +3,7 @@
 - 实现基本梯度梯度下降优化
 - 实现牛顿法和拟牛顿法的二阶方法
 - 实现L1正则的软阈值算法
+- 实现L1正则的FTRL算法
+- 参考
+    - 近似梯度法 <https://tracholar.github.io/wiki/machine-learning/optimization/proximal-algorithm.html>
+    - FTRL算法 Follow-the-Regularized-Leader and Mirror Descent: Equivalence Theorems and L1 Regularization
