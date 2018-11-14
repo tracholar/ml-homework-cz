@@ -1,4 +1,5 @@
 ## 基于TensorFlow实现基本的CTR预估DNN模型
+- 实现 LR
 - 实现 DNN(Embedding + MLP)
 - 实现 DNN + LR (wide & deep)
 - 实现 DeepFM (DNN + FM + LR)
