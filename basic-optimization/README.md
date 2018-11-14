@@ -7,3 +7,6 @@
 - 参考
     - 近似梯度法 <https://tracholar.github.io/wiki/machine-learning/optimization/proximal-algorithm.html>
     - FTRL算法 Follow-the-Regularized-Leader and Mirror Descent: Equivalence Theorems and L1 Regularization
+- 问题
+    - 梯度下降常数学习率能收敛吗?
+    - FTRL与软阈值算法的区别,分别试用的场景是啥?
