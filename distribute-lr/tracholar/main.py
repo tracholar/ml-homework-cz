@@ -59,7 +59,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--role", help="server | worker", required=True)
     parser.add_argument("--server", help="server 机器 ip:port")
-    parser.add_argument("--port", help="本机端口号", type=int, required=True)
+    parser.add_argument("--port", help="本机端口号", type=ints)
     parser.add_argument("--max_iter", default=1000, help="迭代轮数", type=int)
 
 
