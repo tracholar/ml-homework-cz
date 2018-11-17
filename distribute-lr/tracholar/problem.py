@@ -11,13 +11,13 @@ def gen_batch(bath_size = 128, dim = 1024, dense_ratio = 0.1):
     :return: (w, X, y)
     """
     np.random.seed(2018) # 保证每次都是相同的w
-    w = np.random.randn(dim)
+    w = np.random.randn(dim) / np.sqrt(dim)
     mask = (np.random.rand(dim) < (1 - dense_ratio)).astype(int)
     w = w * mask
 
     np.random.seed(None) # 保证每次的数据都是不同的
     X = np.random.randn(bath_size, dim)
-    y = np.dot(X, w)
+    y = (np.dot(X, w) + np.random.rand(X.shape[0]) * 0.1 > 0).astype(int) * 2 - 1
     return w, X, y
 
 
@@ -25,8 +25,8 @@ def loss_function(w, X, y):
     # TODO 返回损失、梯度、海森矩阵
     margin = np.dot(X, w)
     loss = np.mean(np.log(1 + np.exp(- y * margin)))
-    g = - np.dot(X.T, y * np.exp( - y * margin) / (1 + np.exp(- y * margin))) / X.shape[0]
-    return loss, g
+    gw = - np.dot(X.T, y * np.exp( - y * margin) / (1 + np.exp(- y * margin))) / X.shape[0]
+    return loss, gw
 
 def numeric_gradient(f, w, epsilon=1e-4):
     assert len(w.shape) == 1, "w必须是向量"
