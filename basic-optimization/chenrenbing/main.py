@@ -53,6 +53,7 @@ if __name__ =='__main__':
     # 测试批量梯度下降
     from problem import *
     verbose = True
+
     w_dim = 128
     # 光滑函数
     w = np.random.randn(w_dim)
