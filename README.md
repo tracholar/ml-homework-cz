@@ -5,3 +5,10 @@
 
 
 坚持不懈，就是胜利！✌️
+
+1. [基本逻辑回归](basic-lr/)
+2. [基本梯度提升树](basic-gbdt/)
+3. [基本神经网络-自动编码机](basic-keras/)
+4. [基本梯度优化](basic-optimization/)
+5. [深度学习CTR预估模型](deep-ctr/)
+6. [分布式逻辑回归-参数服务器](distribute-lr/)
