@@ -19,13 +19,6 @@ def gen_batch(bath_size = 128, dim = 1024, dense_ratio = 0.1):
     np.random.seed(None) # 保证每次的数据都是不同的
     X = np.random.randn(bath_size, dim)
     y = np.dot(X, w)
-    """
-    w  （m,)
-    X   (N,m)
-    y   (N,
-    """
-    #print(w.shape,X.shape,y.shape)
-    #print(w)
     return w, X, y
 
 def line_search():
