@@ -13,7 +13,10 @@ def load_data():
     """
 
     # TODO: 你的代码
-    raise NotImplementedError()
+    from sklearn.datasets import load_iris
+    data, target = load_iris(return_X_y=True)
+    target = (target == 0).astype(int) * 2 - 1
+    return data, target
 
 def logloss(X, y, theta):
     """
@@ -30,8 +33,30 @@ def logloss(X, y, theta):
     gradient = np.zeros(theta.shape)
 
     # TODO: 你的代码
+    reg = 1
+    margin = np.dot(X, w) + b
+    loss = np.sum(np.log(1 + np.exp(- y * margin))) + 0.5*reg*np.sum(theta*theta)
+    gradient[0] = - np.sum(y * np.exp( - y * margin) / (1 + np.exp(- y * margin))) + reg * b
+    gradient[1:] = - np.dot(X.T, y * np.exp( - y * margin) / (1 + np.exp(- y * margin))) + reg * w
 
     return loss, gradient
+
+def gradient_check(f, x0, epsilon=1e-4):
+    x1 = np.zeros(x0.shape)
+    x2 = np.zeros(x0.shape)
+
+
+    g = np.zeros(x0.shape)
+    for i in range(x0.shape[0]):
+        x1[:] = x0
+        x2[:] = x0
+
+        x1[i] += epsilon
+        x2[i] -= epsilon
+        y1 = f(x1)
+        y2 = f(x2)
+        g[i] = (y1 - y2)/2/epsilon
+    return g
 
 def predict(X, theta):
     """
@@ -40,7 +65,10 @@ def predict(X, theta):
     :param theta:
     :return: y
     """
-    raise NotImplementedError()
+    b = theta[0]
+    w = theta[1:]
+    margin = np.dot(X, w) + b
+    return (margin > 0).astype(int) * 2 - 1
 
 def train(X, y):
     """
@@ -48,17 +76,41 @@ def train(X, y):
     :return: 返回参数 theta
     """
 
-    theta = np.zeros(X.shape[1]+1)
-    max_iter = 100
+    theta = np.random.rand(X.shape[1]+1)
+    max_iter = 100000
+
+    loss0 = 0
     for i in range(0, max_iter):
         # TODO: 你的代码
-        pass
+        loss, gradient = logloss(X, y, theta)
+        theta -= 0.01*gradient
+        #print('{0} {1}'.format(i, loss))
+
+        if abs(loss - loss0) < 1e-6:  # 收敛准则
+            break
+        else:
+            loss0 = loss
 
     return theta
 
 
 if __name__ == '__main__':
     X, y = load_data()
+
+    theta = np.random.rand(X.shape[1]+1)
+    _, g = logloss(X, y, theta)
+    print 'gradient diff:', np.linalg.norm(gradient_check(lambda x: logloss(X, y, x)[0], theta) - g)
+    print g
+    print gradient_check(lambda x: logloss(X, y, x)[0], theta)
+
+
     theta = train(X, y)
+
     yhat = predict(X, theta)
     print('ACC:{0}'.format(np.mean(yhat == y)))
+    print('theta:', theta)
+
+    from sklearn.linear_model import  LogisticRegression
+    clf = LogisticRegression(C=1)
+    clf.fit(X, y)
+    print('sklearn theta:',clf.intercept_, clf.coef_[0])

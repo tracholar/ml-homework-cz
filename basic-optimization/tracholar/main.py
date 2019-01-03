@@ -14,6 +14,7 @@ def bgd_optimizer(w, g, lr=0.1, l1=0, l2=0.1):
         raise NotImplementedError()
     return w
 
+
 def sgd_optimizer(w, g, lr=0.1, l1=0, l2=0.1):
     """
     实现随机梯度下降
@@ -25,7 +26,7 @@ def sgd_optimizer(w, g, lr=0.1, l1=0, l2=0.1):
     if l1 == 0:
         raise NotImplementedError()
     else: # l1 范数 FTRL 算法
-        raise NotImplementedError()
+
     return w
 
 

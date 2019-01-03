@@ -23,7 +23,10 @@ def gen_batch(bath_size = 128, dim = 1024, dense_ratio = 0.1):
 
 def loss_function(w, X, y):
     # TODO 返回损失、梯度、海森矩阵
-    raise NotImplementedError("loss function not implemented!")
+    margin = np.dot(X, w)
+    loss = np.mean(np.log(1 + np.exp(- y * margin)))
+    g = - np.dot(X.T, y * np.exp( - y * margin) / (1 + np.exp(- y * margin))) / X.shape[0]
+    return loss, g
 
 def numeric_gradient(f, w, epsilon=1e-4):
     assert len(w.shape) == 1, "w必须是向量"
@@ -35,3 +38,12 @@ def numeric_gradient(f, w, epsilon=1e-4):
         df = f(w + dw) - f(w - dw)
         g[i] = df / epsilon / 2
     return g
+
+if __name__ == '__main__':
+    w0, X, y = gen_batch(bath_size=10000)
+    w = np.random.rand(w0.shape[0])/w0.shape[0]
+    f = lambda x: loss_function(x, X, y)[0]
+    loss, g0 = loss_function(w, X, y)
+    g1 = numeric_gradient(f, w)
+    print np.linalg.norm(g0 - g1)
+    assert np.linalg.norm(g0 - g1) < 1e-4
