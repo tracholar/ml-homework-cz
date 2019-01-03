@@ -15,7 +15,6 @@ def RunServer(opt):
     port = opt['port']
     logger.info("run server at %s:%d" %( host,port ))
 
-
     global w, lr, step, reg
     w = np.zeros(n_feature)
     lr = 1
@@ -68,6 +67,14 @@ def RunWorker(opt):
 
     print 'w:', w
 
+
+"""
+先启动server
+python main.py  --role server --port 10000
+
+然后启动多个worker
+python main.py  --role worker --server <server-ip>:10000
+"""
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

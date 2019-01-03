@@ -28,6 +28,7 @@ def loss_function(w, X, y):
     gw = - np.dot(X.T, y * np.exp( - y * margin) / (1 + np.exp(- y * margin))) / X.shape[0]
     return loss, gw
 
+
 def numeric_gradient(f, w, epsilon=1e-4):
     assert len(w.shape) == 1, "w必须是向量"
 
@@ -47,3 +48,4 @@ if __name__ == '__main__':
     g1 = numeric_gradient(f, w)
     print np.linalg.norm(g0 - g1)
     assert np.linalg.norm(g0 - g1) < 1e-4
+
