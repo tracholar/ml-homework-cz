@@ -1,0 +1,5 @@
+*.pkl
+*.json
+*.gz
+*.bin
+*.txt

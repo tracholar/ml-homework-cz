@@ -1,6 +1,5 @@
 #! /bin/bash
 
-cd ..
 mkdir ./raw_data
 cd ./raw_data
 wget -c http://snap.stanford.edu/data/amazon/productGraph/categoryFiles/reviews_Electronics_5.json.gz
