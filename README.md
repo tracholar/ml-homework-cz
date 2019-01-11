@@ -12,3 +12,5 @@
 4. [基本梯度优化](basic-optimization/)
 5. [深度学习CTR预估模型](deep-ctr/)
 6. [分布式逻辑回归-参数服务器](distribute-lr/)
+7. [强化学习-动态规划](/rl-dynamic-programming/)
+8. [强化学习-时间差分](/rl-mc-td-learning/)
