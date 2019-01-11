@@ -41,11 +41,7 @@ def logloss(z, y):
     gradient = np.zeros(y.shape)
 
     # TODO: 你的代码
-    loss = np.sum(- y * np.log(sigmoid(z)) - (1 - y) * np.log(1 - sigmoid(z)))
-    gradient = sigmoid(z) - y
-
-
-    return loss, gradient
+    raise NotImplementedError()
 
 def predict(X, trees):
     """

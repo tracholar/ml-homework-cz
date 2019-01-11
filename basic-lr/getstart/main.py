@@ -58,10 +58,7 @@ def predict(X, theta):
     :param theta:
     :return: y
     """
-    b = theta[0]
-    w = theta[1:]
-    margin = np.dot(X, w) + b
-    return (margin > 0).astype(int) * 2 - 1
+    raise NotImplementedError()
 
 def train(X, y):
     """
