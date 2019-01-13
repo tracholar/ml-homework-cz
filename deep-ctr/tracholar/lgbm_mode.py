@@ -13,8 +13,8 @@ with open('./dataset.sample.pkl', 'rb') as f:
     cate_list = pickle.load(f)
     user_count, item_count, cate_count = pickle.load(f)
 
-
-print train_set[:10], test_set[:10], cate_list
+LR(user_count=user_count, item_count=item_count, cate_count=cate_count, cate_list=cate_list)
+#print train_set[:10], test_set[:10], cate_list
 
 def train_input_dataset():
     def _map_fn(data):
@@ -54,13 +54,11 @@ def test_input_dataset():
     return tf.data.Dataset.from_tensor_slices(test_set).flat_map(_map_fn).shuffle(1000).batch(128).repeat()
 
 
-np.array([(1,np.array([32423,23423]), 324324)])
+from input import DataInput, DataInputTest
 
-train_dataset = train_input_dataset()
-iter = train_dataset.make_initializable_iterator()
-next_element = iter.get_next()
 
-with tf.Session() as sess:
-    sess.run(iter.initializer)
-    for i in range(10):
-        print i, sess.run(next_element)
+
+for _, row in DataInput(train_set, 2):
+    reviewId, asin, y, hist, hist_len = row
+    print reviewId, asin, y, hist, hist_len
+    break
