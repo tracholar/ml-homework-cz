@@ -5,7 +5,7 @@ from input import DataInput
 import numpy as np
 
 
-class LR(object):
+class DeepFM(object):
     def __init__(self, **kwargs):
         self.uid = tf.placeholder(tf.int32, [None, ])
         self.tid = tf.placeholder(tf.int32, [None, ])
@@ -13,11 +13,13 @@ class LR(object):
         self.hist_i = tf.placeholder(tf.int32, [None, None])
         self.hist_len = tf.placeholder(tf.int32, [None, ])
 
-        uid_emb_w = tf.get_variable("uid_emb", shape=[kwargs['user_count'], 1])
-        tid_emb_w = tf.get_variable("tid_emb", shape=[kwargs['item_count'], 1])
-        cate_emb_w = tf.get_variable("cate_emb", shape=[kwargs['cate_count'], 1])
+        emb_dim = 16
+        uid_emb_w = tf.get_variable("uid_emb", shape=[kwargs['user_count'], emb_dim])
+        tid_emb_w = tf.get_variable("tid_emb", shape=[kwargs['item_count'], emb_dim])
+        cate_emb_w = tf.get_variable("cate_emb", shape=[kwargs['cate_count'], emb_dim])
 
         cate_list = tf.convert_to_tensor(kwargs['cate_list'], dtype=tf.int64)
+
 
         all_emb = [
             tf.nn.embedding_lookup(uid_emb_w, self.uid),
@@ -26,7 +28,14 @@ class LR(object):
             tf.nn.embedding_lookup(cate_emb_w, tf.gather(cate_list, self.tid)),
             tf.reduce_sum(tf.nn.embedding_lookup(cate_emb_w, tf.gather(cate_list, self.hist_i)), axis=1),
         ]
-        self.logits = tf.reduce_sum(tf.concat(all_emb, axis=1), axis=1)
+        mlp_input = tf.concat(all_emb, axis=1)
+        mlp_hidden = tf.layers.dense(inputs=mlp_input, units=64, activation=tf.nn.relu)
+        mlp_out = tf.reduce_sum(tf.layers.dense(inputs=mlp_hidden, units=1, activation=None), axis=1)
+
+        fm_out = tf.reduce_sum( all_emb[0]* all_emb[1] + all_emb[0] *  all_emb[3] + all_emb[1] * all_emb[2] + all_emb[
+            3] * all_emb[4], axis=1)
+
+        self.logits = mlp_out + fm_out
         self.loss = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(logits=self.logits, labels=self.y))
         self.opt = tf.train.AdagradOptimizer(0.1)
 
@@ -58,7 +67,7 @@ class LR(object):
                                 'global_step': self.global_step.eval(session=sess),
                                 'auc' : self.auc.eval(session=sess),
                                 'epoch' : epoch}
-                    print('Epoch {epoch}, Global step = {global_step}, Loss = {loss}, AUC = {auc}'.format(**log_data))
+                    print('Epoch {epoch}, Global step = {global_step}, Loss = {loss}, AUC = {auc}s'.format(**log_data))
 
                     loss_sum = 0
 
@@ -67,7 +76,6 @@ class LR(object):
         loss_sum = 0
         logits_arr = np.array([])
         y_arr = np.array([])
-
 
         for _, row in DataInput(data_set, 128000):
             reviewerId, asin, y, hist, hist_len = row
