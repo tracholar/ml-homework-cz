@@ -26,12 +26,13 @@ for reviewerID, hist in reviews_df.groupby('reviewerID'):
       train_set.append((reviewerID, hist, neg_list[i], 0))
     else:
       label = (pos_list[i], neg_list[i])
-      test_set.append((reviewerID, hist, label))
+      test_set.append((reviewerID, hist, label[0], 1))
+      test_set.append((reviewerID, hist, label[1], 0))
 
 random.shuffle(train_set)
 random.shuffle(test_set)
 
-assert len(test_set) == user_count
+assert len(test_set) == user_count * 2
 # assert(len(test_set) + len(train_set) // 2 == reviews_df.shape[0])
 
 with open('dataset.pkl', 'wb') as f:
