@@ -8,14 +8,14 @@ class WideDeep(object):
         # TODO 初始化计算图
         raise NotImplementedError()
 
-    def fit(self, data):
+    def fit(self, sess, data):
         # TODO 模型训练
         raise NotImplementedError()
 
-    def predict(self, data):
+    def predict(self,sess,  data):
         # TODO 预测
         raise NotImplementedError()
 
-    def eval(self, data):
+    def eval(self, sess, data):
         # TODO 模型评估
         raise NotImplementedError()
