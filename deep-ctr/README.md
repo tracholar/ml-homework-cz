@@ -8,6 +8,7 @@
    1. 1_convert_pd.py 
    2. 2_remap_id.py
    3. build_dataset.py
+- 启动代码参考 `getstart/` 目录
 - 完成基本的实验报告
     1. 实验原理
     2. 主要步骤
