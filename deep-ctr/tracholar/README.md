@@ -13,6 +13,7 @@
 - DNN 的全连接层使用了 `tf.layers.dense` 这个高级API,而不是用原始的矩阵乘法
 - FM实现是通过对 embedding 向量 先做元素乘法, 然后利用 `tf.reduce_sum` 在特征维度求和, 实现向量内积
 - DeepFM没有使用线性项
+- 运行方法 `python train.py` 可以把里面的模型改为其他模型测试效果
 
 
 ### 实验结果
