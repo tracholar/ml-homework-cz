@@ -5,14 +5,13 @@ from input import DataInput
 import numpy as np
 from model import ModelMixin
 
-class DNN(ModelMixin):
+class WideDeep(ModelMixin):
     def __init__(self, **kwargs):
         self.uid = tf.placeholder(tf.int32, [None, ])
         self.tid = tf.placeholder(tf.int32, [None, ])
         self.y = tf.placeholder(tf.float32, [None,])
         self.hist_i = tf.placeholder(tf.int32, [None, None])
         self.hist_len = tf.placeholder(tf.int32, [None, ])
-
 
         ## TODO 创建计算图
         # 可能有用的函数:
@@ -37,5 +36,3 @@ class DNN(ModelMixin):
         self.auc, self.auc_update_op = None
 
         raise NotImplementedError()
-
-
