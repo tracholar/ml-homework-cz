@@ -5,7 +5,7 @@ from input import DataInput
 import numpy as np
 from model import ModelMixin
 
-class DeepFM(ModelMixin):
+class LR(ModelMixin):
     def __init__(self, **kwargs):
         self.uid = tf.placeholder(tf.int32, [None, ])
         self.tid = tf.placeholder(tf.int32, [None, ])
@@ -13,13 +13,11 @@ class DeepFM(ModelMixin):
         self.hist_i = tf.placeholder(tf.int32, [None, None])
         self.hist_len = tf.placeholder(tf.int32, [None, ])
 
-        emb_dim = 16
-        uid_emb_w = tf.get_variable("uid_emb", shape=[kwargs['user_count'], emb_dim])
-        tid_emb_w = tf.get_variable("tid_emb", shape=[kwargs['item_count'], emb_dim])
-        cate_emb_w = tf.get_variable("cate_emb", shape=[kwargs['cate_count'], emb_dim])
+        uid_emb_w = tf.get_variable("uid_emb", shape=[kwargs['user_count'], 1])
+        tid_emb_w = tf.get_variable("tid_emb", shape=[kwargs['item_count'], 1])
+        cate_emb_w = tf.get_variable("cate_emb", shape=[kwargs['cate_count'], 1])
 
         cate_list = tf.convert_to_tensor(kwargs['cate_list'], dtype=tf.int64)
-
 
         all_emb = [
             tf.nn.embedding_lookup(uid_emb_w, self.uid),
@@ -28,13 +26,8 @@ class DeepFM(ModelMixin):
             tf.nn.embedding_lookup(cate_emb_w, tf.gather(cate_list, self.tid)),
             tf.reduce_sum(tf.nn.embedding_lookup(cate_emb_w, tf.gather(cate_list, self.hist_i)), axis=1),
         ]
-        mlp_input = tf.concat(all_emb, axis=1)
-        mlp_hidden = tf.layers.dense(inputs=mlp_input, units=64, activation=tf.nn.relu)
-        mlp_out = tf.reduce_sum(tf.layers.dense(inputs=mlp_hidden, units=1, activation=None), axis=1)
 
-        fm_out = tf.reduce_sum( all_emb[0]* all_emb[1] + all_emb[0] *  all_emb[3] + all_emb[1] * all_emb[2] + all_emb[
-            3] * all_emb[4], axis=1)
-
+        lr_out = tf.reduce_sum(tf.concat(all_emb, axis=1), axis=1)
 
         # cross feature, item cross 单机扛不住, 只能用 cate 做cross
         # item_cross_dim = kwargs['item_count'] ** 2
@@ -48,18 +41,14 @@ class DeepFM(ModelMixin):
         cate_cross_emb_w = tf.get_variable("cate_cross_emb", shape=[cate_cross_dim, 1])
         cross_out = tf.reduce_sum(tf.nn.embedding_lookup(cate_cross_emb_w, cate_cross), axis=[1, 2]) #  + tf.reduce_sum(tf.nn.embedding_lookup(item_cross_emb_w, item_cross), axis=[1, 2])
 
-        self.logits = mlp_out + fm_out + cross_out
-        self.loss = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(logits=self.logits, labels=self.y))
 
+        self.logits = lr_out + cross_out
+        self.loss = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(logits=self.logits, labels=self.y))
         self.opt = tf.train.AdagradOptimizer(0.1)
 
         self.global_step = tf.Variable(0, trainable=False, name='grobal_step')
         self.train_op = self.opt.minimize(self.loss, global_step=self.global_step)
 
         self.auc, self.auc_update_op = tf.metrics.auc(labels=self.y, predictions=tf.nn.sigmoid(self.logits))
-
-
-
-
 
 
