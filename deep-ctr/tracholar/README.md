@@ -34,7 +34,7 @@
 - embedding的实现使用 `tf.nn.embedding_lookup`
 - LR 的实现也用的是embedding,只是embedding的维度为1, 然后利用 `tf.reduce_sum` 得到和
 - DNN 的全连接层使用了 `tf.layers.dense` 这个高级API,而不是用原始的矩阵乘法
-- WideDeep 的cross特征是通过类别id相乘(即交叉)得到
+- WideDeep 的cross特征是通过类别id相乘(即交叉)得到, 也试过用用户历史asin与候选asin交叉,发现维度太高,有几十亿维,单机扛不住,就没搞了,在工业环境其实可以用这个交叉特征进一步增强模型的记忆能力
     - 遇到一个问题,在tf中,不同dim的张量相乘会出问题, 会报`Incompatible shapes: [128,155] vs. [128]`这种不兼容shape的错误, 可以通过 `tf.expand_dims`将其中一个张量的dim扩大的方法解决, 不会自动做broadcast?
 - FM实现是通过对 embedding 向量 先做元素乘法, 然后利用 `tf.reduce_sum` 在特征维度求和, 实现向量内积
 - DeepFM没有使用线性项
