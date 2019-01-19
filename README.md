@@ -13,6 +13,9 @@
 
 坚持不懈，就是胜利！✌️
 
+
+通过 <https://tracholar.github.io/ml-homework-cz/> 阅读, 获得更佳体验
+
 # 作业目录
 1. [基本逻辑回归](basic-lr/) [容易]
 2. [基本梯度提升树](basic-gbdt/) [中等]
