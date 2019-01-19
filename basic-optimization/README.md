@@ -11,3 +11,13 @@
     - 梯度下降常数学习率能收敛吗?
     - FTRL与软阈值算法的区别,分别试用的场景是啥?
 - 启动代码 `getstart/`
+
+
+
+
+## 实现列表
+提交PR的时候,请在下方列出你的项目
+
+- [getstart](getstart/)
+- [tracholar](tracholar/)
+- [chenrenbing](chenrenbing/)

@@ -13,3 +13,11 @@
 - 数据集可以使用 iris 数据集，iris数据集有3个类别，请将第1类作为正例，其他类别作为负例，原则上可以实现100%准确率。
 - 如果用python的话，可以利用sklearn.dataset.load_iris()直接加载数据集
 
+
+## 实现列表
+提交PR的时候,请在下方列出你的项目
+
+- [getstart](getstart/)
+- [tracholar](tracholar/)
+- [wenshiqi](wenshiqi/)
+- [chenrenbing](chenrenbing/)

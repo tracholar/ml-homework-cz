@@ -7,3 +7,11 @@
 
 - 实现上述问题的模拟特卡罗方法和3种时间差分方法（SARSA, Q-learning, Double Q-learning）
 - 提交作业请发PR，可以参考 getstart，子目录名字请用自己的名字，谢谢
+
+
+
+## 实现列表
+提交PR的时候,请在下方列出你的项目
+
+- [getstart](getstart/)
+- [tracholar](tracholar/)
