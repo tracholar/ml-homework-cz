@@ -13,8 +13,8 @@ with open('../dataset.pkl', 'rb') as f:
     cate_list = pickle.load(f)
     user_count, item_count, cate_count = pickle.load(f)
 
-from deepfm import DeepFM
-model = LR(user_count=user_count, item_count=item_count, cate_count=cate_count, cate_list=cate_list)
+from widedeep import WideDeep
+model = WideDeep(user_count=user_count, item_count=item_count, cate_count=cate_count, cate_list=cate_list)
 
 with tf.Session() as sess:
     ## 初始化
