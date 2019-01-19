@@ -16,5 +16,7 @@
     4. 自己的思考
     
 ## 实现列表
+提交PR的时候,请在下方列出你的项目
+
 - [getstart](getstart/)
 - [tracholar](tracholar/)
