@@ -3,9 +3,9 @@ from __future__ import print_function
 import tensorflow as tf
 from input import DataInput
 import numpy as np
+from model import ModelMixin
 
-
-class LR(object):
+class LR(ModelMixin):
     def __init__(self, **kwargs):
         self.uid = tf.placeholder(tf.int32, [None, ])
         self.tid = tf.placeholder(tf.int32, [None, ])
@@ -35,62 +35,3 @@ class LR(object):
 
         self.auc, self.auc_update_op = tf.metrics.auc(labels=self.y, predictions=tf.nn.sigmoid(self.logits))
 
-
-
-
-
-    def fit(self, sess, train_set):
-
-        loss_sum = 0
-        for epoch in range(5):
-            for _, row in DataInput(train_set, 128):
-                reviewerId, asin, y, hist, hist_len = row
-                loss, _ , _= sess.run([self.loss,  self.train_op, self.auc_update_op], feed_dict = {
-                    self.uid : reviewerId,
-                    self.tid : asin,
-                    self.y : y,
-                    self.hist_i : hist,
-                    self.hist_len: hist_len
-                })
-                loss_sum += loss
-                if self.global_step.eval(session=sess) % 1000 == 0:
-                    log_data = {'loss' : loss_sum,
-                                'global_step': self.global_step.eval(session=sess),
-                                'auc' : self.auc.eval(session=sess),
-                                'epoch' : epoch}
-                    print('Epoch {epoch}, Global step = {global_step}, Loss = {loss}, AUC = {auc}'.format(**log_data))
-
-                    loss_sum = 0
-
-    def eval(self, sess, data_set, name='eval'):
-
-        loss_sum = 0
-        logits_arr = np.array([])
-        y_arr = np.array([])
-
-
-        for _, row in DataInput(data_set, 128000):
-            reviewerId, asin, y, hist, hist_len = row
-            loss,  logits = sess.run([self.loss, self.logits], feed_dict = {
-                self.uid : reviewerId,
-                self.tid : asin,
-                self.y : y,
-                self.hist_i : hist,
-                self.hist_len: hist_len
-            })
-            loss_sum += loss
-
-            logits_arr = np.append(logits_arr, logits)
-            y_arr = np.append(y_arr, y)
-
-        from sklearn.metrics import roc_auc_score
-        auc = roc_auc_score(y_arr, logits_arr)
-
-        log_data = {'name': name,
-                    'loss' : loss_sum,
-                    'auc' : auc,
-                    }
-        print('Eval {name} : loss = {loss} auc = {auc}'.format(**log_data))
-
-    def predict(self, **kwargs):
-        pass
