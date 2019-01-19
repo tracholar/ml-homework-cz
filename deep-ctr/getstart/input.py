@@ -22,13 +22,13 @@ class DataInput:
                                                   len(self.data))]
     self.i += 1
 
-    u, i, y, sl = [], [], [], []
+    u, i, y, hist_len = [], [], [], []
     for t in ts:
       u.append(t[0])
       i.append(t[2])
       y.append(t[3])
-      sl.append(len(t[1]))
-    max_sl = max(sl)
+      hist_len.append(len(t[1]))
+    max_sl = max(hist_len)
 
     hist_i = np.zeros([len(ts), max_sl], np.int64)
 
@@ -38,4 +38,4 @@ class DataInput:
         hist_i[k][l] = t[1][l]
       k += 1
 
-    return self.i, (u, i, y, hist_i, sl)
+    return self.i, (u, i, y, hist_i, hist_len)
