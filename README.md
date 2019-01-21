@@ -26,3 +26,4 @@
 7. [分布式逻辑回归-参数服务器](distribute-lr/) [中等]
 8. [强化学习-动态规划](rl-dynamic-programming/) [容易]
 9. [强化学习-时间差分](rl-mc-td-learning/) [容易]
+10. [探索与利用](explore-exploit/)
