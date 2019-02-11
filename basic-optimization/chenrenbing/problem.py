@@ -171,10 +171,6 @@ def ftrl(w,z_t,n_t,X,y,alpha=1,):
 
     return loss,z_t,n_t
 
-
-
-
-
 def numeric_gradient(f, w, epsilon=1e-4):
     assert len(w.shape) == 1, "w必须是向量"
 
