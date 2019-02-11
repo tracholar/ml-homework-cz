@@ -11,3 +11,11 @@
 - 参考文献
     - Factorization Machines, Steffen Rendle, 2010
     - Field-aware Factorization Machines for CTR Prediction, Yuchin Juan, 2016
+
+
+
+## 实现列表
+提交PR的时候,请在下方列出你的项目
+
+- [wenshiqi](wenshiqi/)
+- [chenrenbing](chenrenbing/)

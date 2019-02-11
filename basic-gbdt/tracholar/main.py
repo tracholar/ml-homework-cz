@@ -10,8 +10,18 @@ def load_data():
     y (n_samples,)           一维数组,取值为 0  和  1
     """
 
-    #TODO 二分类数据
-    raise NotImplementedError()
+    from sklearn.datasets import load_iris
+    data, target = load_iris(return_X_y=True)
+    target = (target == 0).astype(int)
+    return data, target
+
+def sigmoid(x):
+    """
+    请实现 sigmoid 函数
+    :param x:
+    :return:
+    """
+    return 1/(1+np.exp(-x))
 
 def sigmoid(x):
     """
@@ -31,6 +41,8 @@ def logloss(z, y):
     gradient = np.zeros(y.shape)
 
     # TODO: 你的代码
+    loss = np.sum(- y * np.log(sigmoid(z)) - (1 - y) * np.log(1 - sigmoid(z)))
+    gradient = sigmoid(z) - y
 
 
     return loss, gradient
@@ -42,8 +54,11 @@ def predict(X, trees):
     :param trees: 回归树列表
     :return: y
     """
-    #TODO 你的代码
-    raise NotImplementedError()
+    z = 0.5
+    for t in trees:
+        z += t.predict(X)
+    return (sigmoid(z) > 0.5).astype(int)
+
 def predict_score(X, trees):
     """
     预测得分
@@ -70,7 +85,13 @@ def train(X, y, ntrees = 10, alpha = 0.5, mode='gbdt'):
     z = 0.5
     for i in range(0, ntrees):
         # TODO: 你的代码
-        raise NotImplementedError()
+        loss, gradient = logloss(z, y)
+        clf = DecisionTreeRegressor(max_depth=3)
+        clf.fit(X, - alpha * gradient)
+        z += clf.predict(X)
+        trees.append(clf)
+
+        print i, loss
 
     return trees
 

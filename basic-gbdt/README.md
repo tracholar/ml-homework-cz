@@ -6,9 +6,18 @@
 - 实现k-fold交叉验证
 - 请 fork 这个代码仓库，然后增加自己的解答文件，然后发送PR提交作业
 - 请不要抄袭，自己的解答文件请以 yourname.xx  形式提交
+- 启动代码放在 `getstart/` 下面
 
 ## 一些有用的信息
 - GBDT二分类的损失函数是 log(1+exp(-y*(wT x)))
 - 数据集可以使用 iris 数据集，iris数据集有3个类别，请将第1类作为正例，其他类别作为负例，原则上可以实现100%准确率。
 - 如果用python的话，可以利用sklearn.dataset.load_iris()直接加载数据集
 
+
+## 实现列表
+提交PR的时候,请在下方列出你的项目
+
+- [getstart](getstart/)
+- [tracholar](tracholar/)
+- [wenshiqi](wenshiqi/)
+- [chenrenbing](chenrenbing/)

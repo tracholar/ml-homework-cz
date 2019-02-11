@@ -2,9 +2,9 @@
 
 - 请实现一个标准的二分类逻辑回归，可以使用C, C++, Java, Python 等你熟悉的编程语言，只能使用矩阵乘法库。
 - 请 fork 这个代码仓库，增加自己的解答文件后，发送PR提交作业。
-- 请不要抄袭，自己的解答文件请以 yourname/  目录形式提交，请将本作业放在目录 basic-lr/ 下面，可以参看 tracholar 的例子，谢谢
+- 请不要抄袭，自己的解答文件请以 yourname/  目录形式提交，请将本作业放在目录 basic-lr/ 下面
 - 可以增加一个README文件说明自己的想法和思路
-- 如果你完全不知道如何开始,可以将tracholar的solution拷贝过来,自己完成里面未完成的部分
+- 如果你完全不知道如何开始,可以将getstart的启动代码拷贝过来,自己完成里面未完成的部分
 - 实现**泊松回归**，请推导泊松回归的损失函数
 
 ## 一些有用的信息
@@ -13,3 +13,11 @@
 - 数据集可以使用 iris 数据集，iris数据集有3个类别，请将第1类作为正例，其他类别作为负例，原则上可以实现100%准确率。
 - 如果用python的话，可以利用sklearn.dataset.load_iris()直接加载数据集
 
+   
+## 实现列表
+提交PR的时候,请在下方列出你的项目
+
+- [getstart](getstart/)
+- [tracholar](tracholar/)
+- [wenshiqi](wenshiqi/)
+- [chenrenbing](chenrenbing/)

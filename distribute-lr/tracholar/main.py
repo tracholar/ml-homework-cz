@@ -15,22 +15,34 @@ def RunServer(opt):
     port = opt['port']
     logger.info("run server at %s:%d" %( host,port ))
 
+    global w, lr, step, reg
+    w = np.zeros(n_feature)
+    lr = 1
+    step = 0
+    reg = 1e-3
     def pull():
-        #TODO return weight
-        """
-        注意返回 np.ndarray 时,需要转换为 Python list, 否则无法序列化
-        :return: weight
-        """
-        raise NotImplementedError()
+        global w
+        return w.tolist()
 
     def push(dw):
-        raise NotImplementedError()
+        global w, step, lr, reg
+        w -= lr * np.array(dw) + 0.5 * reg * w
+        step += 1
+        if step % 1000 == 0:
+            logger.info("w: %s" % str(w[:5]))
 
+            if step % 5000 == 0:
+                lr /= 2
+        return True
+
+    def close():
+        sys.exit(0)
 
     from SimpleXMLRPCServer import SimpleXMLRPCServer
     server = SimpleXMLRPCServer((host, port), logRequests=False)
     server.register_function(pull)
     server.register_function(push)
+    server.register_function(close)
 
     server.serve_forever()
 
@@ -42,9 +54,18 @@ def RunWorker(opt):
 
     from problem import gen_batch, loss_function
 
+    cum_loss = 0
+    loss_decay = 0.9
     for i in range(opt['max_iter']):
-        # TODO 分布式随机梯度下降, 先从 server pull权重,计算梯度,然后 push 到server
-        raise NotImplementedError()
+        w = np.array(s.pull())
+        w_, X, y = gen_batch(128, dim=n_feature)
+        loss, g = loss_function(w, X, y)
+        cum_loss = cum_loss * loss_decay + (1-loss_decay) * loss
+        s.push(g.tolist())
+
+        logger.info("iter:%d\tloss:%.5f\tnorm(g):%.5f\t%s" % (i, cum_loss, np.linalg.norm(g), str(w_[:3])))
+
+    print 'w:', w
 
 
 """
@@ -59,7 +80,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--role", help="server | worker", required=True)
     parser.add_argument("--server", help="server 机器 ip:port")
-    parser.add_argument("--port", help="本机端口号", type=int)
+    parser.add_argument("--port", help="本机端口号", type=int, required=True)
     parser.add_argument("--max_iter", default=1000, help="迭代轮数", type=int)
 
 
