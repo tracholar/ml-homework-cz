@@ -101,7 +101,7 @@ for i in range(iterations):
     #   - sess.run
 
     if i % 100 == 0:
-        print '\r', time.asctime(), 'train', i, 'iters. dLoss =', dLoss, 'gLoss =', gLoss,
+        print '\r', time.asctime(), 'train', i, 'iters. ',
 print ''
 
 sample_image = generator(z_placeholder, 1, z_dimensions, reuse=True)
