@@ -95,11 +95,13 @@ for i in range(iterations):
     z_batch = np.random.uniform(-1, 1, size=[batch_size, z_dimensions])
     real_image_batch = mnist.train.next_batch(batch_size)
     real_image_batch = np.reshape(real_image_batch[0],[batch_size,28,28,1])
-    _,dLoss = sess.run([trainerD, d_loss],feed_dict={z_placeholder:z_batch,x_placeholder:real_image_batch}) #Update the discriminator
-    _,gLoss = sess.run([trainerG,g_loss],feed_dict={z_placeholder:z_batch}) #Update the generator
+
+    # TODO 执行训练逻辑
+    # 有用的API
+    #   - sess.run
 
     if i % 100 == 0:
-        print '\r', time.asctime(), 'train', i, 'iters. dLoss =', dLoss, 'gLoss =', gLoss,
+        print '\r', time.asctime(), 'train', i, 'iters. ',
 print ''
 
 sample_image = generator(z_placeholder, 1, z_dimensions, reuse=True)
