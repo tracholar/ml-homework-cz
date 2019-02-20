@@ -25,14 +25,14 @@ def RunServer(opt):
         return w.tolist()
 
     def push(dw):
-        global w, step, lr, reg
-        w -= lr * np.array(dw) + 0.5 * reg * w
-        step += 1
-        if step % 1000 == 0:
-            logger.info("w: %s" % str(w[:5]))
+        global w,lr,reg,step
+        w = w- lr * ( np.array(dw) + reg * w)
 
-            if step % 5000 == 0:
-                lr /= 2
+        step = step + 1
+
+        if step % 500 ==0:
+            logger.info(" w : %s " % str(w[:3]))
+
         return True
 
     def close():
@@ -57,13 +57,19 @@ def RunWorker(opt):
     cum_loss = 0
     loss_decay = 0.9
     for i in range(opt['max_iter']):
-        w = np.array(s.pull())
-        w_, X, y = gen_batch(128, dim=n_feature)
-        loss, g = loss_function(w, X, y)
-        cum_loss = cum_loss * loss_decay + (1-loss_decay) * loss
-        s.push(g.tolist())#s.push(list(s))
 
-        logger.info("iter:%d\tloss:%.5f\tnorm(g):%.5f\t%s" % (i, cum_loss, np.linalg.norm(g), str(w_[:3])))
+        w = np.array(s.pull())
+
+        _, X, y = gen_batch(128, dim=n_feature)
+
+        loss, grad= loss_function(w, X, y)
+
+        cum_loss = cum_loss * loss_decay + (1-loss_decay) * loss
+
+        s.push(grad.tolist())
+        if i % 100 ==0 :
+            logger.info(" i % d : loss %s " % (i,str(loss)))
+
 
     print 'w:', w
 
