@@ -13,9 +13,9 @@ class LR(ModelMixin):
         self.hist_i = tf.placeholder(tf.int32, [None, None])
         self.hist_len = tf.placeholder(tf.int32, [None, ])
 
-        uid_emb_w = tf.get_variable("uid_emb", shape=[kwargs['user_count'], 1])
-        tid_emb_w = tf.get_variable("tid_emb", shape=[kwargs['item_count'], 1])
-        cate_emb_w = tf.get_variable("cate_emb", shape=[kwargs['cate_count'], 1])
+        uid_emb_w = tf.get_variable("uid_emb", shape=[kwargs['user_count'], 2])
+        tid_emb_w = tf.get_variable("tid_emb", shape=[kwargs['item_count'], 2])
+        cate_emb_w = tf.get_variable("cate_emb", shape=[kwargs['cate_count'], 2])
 
         cate_list = tf.convert_to_tensor(kwargs['cate_list'], dtype=tf.int64)
 
