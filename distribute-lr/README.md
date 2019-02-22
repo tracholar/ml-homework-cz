@@ -4,7 +4,7 @@
 - 尝试单机测试通过后,在多台机器上运行
 - 参考文献: Parameter Server for Distributed Machine Learning
 - 参考 getstart/ 启动代码
-
+- [可选] RPC通信采用protobuf二进制格式
 
 
 ## 实现列表
