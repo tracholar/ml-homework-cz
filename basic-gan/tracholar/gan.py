@@ -5,6 +5,21 @@ import random
 import matplotlib.pyplot as plt
 import numpy as np
 import time
+import math
+
+def show_image(im, hsize=28, wsize=28):
+    """
+    :param im: shape = [batch_size, 28, 28]
+    :return: rim
+    """
+    w = 5 # 一行最多5个
+    h = int(math.ceil(im.shape[0]*1.0 / 5))
+    rim = np.zeros((h * hsize, w * wsize))
+    for i in range(h):
+        for j in range(w):
+            if i * 5  + j < im.shape[0]:
+                rim[i*hsize:(i+1)*hsize, j*wsize:(j+1)*wsize] = im[i * 5 + j]
+    return rim
 
 from tensorflow.examples.tutorials.mnist import input_data
 mnist = input_data.read_data_sets("MNIST_data/")
@@ -12,9 +27,9 @@ mnist = input_data.read_data_sets("MNIST_data/")
 x_train = mnist.train.images[:55000,:]
 print x_train.shape
 
-randomNum = random.randint(0,55000)
-image = x_train[randomNum].reshape([28,28])
-plt.imshow(image, cmap=plt.get_cmap('gray_r'))
+randomNum = np.random.randint(0,55000, 25)
+image = x_train[randomNum].reshape([-1, 28,28])
+plt.imshow(show_image(image), cmap=plt.get_cmap('gray_r'))
 plt.show()
 
 
@@ -65,7 +80,7 @@ def generator(z, batch_size, z_dim, reuse=False):
         s2, s4, s8, s16 = int(s/2), int(s/4), int(s/8), int(s/16) #We want to slowly upscale the image, so these values will help
         #make that change gradual.
 
-        h0 = tf.reshape(z, [batch_size, s16+1, s16+1, 25])
+        h0 = tf.reshape(z, [batch_size, s16+1, s16+1, 4])
         h0 = tf.nn.relu(h0)
         #Dimensions of h0 = batch_size x 2 x 2 x 25
 
@@ -116,17 +131,17 @@ def generator(z, batch_size, z_dim, reuse=False):
 
 
 sess = tf.Session()
-z_dimensions = 100
+z_dimensions = 16
 z_test_placeholder = tf.placeholder(tf.float32, [None, z_dimensions])
 
-sample_image = generator(z_test_placeholder, 1, z_dimensions)
-test_z = np.random.uniform(-1, 1, [1,z_dimensions])
+sample_image = generator(z_test_placeholder, 25, z_dimensions)
+test_z = np.random.uniform(-1, 1, [25,z_dimensions])
 
 sess.run(tf.global_variables_initializer())
 temp = (sess.run(sample_image, feed_dict={z_test_placeholder: test_z}))
 
 my_i = temp.squeeze()
-plt.imshow(my_i, cmap='gray_r')
+plt.imshow(show_image(my_i), cmap='gray_r')
 plt.show()
 
 
@@ -156,7 +171,7 @@ trainerD = adam.minimize(d_loss, var_list=d_vars)
 trainerG = adam.minimize(g_loss, var_list=g_vars)
 
 sess.run(tf.global_variables_initializer())
-iterations = 13000
+iterations = 3000
 for i in range(iterations):
     z_batch = np.random.uniform(-1, 1, size=[batch_size, z_dimensions])
     real_image_batch = mnist.train.next_batch(batch_size)
@@ -168,9 +183,10 @@ for i in range(iterations):
         print '\r', time.asctime(), 'train', i, 'iters. dLoss =', dLoss, 'gLoss =', gLoss,
 print ''
 
-sample_image = generator(z_placeholder, 1, z_dimensions, reuse=True)
-z_batch = np.random.uniform(-1, 1, size=[1, z_dimensions])
+batch_size = 25
+sample_image = generator(z_placeholder, batch_size, z_dimensions, reuse=True)
+z_batch = np.random.uniform(-1, 1, size=[batch_size, z_dimensions])
 temp = (sess.run(sample_image, feed_dict={z_placeholder: z_batch}))
 my_i = temp.squeeze()
-plt.imshow(my_i, cmap='gray_r')
+plt.imshow(show_image(my_i), cmap='gray_r')
 plt.show()
