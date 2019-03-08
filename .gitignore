@@ -109,3 +109,4 @@ venv.bak/
 *.iml
 *.pkl
 *.tfrecord
+MNIST_data
