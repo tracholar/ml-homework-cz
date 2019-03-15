@@ -103,5 +103,5 @@ def train(flag='MLP'):
 
 if __name__ == '__main__':
     import sys
-    flag=sys.argv[1]
+    flag=sys.argv[0]
     train(flag)
