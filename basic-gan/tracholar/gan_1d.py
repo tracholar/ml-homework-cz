@@ -62,8 +62,8 @@ tf.summary.scalar('gh1_var', tf.reduce_mean(hg1**2))
 tf.summary.histogram('dh1_hist', hx1)
 
 fm_loss = tf.reduce_mean((hx1 - hg1)**2) + tf.reduce_mean((hx2 - hg2)**2)
-g_loss = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(logits=Dg, labels=tf.ones_like(Dg))) + tf.reduce_sum(tf.losses.get_regularization_losses(scope='generator')) #+ tf.reduce_mean(tf.abs(Gz - x_placeholder))
-d_loss = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(logits=Dx, labels=tf.ones_like(Dx))) + tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(logits=Dg, labels=tf.zeros_like(Dg))) + tf.reduce_sum(tf.losses.get_regularization_losses(scope='discriminator'))
+g_loss = tf.reduce_mean(-Dg) # + tf.reduce_sum(tf.losses.get_regularization_losses(scope='generator')) #+ tf.reduce_mean(tf.abs(Gz - x_placeholder))
+d_loss = tf.reduce_mean(tf.nn.relu(1 - Dx)) + tf.reduce_mean(tf.nn.relu(Dg + 1))
 
 tvars = tf.trainable_variables()
 d_vars = [v for v in tvars if 'discriminator' in v.name]
@@ -72,7 +72,7 @@ g_vars = [v for v in tvars if 'generator' in v.name]
 print d_vars
 print g_vars
 
-opt = tf.train.AdagradOptimizer(0.01)
+opt = tf.train.RMSPropOptimizer(0.001)
 d_train = opt.minimize(d_loss, var_list=d_vars)
 g_train = opt.minimize(g_loss, var_list=g_vars)
 
@@ -109,7 +109,7 @@ batch_size = 64
 sess.run(tf.global_variables_initializer())
 step = 10
 dloss, gloss = 0, 0
-for i in range(3000):
+for i in range(13000):
     z = np.random.rand(batch_size, 1)
     x = unlabeled_data_gen(batch_size)
 

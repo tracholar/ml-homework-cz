@@ -82,24 +82,36 @@ class Adam(Optimizer):
         return -self.lr / np.sqrt(self.v) * self.m
 
 class Adabound(Optimizer):
-    def __init__(self, lr, epsilon = 0.1, gamma=0.9, beta=0.9, **kwargs):
+    def __init__(self, lr=0.001, final_lr=0.001, epsilon = 0.1, gamma=0.9, beta=0.9, alpha=1e-3,AMSGrad=False, **kwargs):
         self.step = 0
         self.lr = lr
+        self.final_lr = final_lr
         self.v = epsilon
         self.gamma = gamma
         self.beta = beta
         self.m = 0
+        self.AMSGrad = AMSGrad
+        self.alpha = alpha
+        self.alphai = 0
     def update(self, theta, g):
         self.step += 1
         if self.step == 1:
             self.m = g
         else:
             self.m = self.gamma * self.m + (1-self.gamma) * g
-        self.v = self.v * self.beta + (1-self.beta) * (g**2)
-        eta_l = self.lr - self.lr/(1 + self.step)
-        eta_u = self.lr + self.lr/(self.step)
-        lr = np.minimum(np.maximum(self.lr/ np.sqrt(self.v), eta_l), eta_u)
-        lr = lr / np.sqrt(self.step)
+
+        v = self.v * self.beta + (1-self.beta) * (g**2)
+        if self.AMSGrad:
+            self.v = np.maximum(self.v, v)
+        else:
+            self.v = v
+        delta = self.lr/ np.sqrt(self.v)
+        self.alphai += self.alpha
+        eta_l = self.final_lr - self.final_lr/(1 + self.alphai)
+        eta_u = self.final_lr + self.final_lr/(self.alphai)
+        lr = np.minimum(np.maximum(delta, eta_l), eta_u)
+        if self.step % 100 == 0:
+            print lr
         return - lr  * self.m
 
 from problem import *
@@ -107,7 +119,7 @@ def main():
     w0, X, y = gen_batch(bath_size=128)
     w = np.random.rand(w0.shape[0])/np.sqrt(w0.shape[0])
 
-    optimizer = Adam(lr=0.001, AMSGrad=False)
+    optimizer = Adabound(lr=0.001, AMSGrad=True)
     update = 0
     nesterov = True
     for i in range(3000):
