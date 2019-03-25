@@ -2,7 +2,11 @@
 - 了解参数服务器 Parameter Server, 并实现一个简单的训练逻辑回归的 PS
 - 实现L2正则和L1正则版分布式逻辑回归
 - 尝试单机测试通过后,在多台机器上运行
-- 参考文献: Parameter Server for Distributed Machine Learning
+- 参考文献: 
+    1. Parameter Server for Distributed Machine Learning
+    2. Scaling Distributed Machine Learning with the Parameter Server
+    3. Project Adam: Building an Efficient and Scalable Deep Learning Training System
+    4. Tensorflow: Large-scale machine learning on heterogeneous distributed systems
 - 参考 getstart/ 启动代码
 - [可选] RPC通信采用protobuf二进制格式
 - [可选] 实现同步更新和异步更新模型参数
