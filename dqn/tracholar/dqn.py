@@ -45,9 +45,10 @@ print pred_q.shape, target_q.shape
 loss = tf.reduce_sum((pred_q - target_q)**2) + 1e-2*var_w
 
 adam = tf.train.AdamOptimizer(1e-3)
-train_op = adam.minimize(loss, var_list=vars1)
+step = tf.Variable(0, trainable=False)
+train_op = adam.minimize(loss, var_list=vars1, global_step=step)
 
-
+tf.GraphKeys
 class ExpBuffer():
     def __init__(self, max_size=10240):
         self.buff = []
@@ -128,7 +129,7 @@ with tf.Session() as sess:
 
         obs, act, rew, obsn, doneb  = exp_buffer.sample(32)
 
-        _, l = sess.run([train_op, loss], feed_dict={
+        _, l, istep = sess.run([train_op, loss, step], feed_dict={
             obs_placeholder: obs,
             act_placeholder: act,
             rew_placeholder: rew,
@@ -137,7 +138,7 @@ with tf.Session() as sess:
         })
 
         if (i+1) % 1024 == 0:
-            print i, 'update target, loss =', l, 'epsilon=', epsilon,\
+            print istep, 'update target, loss =', l, 'epsilon=', epsilon,\
                 'avg_reward=', avg_reward,\
                 'max_reward=',max_reward,\
                 'var_weight=', sess.run(var_w)

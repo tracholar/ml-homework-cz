@@ -5,6 +5,7 @@
 - 参考文献: Parameter Server for Distributed Machine Learning
 - 参考 getstart/ 启动代码
 - [可选] RPC通信采用protobuf二进制格式
+- [可选] 实现同步更新和异步更新模型参数
 
 
 ## 思考与总结

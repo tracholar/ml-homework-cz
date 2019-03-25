@@ -110,3 +110,5 @@ venv.bak/
 *.pkl
 *.tfrecord
 MNIST_data
+tmp
+log
