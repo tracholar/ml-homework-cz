@@ -9,6 +9,7 @@
 
 
 ## 思考题
+- 写一个UDF的单元测试?
 - UDAF中的 `init`, `iterate`, `terminatePartial`, `merge`, `terminate` 方法分别在MapReduce的哪些过程中执行, 请实现一个测试用例,模拟MapReduce执行过程,并构造伪造的数据,本地测试UDAF
 - UDTF中的 `initialize`, `process`, `close` 分别在MapReduce的哪些阶段执行, 请实现一个测试用例,模拟MapReduce执行过程,并构造伪造的数据,本地测试UDTF
 - `ObjectInspector`是什么, Hadoop使用`ObjectInspector`有什么好处?
