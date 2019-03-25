@@ -30,4 +30,7 @@
 11. [探索与利用](explore-exploit/) [容易]
 12. [生成对抗网络](basic-gan/)[较难]
 13. [Hive UDF](hive-udf/)[中等]
+14. [随机梯度下降](sgd/)[简单]
+15. [DQN](dqn/)[困难]
+
 
