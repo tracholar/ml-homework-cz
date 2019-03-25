@@ -28,3 +28,5 @@
 9. [强化学习-时间差分](rl-mc-td-learning/) [容易]
 10. [探索与利用](explore-exploit/) [容易]
 11. [生成对抗网络](basic-gan/)[较难]
+12. [Hive UDF](hive-udf/)[中等]
+
