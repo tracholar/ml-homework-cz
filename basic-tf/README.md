@@ -21,3 +21,9 @@
 8. 分布式训练的时候, 程序是如何组织server端代码和worker端代码, 使得两部分代码可以放到一个脚本文件中的?
 9. 用自己的话简述分布式训练时Server和Worker分别做了哪些事情? 参数服务器与MapReduce的区别有哪些?
 10. 分布式训练的时候,同步更新和异步更新的区别和优缺点,TensorFlow在异步更新的时候如何保证server端数据的一致性?
+
+## 实现列表
+提交PR的时候,请在下方列出你的项目
+
+- [getstart](getstart/)
+- [tracholar](tracholar/)
