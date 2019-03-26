@@ -3,7 +3,7 @@
 1.利用TensorFlow搭建MLP（LR）、CNN和RNN网络，实现MNIST数据集的分类。  
 2.利用summary与tensorboard记录权值与结果，根据结果调整网络超参数。
 ## 主要步骤
-1.获取MNIST数据集，并利用placeholder或dataset方式输入网络。  
+1.获取MNIST数据集，并利用placeholder或dataset方式输入网络（分别是dnn.py和dnn_dataset.py）。  
 2.MLP相当于在LR的基础上添加了hidden layer。  
 3.基本的CNN网络由多个卷积层、pooling层和flatten层组成，利用stride=2的卷积层代替max_pooling层会有更好的效果，max_pooling相当于“多段线性的激活函数”。  
 4.RNN的结构采用lstm，同理可扩展为双向RNN和多层RNN。  
