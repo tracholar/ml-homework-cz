@@ -5,10 +5,10 @@
 ## 主要步骤
 1.获取MNIST数据集，并利用placeholder或dataset方式输入网络（分别是dnn.py和dnn_dataset.py）。  
 2.MLP相当于在LR的基础上添加了hidden layer。  
-3.基本的CNN网络由多个卷积层、pooling层和flatten层组成，利用stride=2的卷积层代替max_pooling层会有更好的效果，max_pooling相当于“多段线性的激活函数”。  
+3.基本的CNN网络由多个卷积层、pooling层和flatten层组成，利用stride=2的卷积层代替max_pooling层会有更好的效果。  
 4.RNN的结构采用lstm，同理可扩展为双向RNN和多层RNN。  
 5.网络层参数维度较大的情况添加dropout层。  
-6.batch_normalization层在batch数量较小（50～100）的时候效果并不是很好。  
+6.batch_normalization在该例子中效果并不是很好（batch=100）。  
 7.网络权值随机初始化能够加速网络收敛，甚至能和激活函数搭配使用（selu）。  
 8.test准确率不能直接调用tf.metrics.accuracy，它指的是整个session内，所有feed_dict数据的正确率。  
 ## 实验结果
@@ -16,7 +16,7 @@ batch_size=100的情况下，
 -MLP训练10000个batch，test acc=0.9398  
 -CNN训练1000个batch，test acc=0.9832  
 -RNN训练10000个batch，test acc=0.9804  
-上述三个网络均采用了简单的网络结构（电脑跑不动- -），并且在训练中没有收敛。  
+上述三个网络均采用了简单的网络结构（电脑跑不动），并且在训练中没有收敛。  
 总结来说，CNN网络能够较好的对图片做分类，但RNN能够在参数量较少的情况下达到较高的准确率令人惊讶。  
 
 ## 思考题
