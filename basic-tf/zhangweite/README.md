@@ -63,4 +63,4 @@ tensorboard --logdir=log，进入tensorboard选择直方图查看。
 
 11. `placeholder`方式输入数据和`dataset`方式的区别和利弊有哪些?为什么实际使用中更倾向于使用`dataset`API?  
 -Placeholder方式只能读内存数据，并需要提前确定数据维度。  
--Dataset同时支持从内存和硬盘里读取数据，并根据第一个维度利用iterator迭代读取，具有repeat、map、shuffle、batch等变换功能，更易于实际使用。  
+-Dataset同时支持从内存和硬盘里读取数据，并根据第一个维度利用iterator迭代读取，具有repeat、map、shuffle、batch等变换功能。  
