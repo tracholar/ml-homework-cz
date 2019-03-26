@@ -10,7 +10,7 @@ with tf.name_scope('input'):
     dataset_x = tf.data.Dataset.from_tensor_slices(mnist.train.images).repeat().batch(100)
     iterator_x = dataset_x.make_one_shot_iterator()
     tf_x = iterator_x.get_next()
-    dataset_y = tf.data.Dataset.from_tensor_slices(mnist.test.labels).repeat().batch(100)
+    dataset_y = tf.data.Dataset.from_tensor_slices(mnist.train.labels).repeat().batch(100)
     iterator_y = dataset_y.make_one_shot_iterator()
     tf_y_pre = iterator_y.get_next()
     tf_y = tf.reshape(tf_y_pre, [-1,10]) 
@@ -105,19 +105,24 @@ with tf.Session() as sess:
     else:
         os.mkdir(os.path.dirname(ckpt_path))
 
+
     for _ in range(10000):
         # xs, ys = mnist.train.next_batch(100)
         loss, i, _, _ = sess.run([Loss, step, optimizer, update_op], 
             feed_dict = {tf_is_train: True})
         if i % 1000 == 0:
-            # acc_train, summary = sess.run([acc, merged], feed_dict={tf_is_train: False})
-            # train_writer.add_summary(summary, global_step=i)
 
-            # acc_test, summary = sess.run([acc, merged], feed_dict={tf_is_train: False})
-            # test_writer.add_summary(summary, global_step=i)
-
-            print(i, 'loss', loss ) #, \
-                # 'train acc', acc_train, \
-                # 'test acc', acc_test)
+            print(i, 'loss', loss)
 
             saver.save(sess, ckpt_path)
+
+
+    tf_x = mnist.train.images
+    tf_y = mnist.train.labels
+    acc_train = sess.run(acc, feed_dict={tf_is_train: False})
+    print(acc_train)
+    
+    tf_x = mnist.test.images
+    tf_y = mnist.test.labels
+    acc_test = sess.run(acc, feed_dict={tf_is_train: False})
+    print(acc_test)
