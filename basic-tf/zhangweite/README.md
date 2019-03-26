@@ -1,6 +1,7 @@
 ## 实验报告
 ## 实验原理
 1.利用TensorFlow搭建MLP（LR）、CNN和RNN网络，实现MNIST数据集的分类。
+
 2.利用summary与tensorboard记录权值与结果，根据结果调整网络超参数。
 ## 主要步骤
 1.获取MNIST数据集，并利用placeholder或dataset方式输入网络。
