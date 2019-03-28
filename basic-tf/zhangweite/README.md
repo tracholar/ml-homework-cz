@@ -28,7 +28,6 @@ batch_size=100的情况下，
 2. 下面的代码有区别吗?请详细说明。 其中预定义 `W = tf.Variable(tf.zeros(10))`, `g = np.random.rand(10)`
     - `W = W - 0.1 * g`
     - `W.assign_sub(0.1 * g)`  
-
 原先W是Variable，第一行代码返回的是Tensor，第二行代码返回的是Variable。  
 
 3. 请说明张量、操作、变量之间的区别和联系  
@@ -62,7 +61,8 @@ model.ckpt.data：保存网络权值
 model.ckpt.index：保存索引信息，作用是将Tensor name对应到Tensor的类型、形状、偏移和校验等信息，即关联meta文件和data文件。   
 
 7. 使用变量作用域的好处是啥?  
-tf中的作用域包括名称作用域和变量作用域，名称作用域中的variable和tensor都会加上作用域前缀。为了共享变量，定义了tf.get_variable(‘name’,)，它无视名称作用域，若定义变量名称已经存在则会报错。  
+tf中的作用域包括名称作用域和变量作用域，名称作用域中的variable和tensor都会加上作用域前缀。  
+为了共享变量，定义了tf.get_variable(‘name’,)，它无视名称作用域，若定义变量名称已经存在则会报错。  
 为了进一步管理tf.get_variable，定义了变量作用域，tf.get_variable在变量作用域中会加前缀。同时变量作用域还可以通过设定reuse=True来定义共享变量，并且定义了一个变量作用域后，相当于间接定义了一个名称作用域。此外，变量作用域还可以为tf.get_variable(‘name',)设置默认的初始化分布。  
 综上，变量作用域相当于加强版的名称作用域，可以更好的管理变量命名以及变量共享。  
 
