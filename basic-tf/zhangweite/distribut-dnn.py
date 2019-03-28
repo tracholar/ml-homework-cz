@@ -74,13 +74,13 @@ if __name__ == "__main__":
 	parser.add_argument(
 		"--ps_hosts",
 		type=str,
-		default="172.18.246.128:2220",
+		default="192.168.1.1:2220",
 		help="Comma-separated list of hostname:port pairs"
 	)
 	parser.add_argument(
 		"--worker_hosts",
 		type=str,
-		default="172.18.246.128:2221,172.18.246.128:2222",
+		default="192.168.1.1:2221,192.168.1.1:2222",
 		help="Comma-separated list of hostname:port pairs"
 	)
 	parser.add_argument(
