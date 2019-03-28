@@ -110,6 +110,7 @@ alpha = 0.95
 with tf.Session() as sess:
     fwriter = tf.summary.FileWriter('./log/', graph=sess.graph)
 
+    saver = tf.train.Saver(tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES, scope='dqn'))
 
     sess.run([init_op])
 
