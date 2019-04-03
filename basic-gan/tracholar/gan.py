@@ -7,7 +7,7 @@ import numpy as np
 import time
 
 from tensorflow.examples.tutorials.mnist import input_data
-mnist = input_data.read_data_sets("MNIST_data/")
+mnist = input_data.read_data_sets("../chenrenbing/data")
 
 x_train = mnist.train.images[:55000,:]
 print x_train.shape
@@ -165,7 +165,7 @@ for i in range(iterations):
     _,gLoss = sess.run([trainerG,g_loss],feed_dict={z_placeholder:z_batch}) #Update the generator
 
     if i % 100 == 0:
-        print '\r', time.asctime(), 'train', i, 'iters. dLoss =', dLoss, 'gLoss =', gLoss,
+        print(time.asctime(), 'train', i, 'iters. dLoss =', dLoss, 'gLoss =', gLoss)
 print ''
 
 sample_image = generator(z_placeholder, 1, z_dimensions, reuse=True)
