@@ -94,7 +94,6 @@ elif FLAGS.job_name == "worker":
 11. `placeholder`方式输入数据和`dataset`方式的区别和利弊有哪些?为什么实际使用中更倾向于使用`dataset`API?  
 -Placeholder方式只能读内存数据，并需要提前确定数据维度。  
 -Dataset同时支持从内存和硬盘里读取数据，并根据第一个维度利用iterator迭代读取，具有repeat、map、shuffle、batch等变换功能。  
-
 12.dropout  
 为了更好的拟合训练数据，神经网络的参数数量一般设置过大，从而会导致过拟合。  
 不改变模型结构的基础上，处理过拟合的方式有一般以下几种：  
