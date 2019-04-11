@@ -137,7 +137,10 @@ local变量在的集合, 用tf.local_variables_initializer()初始化 collection
 一般建立的变量(就是tf.Variable())在的集合，用tf.global_variables_initializer()初始化collections=[tf.GraphKeys.VARIABLES]  
 GraphKeys.LOCAL_VARIABLE中的变量指的是被添加入图中，但是未被储存的变量。  
 
-
 19. tf.GraphKeys.UPDATE_OPS  
 tf.GraphKeys.UPDATE_OPS 保存一些需要在训练操作之前完成的操作，比如batch_normaliazation中更新均值和标准差，dropout网络输出等。  
 （并配合tf.control_dependencies函数使用）  
+
+20. tensorflow分布式中hook的作用原理  
+hook可以理解成事件触发机制，在某些步骤中来验证所有的模块是否都已经完成各自的任务，如果已经完成任务那么就进行下一步，否则继续等待。
+在tensorflow分布式中，hook起到了追踪训练过程、报告进度和判断是否停止迭代的作用。一个hook主要包括begin、after_create_session、before_run、after_run、end五个方法，在对应的步骤来判断任务是否正常进行。比如StopAtStepHook是根据global_step来停止训练，CheckpointSaverHook是保存checkpoint等。  
