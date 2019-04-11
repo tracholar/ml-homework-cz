@@ -96,7 +96,7 @@ elif FLAGS.job_name == "worker":
 -Dataset同时支持从内存和硬盘里读取数据，并根据第一个维度利用iterator迭代读取，具有repeat、map、shuffle、batch等变换功能。  
 
 
-12.dropout  
+12. dropout  
 为了更好的拟合训练数据，神经网络的参数数量一般设置过大，从而会导致过拟合。  
 不改变模型结构的基础上，处理过拟合的方式有一般以下几种：  
 1.数据增强，2.降低网络复杂度，3.Early stopping，4.正则化，5.对网络的各个部分加噪，6.贝叶斯方法。  
@@ -106,22 +106,19 @@ dropout能够起到防止过拟合效果的原因如下：
 1.对一个layer加dropout，在训练时相当于训练多个具有相关性的layer“子集”，而在预测时这些“子集”同时激活，使得输出值是全部“子集”的加权和，这相当于是模型维度的“bagging”。  
 2.dropout在训练时对神经元“随机采样”，降低了原本可能具有固定关系的神经元的相互依赖性，提升了模型的鲁棒性。  
 
-
-13.batch normalization  
+13. batch normalization  
 神经网络在训练中，由于网络中参数变化会引起内部结点数据分布发生变化，被称作Internal Covariate Shift。  
 这一现象会使得上层网络需要不断调整以适应输入分布的变化，降低网络训练速度。同时，如果输入分布不断变化的情况下，会降低激活函数的效果，比如sigmoid函数会陷入饱和区。  
 所以BN的思路就是统一输入的每个特征的分布（0均值1方差），但强硬的归一化输入分布会削弱数据的表达能力，使得整个网络学不到东西。所以BN就在归一化分布的基础上，添加了恢复其分布的线形操作，并将恢复过程的参数加入网络进行训练，相当于让网络自己权衡输入分布的统一和输入数据的表达能力。  
 在训练过程中，每个batch的训练按上述操作即可，但需要存储所有特征的均值和方差。  
 在预测过程中，输入数据归一化步骤的均值和方差即采用训练时统计的所有数据的均值和方差。  
 BN使得输入数据的分布变得相对稳定，使得模型学习过程更加稳定，一定程度上简化了调参过程，加快了模型的学习速率，也具备了一定的正则化效果（弱化了输入数据的表达能力）。  
-
    
-14.网络权值初始化方差  
+14. 网络权值初始化方差  
 为了使得信息再网络中更好的传播，每一层layer输出的方差应该尽量相等。  
 假设layer权值服从独立同分布，为了使得输出方差等于输入方差，权值方差应该为1/n，其中n为上一层layer神经元数量。而在方向传播中，同理得到权值方差应该为1/m，其中m为下一层layer的神经元数量。为了综合前向与后向，权值方差应为2/（m+n）。  
 
-
-15.md和ps在实现lr时都差异  
+15. md和ps在实现lr时都差异  
 mapreduce实现分布式lr：  
 1.Root节点向计算节点发送参数Wt  
 2.计算节点根据样本维度和特征维度同时计算梯度Gt，计算完毕后发送给root节点  
@@ -131,22 +128,20 @@ Parameter sever实现分布式lr：
 2.worker同样以样本维度和特征维度分别负责对应部分，训练时worker向server请求参数数据（pull），计算对应参数的梯度，更新参数后回传给server（push）。所有worker可以完全异步进行训练，也可以按照一定的规则半异步进行训练。  
 3.server节点将worker传输的局部更新进行汇总后更新全局参数，进行下一次迭代  
 
-
-16.tf.GraphKeys   
+16. tf.GraphKeys   
 Tensorflow 内部定义了许多标准 Key，全部定义在了 tf.GraphKeys 这个类中。其中有一些常用的，tf.GraphKeys.TRAINABLE_VARIABLES, tf.GraphKeys.GLOBAL_VARIABLES 等等。tf.trainable_variables() 与 tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES) 是等价的；tf.global_variables() 与 tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES) 是等价的。  
 tf.collection 是为了方便用户对图中的操作和变量进行管理，而创建的一个概念。它可以说是一种“集合”，通过一个 key（string类型）来对一组 Python 对象进行命名的集合。这个key既可以是tensorflow在内部定义的一些key，也可以是用户自己定义的名字（string）。  
 
-
-17.is_chief的作用  
+17. is_chief的作用  
 is_chief：如果True，它将负责初始化和恢复底层TensorFlow会话。如果False，它将等待主管初始化或恢复TensorFlow会话。  
 
 
-18.local_variables_initializer  
+18. local_variables_initializer  
 local变量在的集合, 用tf.local_variables_initializer()初始化 collections=[tf.GraphKeys.LOCAL_VARIABLES]  
 一般建立的变量(就是tf.Variable())在的集合，用tf.global_variables_initializer()初始化collections=[tf.GraphKeys.VARIABLES]  
 GraphKeys.LOCAL_VARIABLE中的变量指的是被添加入图中，但是未被储存的变量。  
 
 
-19.tf.GraphKeys.UPDATE_OPS  
+19. tf.GraphKeys.UPDATE_OPS  
 tf.GraphKeys.UPDATE_OPS 保存一些需要在训练操作之前完成的操作，比如batch_normaliazation中更新均值和标准差，dropout网络输出等。  
 （并配合tf.control_dependencies函数使用）  
