@@ -17,6 +17,7 @@
 通过 <https://tracholar.github.io/ml-homework-cz/> 阅读, 获得更佳体验
 
 # 作业目录
+## 基础课程
 1. [基本逻辑回归](basic-lr/) [容易]
 2. [基本梯度提升树](basic-gbdt/) [中等]
 3. [基本神经网络-自动编码机](basic-keras/) [中等]
@@ -32,5 +33,8 @@
 13. [Hive UDF](hive-udf/)[中等]
 14. [随机梯度下降](sgd/)[简单]
 15. [DQN](dqn/)[困难]
+
+## NLP专题
+
 
 
