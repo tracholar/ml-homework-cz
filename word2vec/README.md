@@ -10,6 +10,8 @@
 5. 找一个语料,利用word2vec(现有的工具)得到词向量,并对词向量进行聚类,请可视化你的结果
 6. 利用语料:[今日头条](https://github.com/fate233/toutiao-text-classfication-dataset),实现 onehot+SVM 文本分类和基于词向量的文本分类,对比一下二者的效果
     1. 有人说onehot+SVM可以看做一个特殊的word2vec,你觉得对吗?请详细说明
+7. word2vec是一个多分类问题,负采样可以看做一个二分类的问题,请联系推荐点击率预估场景,请解释这种观点?
+8. word2vec的问题有哪些?有哪些解决方法?
 
 
 ## 实现
