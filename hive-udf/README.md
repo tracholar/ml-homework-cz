@@ -17,9 +17,10 @@
     1. UDF是如何将训练参数传入的? 参数又是如何解析的? 如何保证参数只解析一次?
     2. UDF只会遍历一次数据, hivemall是如何实现多次遍历数据训练的?
     3. 每一个执行UDF的机器上,UDF之间是无法实现通信的, hivemall有两种方式实现不同机器之间的通信, 请简要说明每一种方式的原理,并指出跟PS-Server有哪些异同和优劣?
-    
+
 ## 实现列表
 提交PR的时候,请在下方列出你的项目
 
 - [getstart](getstart/)
 - [tracholar](tracholar/)
+- [zhangweite](zhangweite/)
