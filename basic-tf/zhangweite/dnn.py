@@ -59,7 +59,7 @@ def rnn_net(x_):
     return state
 
 # mlp
-output = mlp_net(tf_x)
+output = conv_net(tf_x)
 
 # cnn
 # output = conv_net(tf_x)
@@ -89,7 +89,7 @@ with tf.Session() as sess:
     train_writer = tf.summary.FileWriter(logdir + '/train', sess.graph)
     test_writer = tf.summary.FileWriter(logdir + '/test')
 
-    sess.run(tf.group(tf.global_variables_initializer(), tf.local_variables_initializer()))
+    sess.run(tf.group(tf.global_variables_initializer()))
    
     saver = tf.train.Saver(tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES))
     ckpt_path = './tmp/mnist_mlp/model.ckpt'
