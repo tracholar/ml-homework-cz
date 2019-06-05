@@ -39,10 +39,10 @@ def MC():
     print("*********************************")
     Q = np.zeros((nS, nA),dtype=float)
     pi = np.random.randint(0,nA, nS)
-    alpha = 0.1
-    gamma = 0.1
-    for it in range(100):
-        if it % 50 == 0:
+    alpha = 0.01
+
+    for it in range(15000):
+        if it % 500 == 0:
             print 'iter', it, 'pi=', pi
 
         # 策略评估：根据目前策略仿真一条状态-动作路径，更新Q函数
@@ -61,9 +61,9 @@ def MC():
 
                 r_q_a=0.0
                 for i in range(len(history)):
-                    r_q_a+=history[i][2]*np.power(0.9,i)# 累积奖赏
+                    r_q_a+=history[i][2]*np.power(gamma,i)# 累积奖赏
 
-                Q[s,a]=Q[s,a]+(-Q[s,a]+r_q_a)/(it+1)
+                Q[s,a]=Q[s,a]+alpha*(-Q[s,a]+r_q_a)
                 #print(" s:{%d},a:{%d},Q:{%f}"%(s,a,Q[s,a]))
 
         #print(" it : ",it,"  ",Q)
@@ -107,7 +107,7 @@ def QLearning():
 
             ss_next=go_next(ss,action)
             r=R[ss,action,ss_next]
-            Q[ss,action]=Q[ss,action]+alpha*(r+0.8*np.max(Q[ss_next,:])-Q[ss,action])
+            Q[ss,action]=Q[ss,action]+alpha*(r+gamma*np.max(Q[ss_next,:])-Q[ss,action])
             ss=ss_next
 
 
@@ -153,7 +153,7 @@ def Saras():
             r=R[ss,action,ss_next]
             new_action=epsilon_greedy(Q,ss_next,epsilon)
 
-            Q[ss,action]=Q[ss,action]+alpha*(r+0.5*(Q[ss_next,new_action])-Q[ss,action])
+            Q[ss,action]=Q[ss,action]+alpha*(r+gamma*(Q[ss_next,new_action])-Q[ss,action])
             ss=ss_next
             action=new_action
 

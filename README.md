@@ -24,7 +24,13 @@
 5. [基本梯度优化](basic-optimization/) [中等]
 6. [深度学习CTR预估模型](deep-ctr/) [较难]
 7. [分布式逻辑回归-参数服务器](distribute-lr/) [中等]
-8. [强化学习-动态规划](rl-dynamic-programming/) [容易]
-9. [强化学习-时间差分](rl-mc-td-learning/) [容易]
-10. [探索与利用](explore-exploit/) [容易]
-11. [生成对抗网络](basic-gan/)[容易]
+8. [Tensorflow基本使用](basic-tf/)[简单]
+9. [强化学习-动态规划](rl-dynamic-programming/) [容易]
+10. [强化学习-时间差分](rl-mc-td-learning/) [容易]
+11. [探索与利用](explore-exploit/) [容易]
+12. [生成对抗网络](basic-gan/)[较难]
+13. [Hive UDF](hive-udf/)[中等]
+14. [随机梯度下降](sgd/)[简单]
+15. [DQN](dqn/)[困难]
+
+
