@@ -6,7 +6,10 @@
     3. 优化器的使用
     4. summary的使用
     5. tensorboard的使用
-- 参考 《深入理解TensorFlow》和 TensorFlow白皮书
+- 参考 
+    - 《深入理解TensorFlow》
+    - TensorFlow白皮书
+    - <http://dlsys.cs.washington.edu/schedule>
 
 ## 思考题
 1. 请使用自己的语言举例说明TensorFlow的声明式编程和我们日常的编程方式上的区别? 如何理解TensorFlow中一切都是计算图上的节点? TensorFlow中写日志操作也是计算图中的节点吗?
@@ -28,3 +31,4 @@
 
 - [getstart](getstart/)
 - [tracholar](tracholar/)
+- [zhangweite](zhangweite/)
