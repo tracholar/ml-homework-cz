@@ -13,7 +13,7 @@
     - `download(path)` 下载文件
 - 实现python版本的client段代码,client端代码上述函数都必须调用一次
 - 服务端代码请使用spring框架实现, server的配置信息请使用XML文件配置
-- 请使用spring提供上述4个方法的HTTP接口
+- 请使用spring 在client端提供上述4个方法的HTTP接口
 - 请对server端每一个接口编写单元测试(用JUnit)
 
 ## 思考题
