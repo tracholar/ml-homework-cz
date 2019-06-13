@@ -7,7 +7,7 @@ class Dataset(object):
         pass
 
 class Word2Vec(object):
-    def __init__(self, word_size, word_len=128, reg = 1e-3):
+    def __init__(self, word_size, word_len=128, reg = 1e-3, window_size = 5):
         """
         创建计算图, 注意我这个模型跟标准的w2v有些差异,
         我只使用了一个词向量矩阵, 左向量和右向量是相同的
@@ -15,6 +15,7 @@ class Word2Vec(object):
         self.word_size = word_size
         self.word_len = word_len
         self.reg = reg
+        self.window_size = window_size
         self.W = tf.Variable(np.random.rand(word_size, word_len), name='W')
         self.c = tf.placeholder(tf.int64, shape=(None, ))
         self.pos = tf.placeholder(tf.int64, shape=(None, None))
@@ -40,7 +41,22 @@ class Word2Vec(object):
         :param data: 数据集
         :return:
         """
-        raise NotImplementedError()
+        trainSet = dataset.getTrainSentences()
+        sess = tf.Session()
+        for s in trainSet:
+            s = s[0]
+            for i in range(self.window_size, len(s) - self.window_size):
+                wc = s[i]
+                pos = [s[j] for j in range(max(0, i - self.window_size), min(len(s), i+self.window_size))]
+                neg = []
+                while len(neg) < 10:
+                    idx = dataset.sampleTokenIdx()
+                    if idx not in pos and idx != wc:
+                        neg.append(idx)
+                loss, _ = sess.run([self.loss, self.train_op], feed_dict={self.c: wc,
+                                                      self.pos: pos,
+                                                      self.neg: neg})
+                print('{} loss: {}'.format(i, loss))
 
     def predict(self, words):
         """
@@ -53,5 +69,9 @@ class Word2Vec(object):
 
 
 if __name__ == '__main__':
-    w2v = Word2Vec(100)
+    from dataset.data_utils import *
+    dataset = StanfordSentiment()
+    tokens = dataset.tokens()
+    w2v = Word2Vec(len(tokens))
+    w2v.fit(dataset)
 
