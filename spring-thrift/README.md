@@ -8,7 +8,7 @@
         - `mime` 文件MIME类型
         - `size` 文件大小
         - `mode` 文件权限
-    - `cat(path, mode)` 列出文件内容, `mode` 有两种类型文本和二进制,取值请使用thrift定义,如果是文本则直接输出文件内容(类似于Linux中的`cat`命令输出结果), 如果是二进制则需要做16进制编码输出文本(类似于Linux中的`od`命令输出结果)
+    - `cat(path, mode)` 列出文件内容, `mode` 有两种类型文本和二进制,取值请使用thrift定义,如果是文本则直接输出文件内容(类似于Linux中的`cat`命令输出结果), 如果是二进制则需要做16进制编码输出文本(类似于Linux中的`hexdump -x`命令输出结果)
     - `upload(name, data)` 上传文件
     - `download(path)` 下载文件, 返回data
 - 实现python版本的client段代码,client端代码上述函数都必须调用一次
