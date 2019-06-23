@@ -1,6 +1,6 @@
 ## Word2Vec实现
 - 参考cs224d(现在叫cs224n) assignment1 实现word2vec
-
+- 可选: 用scrapy爬取知乎或者腾讯新闻的文章,提取标题和内容,将频道作为类别标签,构造文本分类数据集
 
 ## 思考题
 1. 为什么要做word2vec? word2vec解决的是什么问题?请联系几个实际例子加以说明?
@@ -10,6 +10,8 @@
 5. 找一个语料,利用word2vec(现有的工具)得到词向量,并对词向量进行聚类,请可视化你的结果
 6. 利用语料:[今日头条](https://github.com/fate233/toutiao-text-classfication-dataset),实现 onehot+SVM 文本分类和基于词向量的文本分类,对比一下二者的效果
     1. 有人说onehot+SVM可以看做一个特殊的word2vec,你觉得对吗?请详细说明
+7. word2vec是一个多分类问题,负采样可以看做一个二分类的问题,请联系推荐点击率预估场景,请解释这种观点?
+8. word2vec的问题有哪些?有哪些解决方法?
 
 
 ## 实现

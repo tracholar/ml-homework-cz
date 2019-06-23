@@ -112,3 +112,4 @@ venv.bak/
 MNIST_data
 tmp
 log
+*.zip
