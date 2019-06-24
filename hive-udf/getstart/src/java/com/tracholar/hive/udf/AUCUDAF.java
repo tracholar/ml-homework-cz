@@ -4,7 +4,6 @@ import org.apache.hadoop.hive.ql.exec.UDAF;
 import org.apache.hadoop.hive.ql.exec.UDAFEvaluator;
 
 
-
 public final class AUC extends UDAF {
 
     public static class State {
