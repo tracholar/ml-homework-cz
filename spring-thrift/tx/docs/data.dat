@@ -1,5 +1,0 @@
-ByteBuffer bb=client.download("/Users/xuetang/Downloads/test.bin");
-            System.out.println(new String (bb.array(),0, bb.array().length));
-        } catch (TException e) {
-            e.printStackTrace();
-        }
