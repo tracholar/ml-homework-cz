@@ -1,0 +1,21 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+       xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="tsocket" class="org.apache.thrift.transport.TSocket">
+        <constructor-arg name="host" value="localhost"/>
+        <constructor-arg name="port" value="9122"/>
+    </bean>
+
+    <bean id="protocol" class="org.apache.thrift.protocol.TBinaryProtocol">
+        <constructor-arg ref="tsocket"/>
+    </bean>
+
+    <bean id="client" class = "com.tx.homework.HelloWorld.Client">
+        <constructor-arg ref="protocol"/>
+    </bean>
+
+</beans>
