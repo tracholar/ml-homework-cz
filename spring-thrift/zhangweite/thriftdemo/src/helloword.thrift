@@ -12,5 +12,5 @@ service HelloWorldServer
     string cat(1: string path,
                2: i16 mode)
     bool upload(1: FileData filedata)
-    void download(1: string path)
+    FileData download(1: string filedata)
 }
