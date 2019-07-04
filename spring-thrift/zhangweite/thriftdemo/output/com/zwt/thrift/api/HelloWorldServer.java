@@ -18,7 +18,7 @@ public class HelloWorldServer {
 
     public boolean upload(FileData filedata) throws org.apache.thrift.TException;
 
-    public void download(java.lang.String path) throws org.apache.thrift.TException;
+    public FileData download(java.lang.String filedata) throws org.apache.thrift.TException;
 
   }
 
@@ -30,7 +30,7 @@ public class HelloWorldServer {
 
     public void upload(FileData filedata, org.apache.thrift.async.AsyncMethodCallback<java.lang.Boolean> resultHandler) throws org.apache.thrift.TException;
 
-    public void download(java.lang.String path, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException;
+    public void download(java.lang.String filedata, org.apache.thrift.async.AsyncMethodCallback<FileData> resultHandler) throws org.apache.thrift.TException;
 
   }
 
@@ -124,24 +124,27 @@ public class HelloWorldServer {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "upload failed: unknown result");
     }
 
-    public void download(java.lang.String path) throws org.apache.thrift.TException
+    public FileData download(java.lang.String filedata) throws org.apache.thrift.TException
     {
-      send_download(path);
-      recv_download();
+      send_download(filedata);
+      return recv_download();
     }
 
-    public void send_download(java.lang.String path) throws org.apache.thrift.TException
+    public void send_download(java.lang.String filedata) throws org.apache.thrift.TException
     {
       download_args args = new download_args();
-      args.setPath(path);
+      args.setFiledata(filedata);
       sendBase("download", args);
     }
 
-    public void recv_download() throws org.apache.thrift.TException
+    public FileData recv_download() throws org.apache.thrift.TException
     {
       download_result result = new download_result();
       receiveBase(result, "download");
-      return;
+      if (result.isSetSuccess()) {
+        return result.success;
+      }
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "download failed: unknown result");
     }
 
   }
@@ -261,35 +264,35 @@ public class HelloWorldServer {
       }
     }
 
-    public void download(java.lang.String path, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException {
+    public void download(java.lang.String filedata, org.apache.thrift.async.AsyncMethodCallback<FileData> resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      download_call method_call = new download_call(path, resultHandler, this, ___protocolFactory, ___transport);
+      download_call method_call = new download_call(filedata, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
-    public static class download_call extends org.apache.thrift.async.TAsyncMethodCall<Void> {
-      private java.lang.String path;
-      public download_call(java.lang.String path, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+    public static class download_call extends org.apache.thrift.async.TAsyncMethodCall<FileData> {
+      private java.lang.String filedata;
+      public download_call(java.lang.String filedata, org.apache.thrift.async.AsyncMethodCallback<FileData> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
-        this.path = path;
+        this.filedata = filedata;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("download", org.apache.thrift.protocol.TMessageType.CALL, 0));
         download_args args = new download_args();
-        args.setPath(path);
+        args.setFiledata(filedata);
         args.write(prot);
         prot.writeMessageEnd();
       }
 
-      public Void getResult() throws org.apache.thrift.TException {
+      public FileData getResult() throws org.apache.thrift.TException {
         if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
           throw new java.lang.IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
         org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
-        return null;
+        return (new Client(prot)).recv_download();
       }
     }
 
@@ -409,7 +412,7 @@ public class HelloWorldServer {
 
       public download_result getResult(I iface, download_args args) throws org.apache.thrift.TException {
         download_result result = new download_result();
-        iface.download(args.path);
+        result.success = iface.download(args.filedata);
         return result;
       }
     }
@@ -618,7 +621,7 @@ public class HelloWorldServer {
       }
     }
 
-    public static class download<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, download_args, Void> {
+    public static class download<I extends AsyncIface> extends org.apache.thrift.AsyncProcessFunction<I, download_args, FileData> {
       public download() {
         super("download");
       }
@@ -627,11 +630,12 @@ public class HelloWorldServer {
         return new download_args();
       }
 
-      public org.apache.thrift.async.AsyncMethodCallback<Void> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
+      public org.apache.thrift.async.AsyncMethodCallback<FileData> getResultHandler(final org.apache.thrift.server.AbstractNonblockingServer.AsyncFrameBuffer fb, final int seqid) {
         final org.apache.thrift.AsyncProcessFunction fcall = this;
-        return new org.apache.thrift.async.AsyncMethodCallback<Void>() { 
-          public void onComplete(Void o) {
+        return new org.apache.thrift.async.AsyncMethodCallback<FileData>() { 
+          public void onComplete(FileData o) {
             download_result result = new download_result();
+            result.success = o;
             try {
               fcall.sendResponse(fb, result, org.apache.thrift.protocol.TMessageType.REPLY,seqid);
             } catch (org.apache.thrift.transport.TTransportException e) {
@@ -673,8 +677,8 @@ public class HelloWorldServer {
         return false;
       }
 
-      public void start(I iface, download_args args, org.apache.thrift.async.AsyncMethodCallback<Void> resultHandler) throws org.apache.thrift.TException {
-        iface.download(args.path,resultHandler);
+      public void start(I iface, download_args args, org.apache.thrift.async.AsyncMethodCallback<FileData> resultHandler) throws org.apache.thrift.TException {
+        iface.download(args.filedata,resultHandler);
       }
     }
 
@@ -2987,16 +2991,16 @@ public class HelloWorldServer {
   public static class download_args implements org.apache.thrift.TBase<download_args, download_args._Fields>, java.io.Serializable, Cloneable, Comparable<download_args>   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("download_args");
 
-    private static final org.apache.thrift.protocol.TField PATH_FIELD_DESC = new org.apache.thrift.protocol.TField("path", org.apache.thrift.protocol.TType.STRING, (short)1);
+    private static final org.apache.thrift.protocol.TField FILEDATA_FIELD_DESC = new org.apache.thrift.protocol.TField("filedata", org.apache.thrift.protocol.TType.STRING, (short)1);
 
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new download_argsStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new download_argsTupleSchemeFactory();
 
-    public @org.apache.thrift.annotation.Nullable java.lang.String path; // required
+    public @org.apache.thrift.annotation.Nullable java.lang.String filedata; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-      PATH((short)1, "path");
+      FILEDATA((short)1, "filedata");
 
       private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -3012,8 +3016,8 @@ public class HelloWorldServer {
       @org.apache.thrift.annotation.Nullable
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
-          case 1: // PATH
-            return PATH;
+          case 1: // FILEDATA
+            return FILEDATA;
           default:
             return null;
         }
@@ -3058,7 +3062,7 @@ public class HelloWorldServer {
     public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-      tmpMap.put(_Fields.PATH, new org.apache.thrift.meta_data.FieldMetaData("path", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+      tmpMap.put(_Fields.FILEDATA, new org.apache.thrift.meta_data.FieldMetaData("filedata", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(download_args.class, metaDataMap);
@@ -3068,18 +3072,18 @@ public class HelloWorldServer {
     }
 
     public download_args(
-      java.lang.String path)
+      java.lang.String filedata)
     {
       this();
-      this.path = path;
+      this.filedata = filedata;
     }
 
     /**
      * Performs a deep copy on <i>other</i>.
      */
     public download_args(download_args other) {
-      if (other.isSetPath()) {
-        this.path = other.path;
+      if (other.isSetFiledata()) {
+        this.filedata = other.filedata;
       }
     }
 
@@ -3089,41 +3093,41 @@ public class HelloWorldServer {
 
     @Override
     public void clear() {
-      this.path = null;
+      this.filedata = null;
     }
 
     @org.apache.thrift.annotation.Nullable
-    public java.lang.String getPath() {
-      return this.path;
+    public java.lang.String getFiledata() {
+      return this.filedata;
     }
 
-    public download_args setPath(@org.apache.thrift.annotation.Nullable java.lang.String path) {
-      this.path = path;
+    public download_args setFiledata(@org.apache.thrift.annotation.Nullable java.lang.String filedata) {
+      this.filedata = filedata;
       return this;
     }
 
-    public void unsetPath() {
-      this.path = null;
+    public void unsetFiledata() {
+      this.filedata = null;
     }
 
-    /** Returns true if field path is set (has been assigned a value) and false otherwise */
-    public boolean isSetPath() {
-      return this.path != null;
+    /** Returns true if field filedata is set (has been assigned a value) and false otherwise */
+    public boolean isSetFiledata() {
+      return this.filedata != null;
     }
 
-    public void setPathIsSet(boolean value) {
+    public void setFiledataIsSet(boolean value) {
       if (!value) {
-        this.path = null;
+        this.filedata = null;
       }
     }
 
     public void setFieldValue(_Fields field, @org.apache.thrift.annotation.Nullable java.lang.Object value) {
       switch (field) {
-      case PATH:
+      case FILEDATA:
         if (value == null) {
-          unsetPath();
+          unsetFiledata();
         } else {
-          setPath((java.lang.String)value);
+          setFiledata((java.lang.String)value);
         }
         break;
 
@@ -3133,8 +3137,8 @@ public class HelloWorldServer {
     @org.apache.thrift.annotation.Nullable
     public java.lang.Object getFieldValue(_Fields field) {
       switch (field) {
-      case PATH:
-        return getPath();
+      case FILEDATA:
+        return getFiledata();
 
       }
       throw new java.lang.IllegalStateException();
@@ -3147,8 +3151,8 @@ public class HelloWorldServer {
       }
 
       switch (field) {
-      case PATH:
-        return isSetPath();
+      case FILEDATA:
+        return isSetFiledata();
       }
       throw new java.lang.IllegalStateException();
     }
@@ -3168,12 +3172,12 @@ public class HelloWorldServer {
       if (this == that)
         return true;
 
-      boolean this_present_path = true && this.isSetPath();
-      boolean that_present_path = true && that.isSetPath();
-      if (this_present_path || that_present_path) {
-        if (!(this_present_path && that_present_path))
+      boolean this_present_filedata = true && this.isSetFiledata();
+      boolean that_present_filedata = true && that.isSetFiledata();
+      if (this_present_filedata || that_present_filedata) {
+        if (!(this_present_filedata && that_present_filedata))
           return false;
-        if (!this.path.equals(that.path))
+        if (!this.filedata.equals(that.filedata))
           return false;
       }
 
@@ -3184,9 +3188,9 @@ public class HelloWorldServer {
     public int hashCode() {
       int hashCode = 1;
 
-      hashCode = hashCode * 8191 + ((isSetPath()) ? 131071 : 524287);
-      if (isSetPath())
-        hashCode = hashCode * 8191 + path.hashCode();
+      hashCode = hashCode * 8191 + ((isSetFiledata()) ? 131071 : 524287);
+      if (isSetFiledata())
+        hashCode = hashCode * 8191 + filedata.hashCode();
 
       return hashCode;
     }
@@ -3199,12 +3203,12 @@ public class HelloWorldServer {
 
       int lastComparison = 0;
 
-      lastComparison = java.lang.Boolean.valueOf(isSetPath()).compareTo(other.isSetPath());
+      lastComparison = java.lang.Boolean.valueOf(isSetFiledata()).compareTo(other.isSetFiledata());
       if (lastComparison != 0) {
         return lastComparison;
       }
-      if (isSetPath()) {
-        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.path, other.path);
+      if (isSetFiledata()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.filedata, other.filedata);
         if (lastComparison != 0) {
           return lastComparison;
         }
@@ -3230,11 +3234,11 @@ public class HelloWorldServer {
       java.lang.StringBuilder sb = new java.lang.StringBuilder("download_args(");
       boolean first = true;
 
-      sb.append("path:");
-      if (this.path == null) {
+      sb.append("filedata:");
+      if (this.filedata == null) {
         sb.append("null");
       } else {
-        sb.append(this.path);
+        sb.append(this.filedata);
       }
       first = false;
       sb.append(")");
@@ -3280,10 +3284,10 @@ public class HelloWorldServer {
             break;
           }
           switch (schemeField.id) {
-            case 1: // PATH
+            case 1: // FILEDATA
               if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
-                struct.path = iprot.readString();
-                struct.setPathIsSet(true);
+                struct.filedata = iprot.readString();
+                struct.setFiledataIsSet(true);
               } else { 
                 org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
               }
@@ -3303,9 +3307,9 @@ public class HelloWorldServer {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
-        if (struct.path != null) {
-          oprot.writeFieldBegin(PATH_FIELD_DESC);
-          oprot.writeString(struct.path);
+        if (struct.filedata != null) {
+          oprot.writeFieldBegin(FILEDATA_FIELD_DESC);
+          oprot.writeString(struct.filedata);
           oprot.writeFieldEnd();
         }
         oprot.writeFieldStop();
@@ -3326,12 +3330,12 @@ public class HelloWorldServer {
       public void write(org.apache.thrift.protocol.TProtocol prot, download_args struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
         java.util.BitSet optionals = new java.util.BitSet();
-        if (struct.isSetPath()) {
+        if (struct.isSetFiledata()) {
           optionals.set(0);
         }
         oprot.writeBitSet(optionals, 1);
-        if (struct.isSetPath()) {
-          oprot.writeString(struct.path);
+        if (struct.isSetFiledata()) {
+          oprot.writeString(struct.filedata);
         }
       }
 
@@ -3340,8 +3344,8 @@ public class HelloWorldServer {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
         java.util.BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
-          struct.path = iprot.readString();
-          struct.setPathIsSet(true);
+          struct.filedata = iprot.readString();
+          struct.setFiledataIsSet(true);
         }
       }
     }
@@ -3354,14 +3358,16 @@ public class HelloWorldServer {
   public static class download_result implements org.apache.thrift.TBase<download_result, download_result._Fields>, java.io.Serializable, Cloneable, Comparable<download_result>   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("download_result");
 
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRUCT, (short)0);
 
     private static final org.apache.thrift.scheme.SchemeFactory STANDARD_SCHEME_FACTORY = new download_resultStandardSchemeFactory();
     private static final org.apache.thrift.scheme.SchemeFactory TUPLE_SCHEME_FACTORY = new download_resultTupleSchemeFactory();
 
+    public @org.apache.thrift.annotation.Nullable FileData success; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-;
+      SUCCESS((short)0, "success");
 
       private static final java.util.Map<java.lang.String, _Fields> byName = new java.util.HashMap<java.lang.String, _Fields>();
 
@@ -3377,6 +3383,8 @@ public class HelloWorldServer {
       @org.apache.thrift.annotation.Nullable
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
+          case 0: // SUCCESS
+            return SUCCESS;
           default:
             return null;
         }
@@ -3416,9 +3424,13 @@ public class HelloWorldServer {
         return _fieldName;
       }
     }
+
+    // isset id assignments
     public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, FileData.class)));
       metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(download_result.class, metaDataMap);
     }
@@ -3426,10 +3438,20 @@ public class HelloWorldServer {
     public download_result() {
     }
 
+    public download_result(
+      FileData success)
+    {
+      this();
+      this.success = success;
+    }
+
     /**
      * Performs a deep copy on <i>other</i>.
      */
     public download_result(download_result other) {
+      if (other.isSetSuccess()) {
+        this.success = new FileData(other.success);
+      }
     }
 
     public download_result deepCopy() {
@@ -3438,16 +3460,53 @@ public class HelloWorldServer {
 
     @Override
     public void clear() {
+      this.success = null;
+    }
+
+    @org.apache.thrift.annotation.Nullable
+    public FileData getSuccess() {
+      return this.success;
+    }
+
+    public download_result setSuccess(@org.apache.thrift.annotation.Nullable FileData success) {
+      this.success = success;
+      return this;
+    }
+
+    public void unsetSuccess() {
+      this.success = null;
+    }
+
+    /** Returns true if field success is set (has been assigned a value) and false otherwise */
+    public boolean isSetSuccess() {
+      return this.success != null;
+    }
+
+    public void setSuccessIsSet(boolean value) {
+      if (!value) {
+        this.success = null;
+      }
     }
 
     public void setFieldValue(_Fields field, @org.apache.thrift.annotation.Nullable java.lang.Object value) {
       switch (field) {
+      case SUCCESS:
+        if (value == null) {
+          unsetSuccess();
+        } else {
+          setSuccess((FileData)value);
+        }
+        break;
+
       }
     }
 
     @org.apache.thrift.annotation.Nullable
     public java.lang.Object getFieldValue(_Fields field) {
       switch (field) {
+      case SUCCESS:
+        return getSuccess();
+
       }
       throw new java.lang.IllegalStateException();
     }
@@ -3459,6 +3518,8 @@ public class HelloWorldServer {
       }
 
       switch (field) {
+      case SUCCESS:
+        return isSetSuccess();
       }
       throw new java.lang.IllegalStateException();
     }
@@ -3478,12 +3539,25 @@ public class HelloWorldServer {
       if (this == that)
         return true;
 
+      boolean this_present_success = true && this.isSetSuccess();
+      boolean that_present_success = true && that.isSetSuccess();
+      if (this_present_success || that_present_success) {
+        if (!(this_present_success && that_present_success))
+          return false;
+        if (!this.success.equals(that.success))
+          return false;
+      }
+
       return true;
     }
 
     @Override
     public int hashCode() {
       int hashCode = 1;
+
+      hashCode = hashCode * 8191 + ((isSetSuccess()) ? 131071 : 524287);
+      if (isSetSuccess())
+        hashCode = hashCode * 8191 + success.hashCode();
 
       return hashCode;
     }
@@ -3496,6 +3570,16 @@ public class HelloWorldServer {
 
       int lastComparison = 0;
 
+      lastComparison = java.lang.Boolean.valueOf(isSetSuccess()).compareTo(other.isSetSuccess());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSuccess()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, other.success);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
       return 0;
     }
 
@@ -3517,6 +3601,13 @@ public class HelloWorldServer {
       java.lang.StringBuilder sb = new java.lang.StringBuilder("download_result(");
       boolean first = true;
 
+      sb.append("success:");
+      if (this.success == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.success);
+      }
+      first = false;
       sb.append(")");
       return sb.toString();
     }
@@ -3524,6 +3615,9 @@ public class HelloWorldServer {
     public void validate() throws org.apache.thrift.TException {
       // check for required fields
       // check for sub-struct validity
+      if (success != null) {
+        success.validate();
+      }
     }
 
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
@@ -3560,6 +3654,15 @@ public class HelloWorldServer {
             break;
           }
           switch (schemeField.id) {
+            case 0: // SUCCESS
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct.success = new FileData();
+                struct.success.read(iprot);
+                struct.setSuccessIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
             default:
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
           }
@@ -3575,6 +3678,11 @@ public class HelloWorldServer {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
+        if (struct.success != null) {
+          oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+          struct.success.write(oprot);
+          oprot.writeFieldEnd();
+        }
         oprot.writeFieldStop();
         oprot.writeStructEnd();
       }
@@ -3592,11 +3700,25 @@ public class HelloWorldServer {
       @Override
       public void write(org.apache.thrift.protocol.TProtocol prot, download_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol oprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet optionals = new java.util.BitSet();
+        if (struct.isSetSuccess()) {
+          optionals.set(0);
+        }
+        oprot.writeBitSet(optionals, 1);
+        if (struct.isSetSuccess()) {
+          struct.success.write(oprot);
+        }
       }
 
       @Override
       public void read(org.apache.thrift.protocol.TProtocol prot, download_result struct) throws org.apache.thrift.TException {
         org.apache.thrift.protocol.TTupleProtocol iprot = (org.apache.thrift.protocol.TTupleProtocol) prot;
+        java.util.BitSet incoming = iprot.readBitSet(1);
+        if (incoming.get(0)) {
+          struct.success = new FileData();
+          struct.success.read(iprot);
+          struct.setSuccessIsSet(true);
+        }
       }
     }
 
