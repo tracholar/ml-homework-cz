@@ -11,7 +11,9 @@ import org.apache.thrift.protocol.TBinaryProtocol;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 
 public class HelloWorldClient {
     public void start() throws Exception{
@@ -30,7 +32,19 @@ public class HelloWorldClient {
         fileData.buff = ByteBuffer.wrap(bytes);
         client.upload(new FileData(fileData));
 
-
+        String downPath = "/Users/zhangweite/Documents/test4.txt";
+        try
+        {
+            File file = new java.io.File(downPath);
+            FileOutputStream fos = new FileOutputStream(file);
+            FileChannel channel = fos.getChannel();
+            channel.write(client.download("/Users/zhangweite/Documents/test3.txt").buff);
+            channel.close();
+        }
+        catch (Exception x)
+        {
+            x.printStackTrace();
+        }
     }
 
     private static byte[] toByteArray(String filePath){

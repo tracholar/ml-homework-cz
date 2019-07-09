@@ -5,11 +5,10 @@ import org.apache.thrift.TException;
 import com.zwt.thrift.api.HelloWorldServer;
 import com.zwt.thrift.api.FileData;
 
-import java.io.File;
+import java.io.*;
+import java.nio.ByteBuffer;
 import java.util.Scanner;
 
-import java.io.IOException;
-import java.io.FileOutputStream;
 import java.nio.channels.FileChannel;
 
 import java.net.FileNameMap;
@@ -72,8 +71,32 @@ public class HelloWorldServerImpl implements HelloWorldServer.Iface {
         return true;
     }
     @Override
-    public void download(String path){
-        
+    public FileData download(String data){
+        String filePath = "/Users/zhangweite/Documents/test3.txt";
+        byte[] bytes = toByteArray(filePath);
+        FileData fileData = new FileData();
+        fileData.name = filePath;
+        fileData.buff = ByteBuffer.wrap(bytes);
+        return fileData;
+    }
+    private static byte[] toByteArray(String filePath){
+        byte[] buffer = null;
+        try {
+            File file = new File(filePath);
+            FileInputStream fis = new FileInputStream(file);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream(1000);
+            byte[] b = new byte[1000];
+            int n;
+            while ((n = fis.read(b)) != -1) {
+                bos.write(b, 0, n);
+            }
+            fis.close();
+            bos.close();
+            buffer = bos.toByteArray();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return buffer;
     }
 
 }
