@@ -51,7 +51,7 @@ def training():
     global sentence_maxlen
     global word_cnt
     import pickle
-    data = pickle.load(open("data.sample.pkl"))
+    data = pickle.load(open("data.pkl"))
     word_cnt = 1 + data['wordcnt']
     sentence_maxlen = 1 + max(len(d['title']) for d in data['train'])
     print(sentence_maxlen)
