@@ -33,6 +33,7 @@
 13. [Hive UDF](hive-udf/)[中等]
 14. [随机梯度下降](sgd/)[简单]
 15. [DQN](dqn/)[困难]
+16. [Flink](flink/)[中等]
 
 ## NLP专题
 1. [word2vec](word2vec/)[困难]
