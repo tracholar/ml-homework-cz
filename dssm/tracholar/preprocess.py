@@ -1,4 +1,8 @@
 #coding:utf-8
+"""
+- 数据集: https://github.com/fate233/toutiao-text-classfication-dataset/blob/master/toutiao_cat_data.txt.zip
+- 下载下来,并解压到当前目录
+"""
 import pickle
 import jieba
 import random
