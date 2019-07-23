@@ -36,4 +36,8 @@ class Person(val name:String, val age:Int){}
 - 请先实现一个libsvm格式解析函数,函数原型`def parseLibSVMRecord(line: String): (Double, Array[Int], Array[Double])`, 输入是一行,输出一个label和sparsevector。
 - 完成之后,阅读Spark中解析libsvm数据格式的一个函数源代码,请写出至少3个你们实现上的差异,进行对比. <https://github.com/apache/spark/blob/022667cea666190bea651a3873234700a472326c/mllib/src/main/scala/org/apache/spark/mllib/util/MLUtils.scala#L126>
 - scala的异常处理`catch`部分实际上是一个函数! 请指出这个观点的正确性?
-- 
+
+
+## 实现列表
+- [getstart](getstart/)
+- [tracholar](tracholar/)
