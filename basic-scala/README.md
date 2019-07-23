@@ -32,4 +32,5 @@ class Person(val name:String, val age:Int){}
 - 写出`zip`函数的一个使用场景
 - 样本类有什么用处?
 - scala的类型推断有什么价值? scala中每个变量都有确定的类型么?
-- 请先实现一个libsvmParse, 输出是一行,输出一个label和sparsevector。完成之后,阅读Spark中解析libsvm数据格式的一个函数源代码,请写出至少3个你们实现上的差异,进行对比. <https://github.com/apache/spark/blob/022667cea666190bea651a3873234700a472326c/mllib/src/main/scala/org/apache/spark/mllib/util/MLUtils.scala#L126>
+- 请先实现一个libsvm格式解析函数,函数原型`def parseLibSVMRecord(line: String): (Double, Array[Int], Array[Double])`, 输入是一行,输出一个label和sparsevector。
+- 完成之后,阅读Spark中解析libsvm数据格式的一个函数源代码,请写出至少3个你们实现上的差异,进行对比. <https://github.com/apache/spark/blob/022667cea666190bea651a3873234700a472326c/mllib/src/main/scala/org/apache/spark/mllib/util/MLUtils.scala#L126>
