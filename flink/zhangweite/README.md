@@ -41,7 +41,7 @@ val counts = stream.map((_, 1)).keyBy(0).timeWindow(Time.seconds(3)).sum(1)
 
 - 什么时候需要使用 `processFunction` 来实现自己的逻辑?请用自己的话说明flink API的不同层级以及操作的抽象对象是什么?
 
-processFunction是一个用来维护状态和计时的api。在数据流的处理中，需要使用状态参数来记录处理过程的情况下，需要processFunction来实现。  
+processFunction是一个用来维护状态和计时的api。在数据流的处理中，对处理状态和处理时间比较敏感的情况下，需要processFunction来实现。  
 flink api的层级：  
 1.底层是最基础的数据流，对应的就是ProcessFunctions，他被主要用来处理包含单独事件的一个或两个输入流或者是分组到一个窗口类的事件，所以提供了对时间和状态的细粒度控制。ProcessFunctions可强制修改state、重注册未来某时触发回调函数的timer，所以可以实现复杂事件处理逻辑。  
 2.第二层是datastream和dataset层，分别对应了流操作和批操作，提供了很多实用的api。  
