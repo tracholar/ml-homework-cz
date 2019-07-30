@@ -13,8 +13,8 @@ import org.apache.flink.streaming.api.scala._
 import scala.util.Random
 
 /**
- * Created by zuoyuan on 2019/7/10.
- */
+	* Created by zuoyuan on 2019/7/10.
+	*/
 object ProcessFunctionDemo {
 	def main(args: Array[String]) {
 		val env = StreamExecutionEnvironment.getExecutionEnvironment
@@ -27,18 +27,18 @@ object ProcessFunctionDemo {
 
 	class CountWithTimeoutFunction extends KeyedProcessFunction[Tuple, (String, String), (String, Long)] {
 		lazy val state : ValueState[CountWithTimestamp] = getRuntimeContext
-		    .getState(new ValueStateDescriptor[CountWithTimestamp]("mystate", classOf[CountWithTimestamp]))
+			.getState(new ValueStateDescriptor[CountWithTimestamp]("mystate", classOf[CountWithTimestamp]))
 
 		override def processElement(
-									   value: (String, String),
-									   ctx: KeyedProcessFunction[Tuple, (String, String), (String, Long)]#Context,
-										out: Collector[(String, Long)]): Unit = {
+																 value: (String, String),
+																 ctx: KeyedProcessFunction[Tuple, (String, String), (String, Long)]#Context,
+																 out: Collector[(String, Long)]): Unit = {
 			// TODO 实现processElement逻辑
 		}
 
 		override def onTimer(timestamp: Long,
-							 ctx: KeyedProcessFunction[Tuple, (String, String), (String, Long)]#OnTimerContext,
-							 out: Collector[(String, Long)]) = {
+												 ctx: KeyedProcessFunction[Tuple, (String, String), (String, Long)]#OnTimerContext,
+												 out: Collector[(String, Long)]) = {
 			//TODO 实现onTimer逻辑
 		}
 	}

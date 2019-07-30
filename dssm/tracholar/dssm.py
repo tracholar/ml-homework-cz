@@ -44,8 +44,9 @@ def test_training():
             yield ([x1, x2], y)
     dssm = DSSM()
     g = train_set()
-    print(g.next())
-    dssm.fit(g, steps_per_epoch=1024)
+    print(g.__next__())
+    print(g.__next__())
+    dssm.fit(g, steps_per_epoch=10)
 
 def training():
     global sentence_maxlen
@@ -103,4 +104,4 @@ def training():
 
 
 if __name__ == '__main__':
-    training()
+    test_training()
