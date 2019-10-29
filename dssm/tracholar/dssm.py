@@ -97,7 +97,7 @@ def training():
     g_test = data_set('test')
     print(g_train.next())
     dssm.fit(g_train, eval_set=g_test, steps_per_epoch=1024,
-             validation_steps=1024, epochs=10)
+             validation_steps=1024, epochs=100)
 
 
 
