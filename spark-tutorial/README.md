@@ -25,3 +25,9 @@ rdd.mapPartition{iter =>
     iter.map(obj.predict)
 }
 ```
+
+- Spark中的`transformer`和`action`的区别和联系是什么?举例说明。
+- 使用一下sparkshell, 记录使用体会
+- Spark中的分布式机器学习算法和基于PS的分布式机器学习算法的区别和联系是什么?指出数据并行和模型并行分别在哪些地方有实现?
+- `broadcast` 变量和普通的变量传递有什么区别?
+- 如何利用Spark实现MAPJOIN?
