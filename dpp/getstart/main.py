@@ -4,15 +4,11 @@ import matplotlib.pyplot as plt
 
 def psd(L):
     """
-    将对称矩阵L变为半正定矩阵
+    TODO 将对称矩阵L变为半正定矩阵
     :param L: 输入对称矩阵
     :return: PSD(L)
     """
-    w, v = np.linalg.eig(L)
-    w = w * np.sign(w)
-    L2 = v * w
-    L2 = np.matmul(L2, v.T)
-    return L2
+    raise NotImplementedError()
 
 def calc_sim(emb):
     """
@@ -24,7 +20,7 @@ def calc_sim(emb):
 
 def calc_L(q, emb, alpha=0.1, sigma = 1):
     """
-    计算L矩阵，参考 Practical Diversified Recommendations
+    TODO 计算L矩阵，参考 Practical Diversified Recommendations
     on YouTube with Determinantal Point Processes
     :param q: array 每个item的质量分
     :param emb: 2d array 每个item的embedding向量
@@ -34,17 +30,7 @@ def calc_L(q, emb, alpha=0.1, sigma = 1):
     assert q.ndim == 1 and emb.ndim == 2
     assert q.shape[0] == emb.shape[0]
 
-    n = q.shape[0]
-    L = np.diag(q*q)
-    for i in range(n):
-        for j in range(n):
-            if i == j:
-                continue
-            L[i, j] = alpha * q[i] * q[j] * np.exp(-np.dot(emb[i], emb[j])/2/sigma/sigma)
-
-    ## 将L变成PSD
-    L2 = psd(L)
-    return L2
+    raise NotImplementedError()
 
 def gready_approx_max(L, idx, k = 10):
     """
@@ -57,20 +43,8 @@ def gready_approx_max(L, idx, k = 10):
     Y = []
     remain_idx = [i for i in idx]
     for _ in range(min(k, len(remain_idx))):
-        max_i = remain_idx[0]
-        max_p = 0
-
-        # 搜索最大的i和最大概率p
-        for i in remain_idx:
-            Yi = Y + [i]
-            ix = np.ix_(Yi, Yi)
-            p = np.linalg.det(L[ix])
-            if p > max_p:
-                max_i = i
-                max_p = p
-
-        Y.append(max_i)
-        remain_idx.remove(max_i)
+        ## TODO 贪心搜索最优的k个下标
+        raise NotImplementedError()
 
     return Y
 
@@ -85,21 +59,15 @@ def rank_via_dpp(L):
     W = range(len(L)) # 剩下的下标
     R = [] # 排好序的item 下标
     while len(W) > 0:
-        M = gready_approx_max(L, W, min(k, len(W)))
-        D = []
-        for i in M:
-            R.append(i)
-            D.append(i)
-
-            # 从W中移除
-            W.remove(i)
+        ## TODO 实现DPP排序过程
+        raise NotImplementedError()
     return R
 
 
 
 if __name__ == '__main__':
-    n = 100
-    d = 4
+    n = 100 # item总数目
+    d = 4   # item embedding向量长度
     q = np.array(sorted(np.random.rand(n), reverse=True))
     emb = np.random.rand(n, d)
     L = calc_L(q, emb, 1.)
