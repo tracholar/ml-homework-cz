@@ -1,7 +1,7 @@
 # 行列式点过程
 - 行列式点过程可以用来增加多样性，本次作业模拟一个行列式点过程增加推荐多样性的任务
 - 阅读论文 Practical Diversified Recommendations on YouTube with Determinantal Point Processes 完成仿真数据下的DPP算法
-- 参考wiki <https://tracholar.github.io/wiki/machine-learning/recommend/global-rank.html>
+- 参考wiki <https://tracholar.github.io/wiki/machine-learning/recommend/global-rank.html#dpp>
 
 # 思考题
 - DPP 跟行列式有啥关系？
