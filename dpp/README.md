@@ -1,6 +1,6 @@
 # 行列式点过程
 - 行列式点过程可以用来增加多样性，本次作业模拟一个行列式点过程增加推荐多样性的任务
-- 阅读论文 Practical Diversified Recommendations on YouTube with Determinantal Point Processes 完成仿真数据下的DPP算法
+- 阅读论文 Practical Diversified Recommendations on YouTube with Determinantal Point Processes 完成仿真数据下的DPP算法，启动代码放在 getstart 目录下。提交作业请创建自己的目录，并发PR！
 - 参考wiki <https://tracholar.github.io/wiki/machine-learning/recommend/global-rank.html#dpp>
 
 # 思考题
