@@ -9,7 +9,7 @@ def psd(L):
     :return: PSD(L)
     """
     w, v = np.linalg.eig(L)
-    w = w * np.sign(w)
+    w = w * (w > 0)
     L2 = v * w
     L2 = np.matmul(L2, v.T)
     return L2
@@ -20,7 +20,12 @@ def calc_sim(emb):
     :param emb:
     :return:
     """
-    return np.dot(emb, emb.T)
+    sim = np.dot(emb, emb.T)
+    norm = np.sqrt(np.sum(emb ** 2, axis=1))
+    for i in range(len(sim)):
+        for j in range(len(sim[0])):
+            sim[i, j] /= norm[i] * norm[j]
+    return sim
 
 def calc_L(q, emb, alpha=0.1, sigma = 1):
     """
@@ -40,7 +45,7 @@ def calc_L(q, emb, alpha=0.1, sigma = 1):
         for j in range(n):
             if i == j:
                 continue
-            L[i, j] = alpha * q[i] * q[j] * np.exp(-np.dot(emb[i], emb[j])/2/sigma/sigma)
+            L[i, j] = alpha * q[i] * q[j] * np.exp(- np.linalg.norm(emb[i] - emb[j])/2/sigma/sigma)
 
     ## 将L变成PSD
     L2 = psd(L)
@@ -95,16 +100,23 @@ def rank_via_dpp(L):
             W.remove(i)
     return R
 
-
-
 if __name__ == '__main__':
     n = 100
     d = 4
     q = np.array(sorted(np.random.rand(n), reverse=True))
     emb = np.random.rand(n, d)
+    sim = calc_sim(emb)[0, :]
+    print sim
+    idx = list(reversed(np.argsort(sim)))
+    print idx
+    emb = emb[idx, :]
+
     L = calc_L(q, emb, 1.)
     R = rank_via_dpp(L)
     print R
+
+    sim = calc_sim(emb[R])
+    print sim[R[0], :]
 
     plt.subplot(121)
     plt.imshow(calc_sim(emb), interpolation='nearest', cmap=plt.cm.hot)
@@ -113,6 +125,7 @@ if __name__ == '__main__':
     plt.subplot(122)
     plt.imshow(calc_sim(emb[R]), interpolation='nearest', cmap=plt.cm.hot)
     plt.colorbar()
+
     plt.show()
 
 
