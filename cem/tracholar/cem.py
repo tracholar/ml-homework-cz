@@ -22,7 +22,7 @@ def CEM():
         z = np.eye(2, 2) * max(0, 1 - 1.0*itr/40.0) # 随时间递减至0，才能收敛
         sigma = np.diag(np.var(w[inds], axis=0)) + z
 
-        print 'Iter {}, max Reward {}, min Reward {}, mean Reward {}, w=[{}, {}]'.format(itr, np.max(R), np.min(R), np.mean(R), mu[0], mu[1])
+        print 'Iter {}, max Reward {}, min Reward {}, mean Reward {}, std Reward {}, w=[{}, {}]'.format(itr, np.max(R), np.min(R), np.mean(R), np.std(R), mu[0], mu[1])
 
 
 if __name__ == '__main__':
