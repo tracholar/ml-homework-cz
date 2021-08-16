@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="客户端bean ID" class="com.meituan.service.mobile.mtthrift.proxy.ThriftClientProxy" destroy-method="destroy">
+        <property name="serviceInterface" value="com.meituan.mtthrift.test.HelloService"/> <!-- 接口名 -->
+        <property name="remoteAppkey" value="com.sankuai.inf.mtthrift.testServer"/>  <!-- 目标Server Appkey  -->
+        <property name="nettyIO" value="true"/>
+        <property name="filterByServiceName" value="true"/>  <!-- 通过服务名称进行服务发现 -->
+    </bean>
+
+</beans>

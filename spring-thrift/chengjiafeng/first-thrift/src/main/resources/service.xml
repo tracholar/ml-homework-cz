@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://maven.apache.org/POM/4.0.0"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <bean id="serviceProcessor" class="com.cjf.main.CjfServiceImpl"></bean>
+
+    <bean id="服务端bean ID" class="com.meituan.service.mobile.mtthrift.proxy.ThriftServerPublisher" destroy-method="destroy">
+        <property name="serviceInterface" value="com.cjf.thrift.generate.CjfService"/> <!-- 接口类 -->
+        <property name="serviceImpl" ref="serviceProcessor"/> <!-- 实现类 -->
+        <property name="appKey" value="com.sankuai.inf.mtthrift.testServer"/>  <!-- 本地appkey -->
+        <property name="port" value="9001"/> <!-- 监听端口； >=1.8.6.5可不配，注意事项见: https://km.sankuai.com/page/163558219 -->
+    </bean>
+
+</beans>
