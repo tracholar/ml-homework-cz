@@ -1,0 +1,9 @@
+message RequestMessage
+{
+    required string message = 1;
+}
+
+message ResponseMessage
+{
+    required string message = 1;
+}
