@@ -15,6 +15,7 @@ import static org.junit.Assert.assertNull;
 /**
  * Created by zuoyuan on 2019/7/19.
  */
+@RunWith(MockitoJUnitRunner.class)
 public class TestLocalServiceImplMock {
     private LocalServiceImpl localService;
 
@@ -23,6 +24,8 @@ public class TestLocalServiceImplMock {
     @Before
     public void setUp(){
         localService = new LocalServiceImpl();
+        remoteService = Mockito.mock(ServiceA.class);
+        Whitebox.setInternalState(localService, "remoteService", remoteService);
 
     }
 
@@ -30,6 +33,7 @@ public class TestLocalServiceImplMock {
     public void testMock(){
         //TODO 测试下面的方法调用
         Node target = new Node(1, "target");
+        Mockito.when(remoteService.getRemoteNode(1)).thenReturn(target);
         Node result = localService.getRemoteNode(1);
 
         assertEquals(target, result);

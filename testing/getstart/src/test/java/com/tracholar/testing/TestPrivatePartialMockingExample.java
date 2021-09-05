@@ -13,6 +13,8 @@ import static org.powermock.api.mockito.PowerMockito.when;
 /**
  * Created by zuoyuan on 2019/7/19.
  */
+@RunWith(PowerMockRunner.class)
+@PrepareForTest(PrivatePartialMockingExample.class)
 public class TestPrivatePartialMockingExample {
     @Test
     public void demoPrivateMethodMocking() throws Exception{
@@ -21,9 +23,13 @@ public class TestPrivatePartialMockingExample {
         final String input = "input";
 
         //TODO 测试下面的方法调用
-        PrivatePartialMockingExample underTest = new PrivatePartialMockingExample();
 
+        PrivatePartialMockingExample underTest = spy(new PrivatePartialMockingExample());
+
+        when(underTest, nameOfMethodToMock, input).thenReturn(expected);
         assertEquals(expected, underTest.methodToTest());
+
+        verifyPrivate(underTest).invoke(nameOfMethodToMock, input);
 
     }
 
