@@ -1,5 +1,4 @@
 package com.tracholar.testing;
-import com.tracholar.testing.ClassUnderTest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
