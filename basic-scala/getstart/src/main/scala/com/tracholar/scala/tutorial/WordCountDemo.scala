@@ -8,5 +8,6 @@ object WordCountDemo {
 
 	def main(args: Array[String]) {
 		// TODO 实现word count
+
 	}
 }
