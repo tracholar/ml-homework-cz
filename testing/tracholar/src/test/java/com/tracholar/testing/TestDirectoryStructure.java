@@ -30,7 +30,5 @@ public class TestDirectoryStructure {
 
         assertTrue(new DirectoryStructure().create(directoryPath));
         verifyNew(File.class).withArguments(directoryPath);
-
-
     }
 }

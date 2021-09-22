@@ -7,7 +7,7 @@ A2 init、iterate、terminalPartial在map过程中执行；merge、terminate在r
 
 Q3 UDTF中的 `initialize`，`process`，`close` 分别在MapReduce的哪些阶段执行，请实现一个测试用例，模拟MapReduce执行过程，并构造伪造的数据，本地测试UDTF
 
-A3 initialize、process在map过程中执行；close在reduce过程中执行。
+A3 UDTF还没有做
 
 Q4 `ObjectInspector`是什么，Hadoop使用`ObjectInspector`有什么好处?
 
