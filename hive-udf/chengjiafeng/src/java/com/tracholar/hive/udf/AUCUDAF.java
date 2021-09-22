@@ -56,17 +56,17 @@ public final class AUC extends UDAF {
             if (y == 0) {
                 for (int j = 0; j < s.arrs[0].length; j++) {
                     if (value < j * 0.01) {
-                        s.st[1][j]++;
+                        s.arrs[1][j]++;
                     } else {
-                        this.s.st[3][j]++;
+                        s.arrs[3][j]++;
                     }
                 }
             } else {
                 for (int j = 0; j < s.arrs[0].length; j++) {
                     if (value > j * 0.01) {
-                        s.st[0][j]++;
+                        s.arrs[0][j]++;
                     } else {
-                        this.s.st[2][j]++;
+                        s.arrs[2][j]++;
                     }
                 }
             }
