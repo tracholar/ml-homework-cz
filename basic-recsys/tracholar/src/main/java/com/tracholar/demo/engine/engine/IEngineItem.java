@@ -24,4 +24,10 @@ public interface IEngineItem {
      * @return
      */
     float getScore();
+
+    /**
+     * 设置打分
+     * @param score
+     */
+    void setScore(float score);
 }

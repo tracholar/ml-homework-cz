@@ -2,8 +2,11 @@ package com.tracholar.demo.engine.rank;
 
 import com.tracholar.demo.engine.engine.EngineRequest;
 import com.tracholar.demo.engine.engine.IEngineItem;
+import com.tracholar.demo.engine.rank.ranker.SimpleModelRanker;
 import com.tracholar.demo.engine.rank.ranker.SimpleRanker;
 import com.tracholar.demo.utils.Monitor;
+import lombok.Data;
+import lombok.Setter;
 
 import java.util.HashMap;
 import java.util.List;
@@ -15,8 +18,9 @@ import java.util.Map;
  *
  * ranker的路由，用于AB实验
  */
+@Data
 public class RankerRouter implements IRanker{
-    private IRanker defaultRanker = new SimpleRanker();
+    private IRanker defaultRanker = new SimpleModelRanker();
     private Map<String, IRanker> routerTable = new HashMap<>();
 
     @Override

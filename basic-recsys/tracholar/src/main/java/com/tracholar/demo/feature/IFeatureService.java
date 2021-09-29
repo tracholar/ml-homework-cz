@@ -1,5 +1,7 @@
 package com.tracholar.demo.feature;
 
+import com.tracholar.demo.model.Sample;
+
 import java.util.List;
 
 /**
@@ -8,11 +10,11 @@ import java.util.List;
  *
  * 特征服务，获取item、user等实体的特征列表
  */
-public interface IFeatureService<T> {
+public interface IFeatureService{
     /**
      * 获取实体的特征列表
-     * @param entity
+     * @param req
      * @return
      */
-    List<IFeature> getFeatures(T entity);
+    List<Sample> getFeatures(FeatureServiceRequest req);
 }

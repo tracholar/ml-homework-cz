@@ -1,5 +1,7 @@
 package com.tracholar.demo.api;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -8,5 +10,10 @@ import java.io.Serializable;
  *
  * 推荐的item
  */
-public interface Item extends Serializable {
+@Data
+public class Item implements Serializable {
+    /**
+     * 排序分
+     */
+    private float score;
 }

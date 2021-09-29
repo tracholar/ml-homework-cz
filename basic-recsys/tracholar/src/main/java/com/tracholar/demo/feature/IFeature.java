@@ -7,4 +7,5 @@ package com.tracholar.demo.feature;
  * 特征对象
  */
 public interface IFeature {
+    String getName();
 }

@@ -12,7 +12,7 @@ import java.sql.Date;
  */
 @Data
 @Entity
-public class Article implements Item {
+public class Article extends Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
