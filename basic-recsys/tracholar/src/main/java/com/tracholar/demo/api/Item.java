@@ -11,9 +11,17 @@ import java.io.Serializable;
  * 推荐的item
  */
 @Data
-public class Item implements Serializable {
+public class Item implements Serializable, Comparable<Item> {
     /**
      * 排序分
      */
     private float score;
+
+    @Override
+    public int compareTo(Item o) {
+        if(o == null){
+            return 1;
+        }
+        return Float.compare(score, o.score);
+    }
 }
