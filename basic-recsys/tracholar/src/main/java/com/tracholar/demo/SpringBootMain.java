@@ -18,7 +18,7 @@ import java.util.List;
  */
 @SpringBootApplication
 @RestController
-@ImportResource("recaller.xml")
+@ImportResource("beans.xml")
 public class SpringBootMain {
     @GetMapping("/")
     public String index(){
