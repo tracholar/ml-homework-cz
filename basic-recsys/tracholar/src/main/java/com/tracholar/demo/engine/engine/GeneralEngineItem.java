@@ -1,6 +1,7 @@
 package com.tracholar.demo.engine.engine;
 
 import com.tracholar.demo.api.Item;
+import com.tracholar.demo.engine.api.IRender;
 import lombok.Data;
 
 /**
@@ -9,9 +10,6 @@ import lombok.Data;
  */
 @Data
 public class GeneralEngineItem extends Item implements IEngineItem{
-    private EngineItemType type;
-    private long id;
-
     @Override
     public Item toApiItem() {
         return this;

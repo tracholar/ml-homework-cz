@@ -2,8 +2,7 @@ package com.tracholar.demo.engine.recall;
 
 import com.tracholar.demo.engine.engine.EngineRequest;
 import com.tracholar.demo.engine.engine.IEngineItem;
-import com.tracholar.demo.engine.recall.strategy.SimpleRecaller;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -17,9 +16,8 @@ import java.util.Map;
  *
  * 召回的路由
  */
-@Component
+@Setter
 public class RecallerRouter implements IRecaller{
-    @Resource(name = "simpleRecaller")
     private IRecaller defaultRecaller;
     private Map<String, IRecaller> routerTable = new HashMap();
 

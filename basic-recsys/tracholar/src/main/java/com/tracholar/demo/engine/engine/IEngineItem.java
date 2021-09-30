@@ -1,6 +1,7 @@
 package com.tracholar.demo.engine.engine;
 
 import com.tracholar.demo.api.Item;
+import com.tracholar.demo.engine.api.IRender;
 
 /**
  * @author zuoyuan

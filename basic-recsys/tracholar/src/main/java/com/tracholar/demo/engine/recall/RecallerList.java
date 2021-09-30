@@ -3,6 +3,7 @@ package com.tracholar.demo.engine.recall;
 import com.tracholar.demo.engine.engine.EngineRequest;
 import com.tracholar.demo.engine.engine.IEngineItem;
 import com.tracholar.demo.engine.recall.merge.SimpleMerger;
+import lombok.Setter;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -15,9 +16,10 @@ import java.util.Map;
  *
  * 多路召回
  */
+@Setter
 public class RecallerList implements IRecaller{
     private List<IRecaller> recallList = new LinkedList();
-    private IMerger merger = new SimpleMerger();
+    private IMerger merger;
 
     @Override
     public List<IEngineItem> recall(EngineRequest request) {

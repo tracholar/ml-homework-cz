@@ -1,6 +1,7 @@
 package com.tracholar.demo.engine.api;
 
 import com.tracholar.demo.api.Item;
+import com.tracholar.demo.engine.engine.EngineItemType;
 import com.tracholar.demo.engine.engine.IEngineItem;
 
 import java.util.List;

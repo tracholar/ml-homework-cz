@@ -25,7 +25,7 @@ import java.util.List;
 public class RecsysApiImpl implements RecsysApi {
     @Resource(name = "simpleRecEngine")
     private IEngine engine;
-    @Resource(name = "articleRender")
+    @Resource(name = "renderRouter")
     private IRender render;
 
     public Response recommend(Request req) {

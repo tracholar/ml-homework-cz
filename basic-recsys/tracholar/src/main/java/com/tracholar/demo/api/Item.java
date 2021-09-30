@@ -1,5 +1,6 @@
 package com.tracholar.demo.api;
 
+import com.tracholar.demo.engine.engine.EngineItemType;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -12,6 +13,8 @@ import java.io.Serializable;
  */
 @Data
 public class Item implements Serializable, Comparable<Item> {
+    private EngineItemType type;
+    private long id;
     /**
      * 排序分
      */

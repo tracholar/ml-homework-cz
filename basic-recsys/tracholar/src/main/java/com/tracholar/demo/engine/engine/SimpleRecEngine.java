@@ -18,7 +18,7 @@ import java.util.List;
  */
 @Component
 public class SimpleRecEngine implements IEngine{
-    @Resource(name = "recallerRouter")
+    @Resource(name = "recall_router")
     private IRecaller recaller;
     private IFilter recallFilter = new RecallFilter();
     private IRanker ranker = new RankerRouter();

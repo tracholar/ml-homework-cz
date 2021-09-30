@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    <bean id="toplist_recaller" class="com.tracholar.demo.engine.recall.strategy.SimpleRecaller">
+        <constructor-arg name="key" value="toplist" />
+    </bean>
+    <bean id="toplist_electronics_recaller" class="com.tracholar.demo.engine.recall.strategy.SimpleRecaller">
+        <constructor-arg name="key" value="toplist_electronics" />
+    </bean>
+
+    <bean id="default_recall_exp" class="com.tracholar.demo.engine.recall.RecallerList">
+        <property name="merger" ref="simpleMerger" />
+        <property name="recallList">
+            <list>
+                <ref bean="toplist_recaller" />
+                <ref bean="toplist_electronics_recaller" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="recall_router" class="com.tracholar.demo.engine.recall.RecallerRouter">
+        <property name="defaultRecaller" ref="default_recall_exp"/>
+        <property name="routerTable">
+            <map>
+                <entry key="default" value-ref="default_recall_exp"/>
+            </map>
+        </property>
+    </bean>
+</beans>

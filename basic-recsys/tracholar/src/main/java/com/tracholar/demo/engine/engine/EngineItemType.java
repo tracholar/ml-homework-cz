@@ -8,7 +8,8 @@ import lombok.Getter;
  */
 @Getter
 public enum EngineItemType {
-    ARTICLE(1, "文章");
+    ARTICLE(1, "文章"),
+    ELECTRONICS(2, "亚马逊电子产品");
 
     private int id;
     private String name;
