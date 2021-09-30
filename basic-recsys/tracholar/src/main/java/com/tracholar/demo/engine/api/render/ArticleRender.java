@@ -35,8 +35,9 @@ public class ArticleRender implements IRender {
         }
         List<Item> responseItems = new LinkedList<>();
         for(Article article : articles){
-            article.setScore(map.get(article.getId()).getScore());
-            responseItems.add(article);
+            Item item = map.get(article.getId()).toApiItem();
+            item.setDetail(article);
+            responseItems.add(item);
         }
         responseItems.sort((o1, o2) -> - o1.compareTo(o2));
         return new LinkedList<>(responseItems);

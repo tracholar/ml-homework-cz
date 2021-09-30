@@ -1,6 +1,6 @@
 package com.tracholar.demo.data;
 
-import com.tracholar.demo.api.Item;
+import com.tracholar.demo.api.IDetail;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -12,7 +12,7 @@ import java.sql.Date;
  */
 @Data
 @Entity
-public class Article extends Item {
+public class Article implements IDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)

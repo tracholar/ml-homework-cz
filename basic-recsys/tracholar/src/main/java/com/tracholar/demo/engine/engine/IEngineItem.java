@@ -1,5 +1,7 @@
 package com.tracholar.demo.engine.engine;
 
+import com.tracholar.demo.api.Item;
+
 /**
  * @author zuoyuan
  * @date 2021/9/27 13:49
@@ -30,4 +32,10 @@ public interface IEngineItem {
      * @param score
      */
     void setScore(float score);
+
+    /**
+     * 转换为API层的item
+     * @return
+     */
+    Item toApiItem();
 }

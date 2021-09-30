@@ -17,6 +17,8 @@ public class Item implements Serializable, Comparable<Item> {
      */
     private float score;
 
+    private IDetail detail;
+
     @Override
     public int compareTo(Item o) {
         if(o == null){
