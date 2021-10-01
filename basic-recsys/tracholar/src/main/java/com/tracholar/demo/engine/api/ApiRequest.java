@@ -12,5 +12,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ApiRequest implements Request {
-    private String uid;
+    private long uid;
 }

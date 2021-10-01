@@ -21,7 +21,8 @@ public class SimpleRecEngine implements IEngine{
     @Resource(name = "recall_router")
     private IRecaller recaller;
     private IFilter recallFilter = new RecallFilter();
-    private IRanker ranker = new RankerRouter();
+    @Resource(name = "ranker_router")
+    private IRanker ranker;
     private IFilter rankFilter = new RankFilter();
 
     @Override

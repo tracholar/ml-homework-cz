@@ -3,7 +3,6 @@ package com.tracholar.demo.engine.rank;
 import com.tracholar.demo.engine.engine.EngineRequest;
 import com.tracholar.demo.engine.engine.IEngineItem;
 import com.tracholar.demo.engine.rank.ranker.SimpleModelRanker;
-import com.tracholar.demo.engine.rank.ranker.SimpleRanker;
 import com.tracholar.demo.utils.Monitor;
 import lombok.Data;
 

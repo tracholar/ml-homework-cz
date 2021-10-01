@@ -3,6 +3,7 @@ package com.tracholar.demo.engine.rank.ranker;
 import com.tracholar.demo.engine.engine.EngineRequest;
 import com.tracholar.demo.engine.engine.IEngineItem;
 import com.tracholar.demo.engine.rank.IRanker;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
  *
  * 用召回分数排序
  */
+@Component
 public class SimpleRanker implements IRanker {
     @Override
     public List<IEngineItem> rank(List<IEngineItem> items, EngineRequest request) {

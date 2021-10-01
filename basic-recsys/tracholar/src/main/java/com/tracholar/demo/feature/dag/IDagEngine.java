@@ -12,7 +12,7 @@ import java.util.Map;
 public interface IDagEngine {
     /**
      * 执行节点计算逻辑
-     * @param inputs
+     * @param ctx
      */
-    boolean run(List<INode> nodes);
+    boolean run(IEngineContext ctx);
 }

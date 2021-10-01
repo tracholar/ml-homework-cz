@@ -10,6 +10,8 @@ import com.tracholar.demo.feature.service.SimpleFeatureService;
 import com.tracholar.demo.model.*;
 import com.tracholar.demo.model.model.RandomModel;
 import lombok.Builder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
@@ -18,9 +20,11 @@ import java.util.Map;
  * @author zuoyuan
  * @date 2021/9/29 20:21
  */
+@Component
 public class SimpleModelRanker implements IRanker {
     private IPredictor model = new RandomModel();
-    private IFeatureService service = new SimpleFeatureService();
+    @Autowired
+    private IFeatureService service;
 
     @Override
     public List<IEngineItem> rank(List<IEngineItem> items, EngineRequest request) {

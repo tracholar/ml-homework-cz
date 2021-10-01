@@ -10,7 +10,10 @@ import lombok.Getter;
 @Builder
 public class EngineRequest {
     @Getter
-    private String uid;
+    private String reqId;
+
+    @Getter
+    private long uid;
 
     public String getRecallerKey(){
         return "default";

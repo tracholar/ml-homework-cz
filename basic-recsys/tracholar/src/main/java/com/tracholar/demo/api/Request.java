@@ -11,5 +11,5 @@ public interface Request {
      * uid
      * @return
      */
-    String getUid();
+    long getUid();
 }
