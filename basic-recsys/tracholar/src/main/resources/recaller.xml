@@ -24,7 +24,7 @@
         <property name="defaultRecaller" ref="default_recall_exp"/>
         <property name="routerTable">
             <map>
-                <entry key="default" value-ref="default_recall_exp"/>
+                <entry key="base" value-ref="default_recall_exp"/>
             </map>
         </property>
     </bean>

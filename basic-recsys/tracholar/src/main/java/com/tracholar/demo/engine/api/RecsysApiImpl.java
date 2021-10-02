@@ -1,6 +1,8 @@
 package com.tracholar.demo.engine.api;
 
+import com.tracholar.demo.abtest.ABTestInfo;
 import com.tracholar.demo.abtest.IABTest;
+import com.tracholar.demo.abtest.IABTestInfo;
 import com.tracholar.demo.api.Item;
 import com.tracholar.demo.api.RecsysApi;
 import com.tracholar.demo.api.Request;
@@ -33,9 +35,10 @@ public class RecsysApiImpl implements RecsysApi {
     private IABTest abTest;
 
     public Response recommend(Request req) {
+        IABTestInfo abTestInfo = abTest.getABTestInfo(String.valueOf(req.getUid()));
         EngineRequest engineReq = EngineRequest.builder()
                 .uid(req.getUid())
-                .abTestInfo(abTest.getABTestInfo(String.valueOf(req.getUid())))
+                .abTestInfo(abTestInfo)
                 .build();
 
         EngineResponse response = engine.recommend(engineReq);
@@ -43,6 +46,7 @@ public class RecsysApiImpl implements RecsysApi {
 
         return ApiResponse.builder()
                 .results(items)
+                .abTestInfo(abTestInfo)
                 .build();
     }
 

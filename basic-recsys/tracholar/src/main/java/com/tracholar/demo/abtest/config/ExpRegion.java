@@ -14,4 +14,5 @@ public class ExpRegion {
     private String name;
     private Set<Integer> flows;
     private List<LayerConfig> configs;
+    private String desc;
 }

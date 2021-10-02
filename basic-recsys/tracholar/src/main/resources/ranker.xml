@@ -7,8 +7,8 @@
         <property name="defaultRanker" ref="simpleModelRanker" />
         <property name="routerTable">
             <map>
-                <entry key="default" value-ref="simpleModelRanker" />
                 <entry key="base" value-ref="simpleRanker" />
+                <entry key="random_model" value-ref="simpleModelRanker" />
             </map>
         </property>
     </bean>

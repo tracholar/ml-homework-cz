@@ -20,5 +20,17 @@ public class LayerConfig {
     // 多个策略的配置
     private List<StrategyConfig> configs;
 
+    // 默认策略名
+    private String defaultStrategy;
+
+    public StrategyConfig findDefaultStrategy(){
+        for(StrategyConfig s : configs){
+            if(s.getStrategyName().equals(defaultStrategy)){
+                return s;
+            }
+        }
+        return null;
+    }
+
     private String desc;
 }
