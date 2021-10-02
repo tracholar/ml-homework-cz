@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +25,7 @@ public class FeatureJobContext implements
 
     @Getter
     @Setter
-    private List<IEngineItem> items;
+    private List<IEngineItem> items = new LinkedList<>();
 
 
     private Map<IFeatureJob, IJobResults> results = new HashMap<>();

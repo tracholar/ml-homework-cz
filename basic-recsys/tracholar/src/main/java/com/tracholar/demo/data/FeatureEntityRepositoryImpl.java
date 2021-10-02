@@ -15,11 +15,11 @@ public class FeatureEntityRepositoryImpl implements CustomFeatureQuery{
 
     @Override
     public List<FeatureEntity> findFeature(int type, List<Long> items, List<String> names) {
-        String sql = "select * from feature_entity where type = ? and id in (?) and name in (?)";
+        String sql = "select * from feature_entity where type = :type and id in :ids and name in :names";
         Query query = entityManager.createNativeQuery(sql);
-        query.setParameter(1, (short)type);
-        query.setParameter(2, items);
-        query.setParameter(3, names);
+        query.setParameter("type", (short)type);
+        query.setParameter("ids", items);
+        query.setParameter("names", names);
         List<FeatureEntity> data = query.getResultList();
 
         return data;
