@@ -31,8 +31,7 @@ public class SimpleFeatureService implements IFeatureService {
             Sample s = new Sample();
             s.setReqId(req.getReq().getReqId());
             s.setUid(req.getReq().getUid());
-            s.setType(item.getType());
-            s.setId(item.getId());
+            s.setItem(item);
 
             // 特征
             Map<String, Object> features = new HashMap<>();

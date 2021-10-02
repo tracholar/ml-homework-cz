@@ -1,7 +1,9 @@
 package com.tracholar.demo.data.amazon;
 
 import com.tracholar.demo.api.IDetail;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
@@ -12,6 +14,8 @@ import java.util.List;
  */
 @Data
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class Electronics implements IDetail{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

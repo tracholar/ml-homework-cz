@@ -6,5 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface FeatureEntityRepository
-        extends CrudRepository<FeatureEntity, String>, CustomFeatureQuery{
+        extends CrudRepository<FeatureEntity, Long>, CustomFeatureQuery{
 }

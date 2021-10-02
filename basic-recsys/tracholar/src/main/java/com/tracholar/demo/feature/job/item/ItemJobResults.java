@@ -1,10 +1,14 @@
 package com.tracholar.demo.feature.job.item;
 
+import com.tracholar.demo.data.FeatureEntity;
+import com.tracholar.demo.engine.engine.EngineItemType;
+import com.tracholar.demo.engine.engine.GeneralEngineItem;
 import com.tracholar.demo.engine.engine.IEngineItem;
 import com.tracholar.demo.feature.job.IJobResults;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 /**

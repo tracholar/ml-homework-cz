@@ -61,13 +61,17 @@ public class ItemBaseFeatureJob implements IItemJob {
                     List<Long> ids = e.getValue().stream().map(x -> x.getId())
                             .collect(Collectors.toList());
                     List<FeatureEntity> r = rep.findFeature(e.getKey().getId(), ids, outputNames);
+                    Map<String, IEngineItem> itemMap = new HashMap<>();
                     for(IEngineItem item : e.getValue()){
+                        itemMap.put(item.uniqueId(), item);
+                    }
+                    for(FeatureEntity entity : r){
+                        String uniqueId = entity.getEngineItem().uniqueId();
+                        IEngineItem item = itemMap.get(uniqueId);
                         if(!results.containsKey(item)){
                             results.put(item, new HashMap<>());
                         }
-                    }
-                    for(FeatureEntity entity : r){
-                        // TODO 待完成
+                        results.get(item).putAll(entity.getFeature());
                     }
                 });
         return results;

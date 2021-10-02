@@ -8,10 +8,16 @@ import lombok.Data;
  * @author zuoyuan
  * @date 2021/9/29 15:21
  */
-@Data
 public class GeneralEngineItem extends Item implements IEngineItem{
     @Override
     public Item toApiItem() {
         return this;
     }
+
+    @Override
+    public String uniqueId() {
+        return String.format("%s-%s", getType(), getId());
+    }
+
+
 }

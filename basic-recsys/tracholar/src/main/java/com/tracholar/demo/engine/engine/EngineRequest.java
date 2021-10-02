@@ -24,7 +24,7 @@ public class EngineRequest {
     }
 
     public String getRankerKey(){
-        return "default";
+        return "base";
     }
 
     public String getRankFilterKey(){

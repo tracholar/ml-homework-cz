@@ -39,4 +39,10 @@ public interface IEngineItem {
      * @return
      */
     Item toApiItem();
+
+    /**
+     * 唯一ID
+     * @return
+     */
+    String uniqueId();
 }

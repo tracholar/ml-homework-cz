@@ -13,5 +13,5 @@ import java.util.Map;
 @Builder
 @Getter
 public class PredictResponse implements IPredictResponse{
-    private Map<Integer, PredictResult> results;
+    private Map<String, PredictResult> results;
 }

@@ -10,6 +10,7 @@ import com.tracholar.demo.feature.service.SimpleFeatureService;
 import com.tracholar.demo.model.*;
 import com.tracholar.demo.model.model.RandomModel;
 import lombok.Builder;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,9 +21,9 @@ import java.util.Map;
  * @author zuoyuan
  * @date 2021/9/29 20:21
  */
-@Component
 public class SimpleModelRanker implements IRanker {
-    private IPredictor model = new RandomModel();
+    @Setter
+    private IPredictor model;
     @Autowired
     private IFeatureService service;
 
@@ -33,10 +34,11 @@ public class SimpleModelRanker implements IRanker {
         List<Sample> samples = service.getFeatures(req);
         PredictRequest predReq = PredictRequest.builder().items(samples).build();
         IPredictResponse resp = model.predict(predReq);
-        Map<Integer, PredictResult> predResults = resp.getResults();
-        for(int i = 0; i<items.size(); i++){
-            IEngineItem item = items.get(i);
-            item.setScore(predResults.get(i).getScore());
+        Map<String, PredictResult> predResults = resp.getResults();
+        for(Sample s : samples){
+            PredictResult pred = predResults.get(s.getUniqueId());
+            IEngineItem item = s.getItem();
+            item.setScore(pred.getScore());
         }
         items.sort((o1, o2) -> -Float.compare(o1.getScore(),o2.getScore()));
         return items;

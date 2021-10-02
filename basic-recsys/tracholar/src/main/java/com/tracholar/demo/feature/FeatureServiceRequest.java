@@ -21,7 +21,9 @@ public class FeatureServiceRequest {
 
     public FeatureJobContext buildFeatureJobContext(){
         FeatureJobContext ctx = new FeatureJobContext();
-        //TODO 创建
+        ctx.setUid(req.getUid());
+        ctx.setItems(items);
+
         return ctx;
     }
 }

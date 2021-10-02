@@ -12,4 +12,8 @@
             </map>
         </property>
     </bean>
+
+    <bean id="simpleModelRanker" class="com.tracholar.demo.engine.rank.ranker.SimpleModelRanker">
+        <property name="model" ref="randomModel" />
+    </bean>
 </beans>
