@@ -1,5 +1,6 @@
 package com.tracholar.demo.engine.engine;
 
+import com.tracholar.demo.abtest.IABTestInfo;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -15,19 +16,21 @@ public class EngineRequest {
     @Getter
     private long uid;
 
+    private IABTestInfo abTestInfo;
+
     public String getRecallerKey(){
-        return "default";
+        return abTestInfo.getLayerKey("recall");
     }
 
     public String getRecallFilterKey(){
-        return "default";
+        return abTestInfo.getLayerKey("recallFilter");
     }
 
     public String getRankerKey(){
-        return "base";
+        return abTestInfo.getLayerKey("ranker");
     }
 
     public String getRankFilterKey(){
-        return "default";
+        return abTestInfo.getLayerKey("rankFilter");
     }
 }

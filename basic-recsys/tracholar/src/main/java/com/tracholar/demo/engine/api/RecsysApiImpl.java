@@ -1,5 +1,6 @@
 package com.tracholar.demo.engine.api;
 
+import com.tracholar.demo.abtest.IABTest;
 import com.tracholar.demo.api.Item;
 import com.tracholar.demo.api.RecsysApi;
 import com.tracholar.demo.api.Request;
@@ -9,6 +10,7 @@ import com.tracholar.demo.engine.engine.EngineRequest;
 import com.tracholar.demo.engine.engine.EngineResponse;
 import com.tracholar.demo.engine.engine.IEngine;
 import com.tracholar.demo.engine.engine.SimpleRecEngine;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,10 +29,13 @@ public class RecsysApiImpl implements RecsysApi {
     private IEngine engine;
     @Resource(name = "renderRouter")
     private IRender render;
+    @Autowired
+    private IABTest abTest;
 
     public Response recommend(Request req) {
         EngineRequest engineReq = EngineRequest.builder()
                 .uid(req.getUid())
+                .abTestInfo(abTest.getABTestInfo(String.valueOf(req.getUid())))
                 .build();
 
         EngineResponse response = engine.recommend(engineReq);
