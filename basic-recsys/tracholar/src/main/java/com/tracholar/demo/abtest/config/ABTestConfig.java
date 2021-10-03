@@ -1,5 +1,6 @@
 package com.tracholar.demo.abtest.config;
 
+import com.tracholar.demo.abtest.ABTestInfo;
 import lombok.Data;
 
 import java.util.List;
@@ -21,18 +22,21 @@ public class ABTestConfig {
     private int seed;
     private String desc;
     /**
-     * 多个实验区，一般配置为 跨层实验区，正交试验区
+     * 多个实验区，跨层实验区，正交试验区
      */
-    private List<ExpRegion> regions;
-    // 默认区域
-    private String defaultRegion;
+    private MultiLayerExpRegion multiLayerExpRegion;
+    private ExpRegion region;
 
-    public ExpRegion findDefaultRegion(){
-        for(ExpRegion region : regions){
-            if(region.getName().equals(defaultRegion)){
-                return region;
-            }
+    public IExpRegion findMatchRegion(String flowId){
+        int flow = Hash.hash(flowId, seed) % bucketNum;
+        if(multiLayerExpRegion.getFlows().contains(flow)){
+            return multiLayerExpRegion;
         }
-        return null;
+        return region;
+    }
+
+    public ABTestInfo generateExpInfo(String flowId){
+        IExpRegion reg = findMatchRegion(flowId);
+        return reg.genABTestInfo(flowId, bucketNum);
     }
 }

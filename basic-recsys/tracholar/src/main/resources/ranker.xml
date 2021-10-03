@@ -8,6 +8,7 @@
         <property name="routerTable">
             <map>
                 <entry key="base" value-ref="simpleRanker" />
+                <entry key="ml_base" value-ref="simpleRanker" />
                 <entry key="random_model" value-ref="simpleModelRanker" />
             </map>
         </property>

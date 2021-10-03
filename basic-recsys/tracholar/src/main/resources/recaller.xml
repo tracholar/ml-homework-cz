@@ -25,6 +25,7 @@
         <property name="routerTable">
             <map>
                 <entry key="base" value-ref="default_recall_exp"/>
+                <entry key="ml_base" value-ref="default_recall_exp"/>
             </map>
         </property>
     </bean>

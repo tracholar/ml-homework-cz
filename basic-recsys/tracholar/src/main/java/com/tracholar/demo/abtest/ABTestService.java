@@ -60,28 +60,8 @@ public class ABTestService implements IABTest{
         if(flowId == null){
             return info;
         }
-        int flow = hash(flowId, config.getSeed());
 
         // 试验区，默认是正交实验区
-        ExpRegion hitRegion = config.findDefaultRegion();
-        for(ExpRegion region : config.getRegions()){
-            if(region.getFlows().contains(flow)){
-                hitRegion = region;
-                break;
-            }
-        }
-
-        // 各层实验
-        for(LayerConfig c : hitRegion.getConfigs()){
-            flow = hash(flowId, c.getSeed());
-            String strategyName = c.findDefaultStrategy().getStrategyName();
-            for(StrategyConfig sc : c.getConfigs()){
-                if(sc.getFlows().contains(flow)){
-                    strategyName = sc.getStrategyName();
-                }
-            }
-            info.put(c.getLayerName(), strategyName);
-        }
-        return info;
+        return config.generateExpInfo(flowId);
     }
 }

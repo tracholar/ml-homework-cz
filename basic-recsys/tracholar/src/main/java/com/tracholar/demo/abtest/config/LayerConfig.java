@@ -32,5 +32,16 @@ public class LayerConfig {
         return null;
     }
 
+    public String findMatchStrategy(String flowId, int buckNum){
+        int flow = Hash.hash(flowId, seed) % buckNum;
+        String strategyName = defaultStrategy;
+        for(StrategyConfig sc : configs){
+            if(sc.getFlows().contains(flow)){
+                return sc.getStrategyName();
+            }
+        }
+        return strategyName;
+    }
+
     private String desc;
 }

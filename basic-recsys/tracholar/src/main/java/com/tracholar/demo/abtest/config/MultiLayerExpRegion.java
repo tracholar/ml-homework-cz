@@ -8,23 +8,19 @@ import java.util.Set;
 
 /**
  * @author zuoyuan
- * @date 2021/10/2 16:07
+ * @date 2021/10/3 11:21
  */
 @Data
-public class ExpRegion implements IExpRegion{
-    private String name;
+public class MultiLayerExpRegion extends LayerConfig implements IExpRegion{
     private Set<Integer> flows;
-    private List<LayerConfig> configs;
-    private String desc;
-
+    private List<String> layerKeys;
 
     @Override
     public ABTestInfo genABTestInfo(String flowId, int bucketNum) {
-        // 各层实验
         ABTestInfo info = new ABTestInfo();
-        for(LayerConfig c : getConfigs()){
-            String strategyName = c.findMatchStrategy(flowId, bucketNum);
-            info.put(c.getLayerName(), strategyName);
+        String strategyName = findMatchStrategy(flowId, bucketNum);
+        for(String layer : layerKeys){
+            info.put(layer, strategyName);
         }
         return info;
     }

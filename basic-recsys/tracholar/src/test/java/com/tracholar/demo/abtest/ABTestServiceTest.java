@@ -10,6 +10,6 @@ public class ABTestServiceTest {
    @Test
    public void test(){
        ABTestService service = new ABTestService();
-       System.out.println(service.getABTestInfo("565"));
+       System.out.println(service.getABTestInfo("0"));
    }
 }

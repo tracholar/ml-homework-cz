@@ -4,28 +4,22 @@
   "bucketNum" : 10,
   "seed" : 2021,
   "defaultRegion": "multi_layer_exp",
-  "regions" : [
-    {
+  "multiLayerExpRegion" : {
       "name" : "multi_layer_exp",
       "desc" : "跨层关联试验区",
       "flows" : [0,1],
+      "layerKeys" : ["recall", "ranker"],
+      "seed" : 1,
+      "defaultStrategy" : "ml_base",
       "configs" : [
         {
-          "layerName" : "multi_layer_exp_layer",
-          "desc" : "跨层关联试验区",
-          "seed" : 1,
-          "defaultStrategy" : "base",
-          "configs" : [
-            {
-              "strategyName" : "base",
-              "desc" : "关联区基线",
-              "flows" : [0,1,2,3,4,5,6,7,8,9]
-            }
-          ]
+          "strategyName" : "ml_base",
+          "desc" : "关联区基线",
+          "flows" : [0,1,2,3,4,5,6,7,8,9]
         }
       ]
     },
-    {
+    "region":{
       "name" : "cross_exp",
       "desc" : "正交试验区",
       "flows" : [2,3,4,5,6,7,8,9],
@@ -56,11 +50,10 @@
             {
               "strategyName" : "random_model",
               "desc" : "随机模型实验",
-              "flows" : [1,2,3,4,5,6]
+              "flows" : [1,2,3,4,5,6,7,8,9]
             }
           ]
         }
       ]
     }
-  ]
 }
