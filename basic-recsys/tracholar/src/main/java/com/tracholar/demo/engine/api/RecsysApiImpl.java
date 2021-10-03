@@ -16,9 +16,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author zuoyuan
@@ -53,5 +56,15 @@ public class RecsysApiImpl implements RecsysApi {
     @RequestMapping("/recommend")
     public Response index(ApiRequest req){
         return recommend(req);
+    }
+
+    @RequestMapping("/recommend/html")
+    public ModelAndView indexPage(ApiRequest req){
+        Response resp = recommend(req);
+        Map<String, Object> model = new HashMap<>();
+        model.put("req", req);
+        model.put("resp", resp);
+
+        return new ModelAndView("index", model);
     }
 }
