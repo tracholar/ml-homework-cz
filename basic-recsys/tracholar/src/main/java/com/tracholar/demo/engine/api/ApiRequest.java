@@ -13,4 +13,8 @@ import lombok.Setter;
 @Setter
 public class ApiRequest implements Request {
     private long uid;
+    /**
+     * 返回结果数目，默认20
+     */
+    private int limitSize = 20;
 }

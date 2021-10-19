@@ -90,10 +90,17 @@
                                 </div>
 
                                 <div class="electronics" th:case="2" th:object="${row.detail}">
-                                    <img th:src="*{imUrl}" style="max-width:100%; display:inline-block;max-height:150px;" />
-                                    <p th:text="*{title}"/>
+                                    <img th:src="*{imUrl}" style="max-width:100%; display:block;max-height:150px; margin: 5px auto;" />
+                                    <p th:text="*{@myUtils.htmlDecode(title)}"/>
                                     <p class="side-info">
                                         <span class="asin" th:text="*{asin}"/>
+                                    </p>
+                                </div>
+
+                                <div class="electronics" th:case="3" th:object="${row.detail}">
+                                    <img th:src="*{@myUtils.extractHeadImg(contentBody)}" style="max-width:100%; display:block;max-height:150px; margin: 5px auto;" />
+                                    <p class="side-info">
+                                        <a class="url" th:text="*{title}" th:href="*{url}"/>
                                     </p>
                                 </div>
                             </div>

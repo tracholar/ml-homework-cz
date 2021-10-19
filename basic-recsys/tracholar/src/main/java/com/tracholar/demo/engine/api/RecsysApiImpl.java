@@ -41,6 +41,7 @@ public class RecsysApiImpl implements RecsysApi {
         IABTestInfo abTestInfo = abTest.getABTestInfo(String.valueOf(req.getUid()));
         EngineRequest engineReq = EngineRequest.builder()
                 .uid(req.getUid())
+                .limitSize(req.getLimitSize())
                 .abTestInfo(abTestInfo)
                 .build();
 

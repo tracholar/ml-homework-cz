@@ -16,6 +16,8 @@
             <list>
                 <ref bean="toplist_recaller" />
                 <ref bean="toplist_electronics_recaller" />
+                <ref bean="electronicsRandomRecaller" />
+                <ref bean="baikeRandomRecaller" />
             </list>
         </property>
     </bean>

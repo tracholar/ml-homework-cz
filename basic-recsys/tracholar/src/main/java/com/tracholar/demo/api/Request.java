@@ -12,4 +12,10 @@ public interface Request {
      * @return
      */
     long getUid();
+
+    /**
+     * 返回结果数目
+     * @return
+     */
+    int getLimitSize();
 }

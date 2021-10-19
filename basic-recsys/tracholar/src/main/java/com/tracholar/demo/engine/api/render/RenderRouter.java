@@ -59,5 +59,6 @@ public class RenderRouter implements IRender, InitializingBean {
     public void afterPropertiesSet() throws Exception {
         router.put(EngineItemType.ARTICLE, context.getBean(ArticleRender.class));
         router.put(EngineItemType.ELECTRONICS, context.getBean(ElectronicsRender.class));
+        router.put(EngineItemType.BAIKE, context.getBean(BaikeRender.class));
     }
 }

@@ -15,6 +15,8 @@ public class EngineRequest {
 
     @Getter
     private long uid;
+    @Getter
+    private int limitSize;
 
     private IABTestInfo abTestInfo;
 

@@ -33,7 +33,7 @@ public class SimpleRecEngine implements IEngine{
         items = rankFilter.filter(items, request);
 
         EngineResponse response = EngineResponse.builder()
-                .items(items)
+                .items(items.subList(0, Math.min(items.size(), request.getLimitSize())))
                 .build();
         return response;
     }

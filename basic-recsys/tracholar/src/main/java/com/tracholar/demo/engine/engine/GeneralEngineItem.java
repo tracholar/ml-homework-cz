@@ -19,5 +19,16 @@ public class GeneralEngineItem extends Item implements IEngineItem{
         return String.format("%s-%s", getType(), getId());
     }
 
+    @Override
+    public int hashCode() {
+        return uniqueId().hashCode();
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if(!(o instanceof GeneralEngineItem)){
+            return false;
+        }
+        return uniqueId().equals(((GeneralEngineItem) o).uniqueId());
+    }
 }
