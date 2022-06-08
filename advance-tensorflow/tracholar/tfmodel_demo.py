@@ -15,7 +15,9 @@ with open('model/mnist_cnn_py/keras_metadata.pb', 'rb') as f:
     data = f.read()
     saved_metadata = saved_metadata_pb2.SavedMetadata()
     saved_metadata.ParseFromString(data)
-    print(saved_metadata)
+
+    with open('tfjs/keras_metadata.json', 'w') as g:
+        print(json_format.MessageToJson(saved_metadata, indent=4), file=g)
 
 
 with open('model/mnist_cnn_py/saved_model.pb', 'rb') as f:
@@ -65,4 +67,8 @@ load = tf.saved_model.load('model/mnist_cnn_py')
 new_model = tf.keras.models.load_model('model/mnist_cnn_py')
 print(new_model.summary())
 
+
+from tensorflow.python.tools.import_pb_to_tensorboard import import_to_tensorboard
+
+import_to_tensorboard('model/mnist_cnn_py', 'log/', 'serve')
 

@@ -1,0 +1,53 @@
+{
+    "nodes": [
+        {
+            "nodePath": "root",
+            "identifier": "_tf_keras_model",
+            "metadata": "{\"name\": \"my_model\", \"trainable\": true, \"expects_training_arg\": false, \"dtype\": \"float32\", \"batch_input_shape\": null, \"must_restore_from_config\": false, \"class_name\": \"MyModel\", \"config\": {}, \"shared_object_id\": 0, \"is_graph_network\": false, \"full_save_spec\": {\"class_name\": \"__tuple__\", \"items\": [[{\"class_name\": \"TypeSpec\", \"type_spec\": \"tf.TensorSpec\", \"serialized\": [{\"class_name\": \"TensorShape\", \"items\": [32, 28, 28, 1]}, \"float32\", \"input_1\"]}], {}]}, \"save_spec\": {\"class_name\": \"TypeSpec\", \"type_spec\": \"tf.TensorSpec\", \"serialized\": [{\"class_name\": \"TensorShape\", \"items\": [32, 28, 28, 1]}, \"float32\", \"input_1\"]}, \"keras_version\": \"2.9.0\", \"backend\": \"tensorflow\", \"model_config\": {\"class_name\": \"MyModel\", \"config\": {}}}",
+            "version": {
+                "producer": 2,
+                "minConsumer": 1
+            }
+        },
+        {
+            "nodeId": 8,
+            "nodePath": "root.conv1",
+            "identifier": "_tf_keras_layer",
+            "metadata": "{\"name\": \"conv2d\", \"trainable\": true, \"expects_training_arg\": false, \"dtype\": \"float32\", \"batch_input_shape\": null, \"stateful\": false, \"must_restore_from_config\": false, \"class_name\": \"Conv2D\", \"config\": {\"name\": \"conv2d\", \"trainable\": true, \"dtype\": \"float32\", \"filters\": 32, \"kernel_size\": {\"class_name\": \"__tuple__\", \"items\": [3, 3]}, \"strides\": {\"class_name\": \"__tuple__\", \"items\": [1, 1]}, \"padding\": \"valid\", \"data_format\": \"channels_last\", \"dilation_rate\": {\"class_name\": \"__tuple__\", \"items\": [1, 1]}, \"groups\": 1, \"activation\": \"relu\", \"use_bias\": true, \"kernel_initializer\": {\"class_name\": \"GlorotUniform\", \"config\": {\"seed\": null}, \"shared_object_id\": 1}, \"bias_initializer\": {\"class_name\": \"Zeros\", \"config\": {}, \"shared_object_id\": 2}, \"kernel_regularizer\": null, \"bias_regularizer\": null, \"activity_regularizer\": null, \"kernel_constraint\": null, \"bias_constraint\": null}, \"shared_object_id\": 3, \"input_spec\": {\"class_name\": \"InputSpec\", \"config\": {\"dtype\": null, \"shape\": null, \"ndim\": null, \"max_ndim\": null, \"min_ndim\": 4, \"axes\": {\"-1\": 1}}, \"shared_object_id\": 4}, \"build_input_shape\": {\"class_name\": \"TensorShape\", \"items\": [32, 28, 28, 1]}}",
+            "version": {
+                "producer": 2,
+                "minConsumer": 1
+            }
+        },
+        {
+            "nodeId": 9,
+            "nodePath": "root.flatten",
+            "identifier": "_tf_keras_layer",
+            "metadata": "{\"name\": \"flatten\", \"trainable\": true, \"expects_training_arg\": false, \"dtype\": \"float32\", \"batch_input_shape\": null, \"stateful\": false, \"must_restore_from_config\": false, \"class_name\": \"Flatten\", \"config\": {\"name\": \"flatten\", \"trainable\": true, \"dtype\": \"float32\", \"data_format\": \"channels_last\"}, \"shared_object_id\": 5, \"input_spec\": {\"class_name\": \"InputSpec\", \"config\": {\"dtype\": null, \"shape\": null, \"ndim\": null, \"max_ndim\": null, \"min_ndim\": 1, \"axes\": {}}, \"shared_object_id\": 6}}",
+            "version": {
+                "producer": 2,
+                "minConsumer": 1
+            }
+        },
+        {
+            "nodeId": 10,
+            "nodePath": "root.d1",
+            "identifier": "_tf_keras_layer",
+            "metadata": "{\"name\": \"dense\", \"trainable\": true, \"expects_training_arg\": false, \"dtype\": \"float32\", \"batch_input_shape\": null, \"stateful\": false, \"must_restore_from_config\": false, \"class_name\": \"Dense\", \"config\": {\"name\": \"dense\", \"trainable\": true, \"dtype\": \"float32\", \"units\": 128, \"activation\": \"relu\", \"use_bias\": true, \"kernel_initializer\": {\"class_name\": \"GlorotUniform\", \"config\": {\"seed\": null}, \"shared_object_id\": 7}, \"bias_initializer\": {\"class_name\": \"Zeros\", \"config\": {}, \"shared_object_id\": 8}, \"kernel_regularizer\": null, \"bias_regularizer\": null, \"activity_regularizer\": null, \"kernel_constraint\": null, \"bias_constraint\": null}, \"shared_object_id\": 9, \"input_spec\": {\"class_name\": \"InputSpec\", \"config\": {\"dtype\": null, \"shape\": null, \"ndim\": null, \"max_ndim\": null, \"min_ndim\": 2, \"axes\": {\"-1\": 21632}}, \"shared_object_id\": 10}, \"build_input_shape\": {\"class_name\": \"TensorShape\", \"items\": [32, 21632]}}",
+            "version": {
+                "producer": 2,
+                "minConsumer": 1
+            }
+        },
+        {
+            "nodeId": 11,
+            "nodePath": "root.d2",
+            "identifier": "_tf_keras_layer",
+            "metadata": "{\"name\": \"dense_1\", \"trainable\": true, \"expects_training_arg\": false, \"dtype\": \"float32\", \"batch_input_shape\": null, \"stateful\": false, \"must_restore_from_config\": false, \"class_name\": \"Dense\", \"config\": {\"name\": \"dense_1\", \"trainable\": true, \"dtype\": \"float32\", \"units\": 10, \"activation\": \"linear\", \"use_bias\": true, \"kernel_initializer\": {\"class_name\": \"GlorotUniform\", \"config\": {\"seed\": null}, \"shared_object_id\": 11}, \"bias_initializer\": {\"class_name\": \"Zeros\", \"config\": {}, \"shared_object_id\": 12}, \"kernel_regularizer\": null, \"bias_regularizer\": null, \"activity_regularizer\": null, \"kernel_constraint\": null, \"bias_constraint\": null}, \"shared_object_id\": 13, \"input_spec\": {\"class_name\": \"InputSpec\", \"config\": {\"dtype\": null, \"shape\": null, \"ndim\": null, \"max_ndim\": null, \"min_ndim\": 2, \"axes\": {\"-1\": 128}}, \"shared_object_id\": 14}, \"build_input_shape\": {\"class_name\": \"TensorShape\", \"items\": [32, 128]}}",
+            "version": {
+                "producer": 2,
+                "minConsumer": 1
+            }
+        }
+    ]
+}

@@ -68,6 +68,13 @@ def test_step(images, labels):
     test_loss(t_loss)
     test_acc(labels, predictions)
 
+train_log_dir = './log/train/'
+test_log_dir = './log/test/'
+train_summary_writer = tf.summary.create_file_writer(train_log_dir)
+test_summary_writer = tf.summary.create_file_writer(test_log_dir)
+
+tf.summary.trace_on(graph=True, profiler=True)
+
 EPOCH = 5
 for epoch in range(EPOCH):
     # reset metrics each iter
@@ -79,13 +86,26 @@ for epoch in range(EPOCH):
     for images, labels in tqdm(train_ds):
         train_step(images, labels)
 
+    with train_summary_writer.as_default():
+        tf.summary.scalar('loss', train_loss.result(), step=epoch)
+        tf.summary.scalar('acc', train_acc.result(), step=epoch)
+
     for images, labels in tqdm(test_ds):
         test_step(images, labels)
+
+    with test_summary_writer.as_default():
+        tf.summary.scalar('loss', test_loss.result(), step=epoch)
+        tf.summary.scalar('acc', test_acc.result(), step=epoch)
 
     print(f'Epoch: {epoch + 1}, Loss: {train_loss.result():.4f},',
           f'ACC:  {train_acc.result():.2f}, Test Loss: {test_loss.result():.4f},',
           f'Test ACC: {test_acc.result():.2f}'
           )
+
+    if epoch == 0:
+        with train_summary_writer.as_default():
+            tf.summary.trace_export(name='MyModel', step=0, profiler_outdir=train_log_dir)
+
 
 
 model.save('model/mnist_cnn_py')
