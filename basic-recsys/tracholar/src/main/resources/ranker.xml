@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    <bean id="ranker_router" class="com.tracholar.demo.engine.rank.RankerRouter">
+        <property name="defaultRanker" ref="simpleModelRanker" />
+        <property name="routerTable">
+            <map>
+                <entry key="base" value-ref="simpleRanker" />
+                <entry key="ml_base" value-ref="simpleRanker" />
+                <entry key="random_model" value-ref="simpleModelRanker" />
+            </map>
+        </property>
+    </bean>
+
+    <bean id="simpleModelRanker" class="com.tracholar.demo.engine.rank.ranker.SimpleModelRanker">
+        <property name="model" ref="randomModel" />
+    </bean>
+</beans>

@@ -1,0 +1,59 @@
+{
+  "appName" : "推荐系统",
+  "desc" : "推荐系统",
+  "bucketNum" : 10,
+  "seed" : 2021,
+  "defaultRegion": "multi_layer_exp",
+  "multiLayerExpRegion" : {
+      "name" : "multi_layer_exp",
+      "desc" : "跨层关联试验区",
+      "flows" : [0,1],
+      "layerKeys" : ["recall", "ranker"],
+      "seed" : 1,
+      "defaultStrategy" : "ml_base",
+      "configs" : [
+        {
+          "strategyName" : "ml_base",
+          "desc" : "关联区基线",
+          "flows" : [0,1,2,3,4,5,6,7,8,9]
+        }
+      ]
+    },
+    "region":{
+      "name" : "cross_exp",
+      "desc" : "正交试验区",
+      "flows" : [2,3,4,5,6,7,8,9],
+      "configs" : [
+        {
+          "layerName" : "recall",
+          "seed" : 11,
+          "desc" : "召回层",
+          "defaultStrategy" : "base",
+          "configs" : [
+            {
+              "strategyName" : "base",
+              "desc" : "基线",
+              "flows" : [0,1,2,3,4,5,6,7,8,9]
+            }
+          ]
+        },{
+          "layerName" : "ranker",
+          "seed" : 12,
+          "desc" : "排序",
+          "defaultStrategy": "base",
+          "configs" : [
+            {
+              "strategyName" : "base",
+              "desc" : "基线",
+              "flows" : [0]
+            },
+            {
+              "strategyName" : "random_model",
+              "desc" : "随机模型实验",
+              "flows" : [1,2,3,4,5,6,7,8,9]
+            }
+          ]
+        }
+      ]
+    }
+}

@@ -1,0 +1,912 @@
+{
+    "nodes": [
+        {
+            "children": [
+                {
+                    "nodeId": 1,
+                    "localName": "variables"
+                },
+                {
+                    "nodeId": 2,
+                    "localName": "trainable_variables"
+                },
+                {
+                    "nodeId": 3,
+                    "localName": "regularization_losses"
+                },
+                {
+                    "nodeId": 4,
+                    "localName": "keras_api"
+                },
+                {
+                    "nodeId": 5,
+                    "localName": "__call__"
+                },
+                {
+                    "nodeId": 6,
+                    "localName": "call_and_return_all_conditional_losses"
+                },
+                {
+                    "nodeId": 7,
+                    "localName": "_default_save_signature"
+                },
+                {
+                    "nodeId": 8,
+                    "localName": "conv1"
+                },
+                {
+                    "nodeId": 9,
+                    "localName": "flatten"
+                },
+                {
+                    "nodeId": 10,
+                    "localName": "d1"
+                },
+                {
+                    "nodeId": 11,
+                    "localName": "d2"
+                },
+                {
+                    "nodeId": 12,
+                    "localName": "signatures"
+                }
+            ],
+            "hasCheckpointValues": true
+        },
+        {
+            "children": [
+                {
+                    "nodeId": 13,
+                    "localName": "0"
+                },
+                {
+                    "nodeId": 14,
+                    "localName": "1"
+                },
+                {
+                    "nodeId": 15,
+                    "localName": "2"
+                },
+                {
+                    "nodeId": 16,
+                    "localName": "3"
+                },
+                {
+                    "nodeId": 17,
+                    "localName": "4"
+                },
+                {
+                    "nodeId": 18,
+                    "localName": "5"
+                }
+            ],
+            "hasCheckpointValues": true
+        },
+        {
+            "children": [
+                {
+                    "nodeId": 13,
+                    "localName": "0"
+                },
+                {
+                    "nodeId": 14,
+                    "localName": "1"
+                },
+                {
+                    "nodeId": 15,
+                    "localName": "2"
+                },
+                {
+                    "nodeId": 16,
+                    "localName": "3"
+                },
+                {
+                    "nodeId": 17,
+                    "localName": "4"
+                },
+                {
+                    "nodeId": 18,
+                    "localName": "5"
+                }
+            ],
+            "hasCheckpointValues": true
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "children": [
+                {
+                    "nodeId": 19,
+                    "localName": "non_trainable_variables"
+                },
+                {
+                    "nodeId": 20,
+                    "localName": "layers"
+                },
+                {
+                    "nodeId": 21,
+                    "localName": "metrics"
+                },
+                {
+                    "nodeId": 22,
+                    "localName": "layer_regularization_losses"
+                },
+                {
+                    "nodeId": 23,
+                    "localName": "layer_metrics"
+                },
+                {
+                    "nodeId": 1,
+                    "localName": "variables"
+                },
+                {
+                    "nodeId": 2,
+                    "localName": "trainable_variables"
+                },
+                {
+                    "nodeId": 3,
+                    "localName": "regularization_losses"
+                },
+                {
+                    "nodeId": 5,
+                    "localName": "__call__"
+                },
+                {
+                    "nodeId": 7,
+                    "localName": "_default_save_signature"
+                },
+                {
+                    "nodeId": 6,
+                    "localName": "call_and_return_all_conditional_losses"
+                },
+                {
+                    "nodeId": 6,
+                    "localName": "call_and_return_conditional_losses"
+                }
+            ],
+            "hasCheckpointValues": true
+        },
+        {
+            "children": [
+                {
+                    "nodeId": 24,
+                    "localName": "trace_0"
+                },
+                {
+                    "nodeId": 25,
+                    "localName": "trace_1"
+                }
+            ],
+            "hasCheckpointValues": false
+        },
+        {
+            "children": [
+                {
+                    "nodeId": 26,
+                    "localName": "trace_0"
+                },
+                {
+                    "nodeId": 27,
+                    "localName": "trace_1"
+                }
+            ],
+            "hasCheckpointValues": false
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "children": [
+                {
+                    "nodeId": 28,
+                    "localName": "variables"
+                },
+                {
+                    "nodeId": 29,
+                    "localName": "trainable_variables"
+                },
+                {
+                    "nodeId": 30,
+                    "localName": "regularization_losses"
+                },
+                {
+                    "nodeId": 31,
+                    "localName": "keras_api"
+                },
+                {
+                    "nodeId": 32,
+                    "localName": "__call__"
+                },
+                {
+                    "nodeId": 33,
+                    "localName": "call_and_return_all_conditional_losses"
+                },
+                {
+                    "nodeId": 13,
+                    "localName": "kernel"
+                },
+                {
+                    "nodeId": 14,
+                    "localName": "bias"
+                },
+                {
+                    "nodeId": 34,
+                    "localName": "_jit_compiled_convolution_op"
+                }
+            ],
+            "hasCheckpointValues": true
+        },
+        {
+            "children": [
+                {
+                    "nodeId": 35,
+                    "localName": "variables"
+                },
+                {
+                    "nodeId": 36,
+                    "localName": "trainable_variables"
+                },
+                {
+                    "nodeId": 37,
+                    "localName": "regularization_losses"
+                },
+                {
+                    "nodeId": 38,
+                    "localName": "keras_api"
+                },
+                {
+                    "nodeId": 39,
+                    "localName": "__call__"
+                },
+                {
+                    "nodeId": 40,
+                    "localName": "call_and_return_all_conditional_losses"
+                }
+            ],
+            "hasCheckpointValues": false
+        },
+        {
+            "children": [
+                {
+                    "nodeId": 41,
+                    "localName": "variables"
+                },
+                {
+                    "nodeId": 42,
+                    "localName": "trainable_variables"
+                },
+                {
+                    "nodeId": 43,
+                    "localName": "regularization_losses"
+                },
+                {
+                    "nodeId": 44,
+                    "localName": "keras_api"
+                },
+                {
+                    "nodeId": 45,
+                    "localName": "__call__"
+                },
+                {
+                    "nodeId": 46,
+                    "localName": "call_and_return_all_conditional_losses"
+                },
+                {
+                    "nodeId": 15,
+                    "localName": "kernel"
+                },
+                {
+                    "nodeId": 16,
+                    "localName": "bias"
+                }
+            ],
+            "hasCheckpointValues": true
+        },
+        {
+            "children": [
+                {
+                    "nodeId": 47,
+                    "localName": "variables"
+                },
+                {
+                    "nodeId": 48,
+                    "localName": "trainable_variables"
+                },
+                {
+                    "nodeId": 49,
+                    "localName": "regularization_losses"
+                },
+                {
+                    "nodeId": 50,
+                    "localName": "keras_api"
+                },
+                {
+                    "nodeId": 51,
+                    "localName": "__call__"
+                },
+                {
+                    "nodeId": 52,
+                    "localName": "call_and_return_all_conditional_losses"
+                },
+                {
+                    "nodeId": 17,
+                    "localName": "kernel"
+                },
+                {
+                    "nodeId": 18,
+                    "localName": "bias"
+                }
+            ],
+            "hasCheckpointValues": true
+        },
+        {
+            "children": [
+                {
+                    "nodeId": 53,
+                    "localName": "serving_default"
+                }
+            ],
+            "hasCheckpointValues": false
+        },
+        {
+            "attributes": [
+                {
+                    "name": "VARIABLE_VALUE",
+                    "fullName": "my_model/conv2d/kernel",
+                    "checkpointKey": "variables/0/.ATTRIBUTES/VARIABLE_VALUE"
+                }
+            ],
+            "hasCheckpointValues": true
+        },
+        {
+            "attributes": [
+                {
+                    "name": "VARIABLE_VALUE",
+                    "fullName": "my_model/conv2d/bias",
+                    "checkpointKey": "variables/1/.ATTRIBUTES/VARIABLE_VALUE"
+                }
+            ],
+            "hasCheckpointValues": true
+        },
+        {
+            "attributes": [
+                {
+                    "name": "VARIABLE_VALUE",
+                    "fullName": "my_model/dense/kernel",
+                    "checkpointKey": "variables/2/.ATTRIBUTES/VARIABLE_VALUE"
+                }
+            ],
+            "hasCheckpointValues": true
+        },
+        {
+            "attributes": [
+                {
+                    "name": "VARIABLE_VALUE",
+                    "fullName": "my_model/dense/bias",
+                    "checkpointKey": "variables/3/.ATTRIBUTES/VARIABLE_VALUE"
+                }
+            ],
+            "hasCheckpointValues": true
+        },
+        {
+            "attributes": [
+                {
+                    "name": "VARIABLE_VALUE",
+                    "fullName": "my_model/dense_1/kernel",
+                    "checkpointKey": "variables/4/.ATTRIBUTES/VARIABLE_VALUE"
+                }
+            ],
+            "hasCheckpointValues": true
+        },
+        {
+            "attributes": [
+                {
+                    "name": "VARIABLE_VALUE",
+                    "fullName": "my_model/dense_1/bias",
+                    "checkpointKey": "variables/5/.ATTRIBUTES/VARIABLE_VALUE"
+                }
+            ],
+            "hasCheckpointValues": true
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "children": [
+                {
+                    "nodeId": 8,
+                    "localName": "0"
+                },
+                {
+                    "nodeId": 9,
+                    "localName": "1"
+                },
+                {
+                    "nodeId": 10,
+                    "localName": "2"
+                },
+                {
+                    "nodeId": 11,
+                    "localName": "3"
+                }
+            ],
+            "hasCheckpointValues": true
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "children": [
+                {
+                    "nodeId": 13,
+                    "localName": "0"
+                },
+                {
+                    "nodeId": 14,
+                    "localName": "1"
+                }
+            ],
+            "hasCheckpointValues": true
+        },
+        {
+            "children": [
+                {
+                    "nodeId": 13,
+                    "localName": "0"
+                },
+                {
+                    "nodeId": 14,
+                    "localName": "1"
+                }
+            ],
+            "hasCheckpointValues": true
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "children": [
+                {
+                    "nodeId": 54,
+                    "localName": "non_trainable_variables"
+                },
+                {
+                    "nodeId": 55,
+                    "localName": "layers"
+                },
+                {
+                    "nodeId": 56,
+                    "localName": "metrics"
+                },
+                {
+                    "nodeId": 57,
+                    "localName": "layer_regularization_losses"
+                },
+                {
+                    "nodeId": 58,
+                    "localName": "layer_metrics"
+                },
+                {
+                    "nodeId": 28,
+                    "localName": "variables"
+                },
+                {
+                    "nodeId": 29,
+                    "localName": "trainable_variables"
+                },
+                {
+                    "nodeId": 30,
+                    "localName": "regularization_losses"
+                },
+                {
+                    "nodeId": 32,
+                    "localName": "__call__"
+                },
+                {
+                    "nodeId": 33,
+                    "localName": "call_and_return_all_conditional_losses"
+                },
+                {
+                    "nodeId": 33,
+                    "localName": "call_and_return_conditional_losses"
+                }
+            ],
+            "hasCheckpointValues": true
+        },
+        {
+            "children": [
+                {
+                    "nodeId": 59,
+                    "localName": "trace_0"
+                }
+            ],
+            "hasCheckpointValues": false
+        },
+        {
+            "children": [
+                {
+                    "nodeId": 60,
+                    "localName": "trace_0"
+                }
+            ],
+            "hasCheckpointValues": false
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "children": [
+                {
+                    "nodeId": 61,
+                    "localName": "non_trainable_variables"
+                },
+                {
+                    "nodeId": 62,
+                    "localName": "layers"
+                },
+                {
+                    "nodeId": 63,
+                    "localName": "metrics"
+                },
+                {
+                    "nodeId": 64,
+                    "localName": "layer_regularization_losses"
+                },
+                {
+                    "nodeId": 65,
+                    "localName": "layer_metrics"
+                },
+                {
+                    "nodeId": 35,
+                    "localName": "variables"
+                },
+                {
+                    "nodeId": 36,
+                    "localName": "trainable_variables"
+                },
+                {
+                    "nodeId": 37,
+                    "localName": "regularization_losses"
+                },
+                {
+                    "nodeId": 39,
+                    "localName": "__call__"
+                },
+                {
+                    "nodeId": 40,
+                    "localName": "call_and_return_all_conditional_losses"
+                },
+                {
+                    "nodeId": 40,
+                    "localName": "call_and_return_conditional_losses"
+                }
+            ],
+            "hasCheckpointValues": false
+        },
+        {
+            "children": [
+                {
+                    "nodeId": 66,
+                    "localName": "trace_0"
+                }
+            ],
+            "hasCheckpointValues": false
+        },
+        {
+            "children": [
+                {
+                    "nodeId": 67,
+                    "localName": "trace_0"
+                }
+            ],
+            "hasCheckpointValues": false
+        },
+        {
+            "children": [
+                {
+                    "nodeId": 15,
+                    "localName": "0"
+                },
+                {
+                    "nodeId": 16,
+                    "localName": "1"
+                }
+            ],
+            "hasCheckpointValues": true
+        },
+        {
+            "children": [
+                {
+                    "nodeId": 15,
+                    "localName": "0"
+                },
+                {
+                    "nodeId": 16,
+                    "localName": "1"
+                }
+            ],
+            "hasCheckpointValues": true
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "children": [
+                {
+                    "nodeId": 68,
+                    "localName": "non_trainable_variables"
+                },
+                {
+                    "nodeId": 69,
+                    "localName": "layers"
+                },
+                {
+                    "nodeId": 70,
+                    "localName": "metrics"
+                },
+                {
+                    "nodeId": 71,
+                    "localName": "layer_regularization_losses"
+                },
+                {
+                    "nodeId": 72,
+                    "localName": "layer_metrics"
+                },
+                {
+                    "nodeId": 41,
+                    "localName": "variables"
+                },
+                {
+                    "nodeId": 42,
+                    "localName": "trainable_variables"
+                },
+                {
+                    "nodeId": 43,
+                    "localName": "regularization_losses"
+                },
+                {
+                    "nodeId": 45,
+                    "localName": "__call__"
+                },
+                {
+                    "nodeId": 46,
+                    "localName": "call_and_return_all_conditional_losses"
+                },
+                {
+                    "nodeId": 46,
+                    "localName": "call_and_return_conditional_losses"
+                }
+            ],
+            "hasCheckpointValues": true
+        },
+        {
+            "children": [
+                {
+                    "nodeId": 73,
+                    "localName": "trace_0"
+                }
+            ],
+            "hasCheckpointValues": false
+        },
+        {
+            "children": [
+                {
+                    "nodeId": 74,
+                    "localName": "trace_0"
+                }
+            ],
+            "hasCheckpointValues": false
+        },
+        {
+            "children": [
+                {
+                    "nodeId": 17,
+                    "localName": "0"
+                },
+                {
+                    "nodeId": 18,
+                    "localName": "1"
+                }
+            ],
+            "hasCheckpointValues": true
+        },
+        {
+            "children": [
+                {
+                    "nodeId": 17,
+                    "localName": "0"
+                },
+                {
+                    "nodeId": 18,
+                    "localName": "1"
+                }
+            ],
+            "hasCheckpointValues": true
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "children": [
+                {
+                    "nodeId": 75,
+                    "localName": "non_trainable_variables"
+                },
+                {
+                    "nodeId": 76,
+                    "localName": "layers"
+                },
+                {
+                    "nodeId": 77,
+                    "localName": "metrics"
+                },
+                {
+                    "nodeId": 78,
+                    "localName": "layer_regularization_losses"
+                },
+                {
+                    "nodeId": 79,
+                    "localName": "layer_metrics"
+                },
+                {
+                    "nodeId": 47,
+                    "localName": "variables"
+                },
+                {
+                    "nodeId": 48,
+                    "localName": "trainable_variables"
+                },
+                {
+                    "nodeId": 49,
+                    "localName": "regularization_losses"
+                },
+                {
+                    "nodeId": 51,
+                    "localName": "__call__"
+                },
+                {
+                    "nodeId": 52,
+                    "localName": "call_and_return_all_conditional_losses"
+                },
+                {
+                    "nodeId": 52,
+                    "localName": "call_and_return_conditional_losses"
+                }
+            ],
+            "hasCheckpointValues": true
+        },
+        {
+            "children": [
+                {
+                    "nodeId": 80,
+                    "localName": "trace_0"
+                }
+            ],
+            "hasCheckpointValues": false
+        },
+        {
+            "children": [
+                {
+                    "nodeId": 81,
+                    "localName": "trace_0"
+                }
+            ],
+            "hasCheckpointValues": false
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "hasCheckpointValues": false
+        },
+        {
+            "hasCheckpointValues": false
+        }
+    ]
+}
