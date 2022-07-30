@@ -1,4 +1,6 @@
 # coding:utf-8
+import time
+
 import numpy as np
 class GobangState(object):
     def __init__(self, width = 9, height = 9, aiFirst = False):
@@ -43,7 +45,8 @@ class GobangState(object):
         return [self[i+k, k] for k in range(self.height - i)]
 
     def __str__(self):
-        rows = [' '.join(str(i) for i in x) for x in self.state]
+        sym = [' ', '●', '○']
+        rows = [' '.join(sym[i] for i in x) for x in self.state]
         return '\n'.join(rows)
 
     @property
@@ -52,7 +55,7 @@ class GobangState(object):
         check whether game over
         :return: bool
         """
-        return False
+        return StateEval.game_over(self)
 
 
 class GobangApi(object):
@@ -130,7 +133,7 @@ class StateEval(object):
         value, max_cnt = StateEval.eval(state, role)
         if max_cnt >= 5:
             return 1e9
-        return value.get('live_4', 0) * 1e6 + \
+        return value.get('live_4', 0) * 1e7 + \
                (value.get('live_3', 0) + value.get('left_live_4', 0) + value.get('right_live_4', 0)) * 1e5 + \
                (value.get('live_2', 0) + value.get('left_live_3', 0) + value.get('right_live_3', 0)) * 1e3 + \
                (value.get('live_1', 0) + value.get('left_live_2', 0) + value.get('right_live_2', 0))
@@ -144,9 +147,10 @@ class StateEval(object):
         for x in range(state.height):
             for y in range(state.width):
                 if state[x, y] != 0:
-                    ps = [(x, y+1), (x+1, y), (x+1, y+1), (x-1, y), (x, y-1), (x-1, y-1)]
+                    ps = [(x, y+1), (x+1, y), (x+1, y+1), (x-1, y), (x, y-1), (x-1, y-1), (x+1, y-1), (x-1, y-1)]
                     for px, py in ps:
-                        if px > 0 and px < state.height and py > 0 and py < state.width:
+                        if px >= 0 and px < state.height and py >= 0 and py < state.width\
+                                and state[px, py] == 0:
                             pos.append((px, py))
         return pos
 
@@ -160,13 +164,79 @@ class StateEval(object):
         return StateEval.score(s, role)
 
     @staticmethod
-    def best_pos(state: GobangState, role):
+    def best_pos(s: GobangState, role):
         pos = StateEval.next_potential_pos(s)
         score = StateEval.pos_score(s, pos, role)
         i = np.argmax(score)
         return pos[i], score[i]
 
-if __name__ == '__main__':
+    @staticmethod
+    def change_role(role):
+        return 3 - role
+
+    @staticmethod
+    def min_max_search(s: GobangState, role=1, depth=2, min_max=-1):
+        pos = StateEval.next_potential_pos(s)
+
+        if len(pos) == 0:
+            return None, 0
+
+        if depth == 1:
+            score = StateEval.pos_score(s, pos, role)
+            score = [s * min_max for s in score]
+            i = np.argmax(score)
+            return pos[i], score[i]
+
+        bpos, bscore = (), None
+        for p in pos:
+            s_tmp = s.copy()
+            s_tmp[p] = role
+            next_role = StateEval.change_role(role)
+            _, best_score = StateEval.min_max_search(s_tmp, next_role, depth-1, -min_max)
+            best_score = best_score * min_max
+
+            myscore, _ = StateEval.eval(s_tmp, role)
+            best_score = best_score + myscore
+            if bscore is None or bscore < best_score:
+                bpos = p
+                bscore = best_score
+        return bpos, bscore
+
+
+
+
+    @staticmethod
+    def game_over(state : GobangState):
+        value, max_cnt = StateEval.eval(state, 1)
+        if max_cnt >= 5:
+            return True
+        value, max_cnt = StateEval.eval(state, 2)
+        if max_cnt >= 5:
+            return True
+        if not np.any(state[:, :] == 0):
+            return True
+        return False
+
+
+
+
+
+def game_simulate(n = 13, search_depth = 2):
+    s = GobangState(n, n)
+    role = 1
+    step = 0
+    while not s.game_over:
+        pos, score = StateEval.min_max_search(s, role, search_depth)
+        if pos is None:
+            break
+        s[pos] = role
+        print('Step:', step, 'pos:', pos, 'min_max score:', score)
+        print(s)
+        role = StateEval.change_role(role) # 换一个人
+        step += 1
+        # time.sleep(1)
+
+def test():
     s = GobangState(9, 9)
     s[3, 3:5] = 1
     print(s)
@@ -186,3 +256,9 @@ if __name__ == '__main__':
     print('best_pos', best_pos)
     s[best_pos] = 1
     print(s)
+
+    print(StateEval.best_pos(s, 2))
+    print(StateEval.game_over(s))
+
+if __name__ == '__main__':
+    game_simulate(19, 2)
