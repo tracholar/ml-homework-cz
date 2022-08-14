@@ -188,10 +188,11 @@ class StateEval(object):
         return 3 - role
 
     @staticmethod
-    def min_max_search(s: GobangState, root_role=1, role=1, depth=2, minmax=1):
+    def min_max_search(s: GobangState, root_role=1, role=1, maxdepth=10, dfs_scale=1.0, depth=0, minmax=1):
         pos = StateEval.next_potential_pos(s)
 
-        if depth == 0 or len(pos) == 0:
+        if depth >= maxdepth or len(pos) == 0\
+                or (depth>=2 and np.random.rand() > np.exp(-1.0 * depth / dfs_scale)):
             return None, StateEval.score(s, root_role)
 
         bpos, bscore = (), None
@@ -199,7 +200,12 @@ class StateEval(object):
             s_tmp = s.copy()
             s_tmp[p] = role
             next_role = StateEval.change_role(role)
-            _, best_score = StateEval.min_max_search(s_tmp, root_role, next_role, depth-1, -minmax)
+            _, best_score = StateEval.min_max_search(s_tmp, root_role=root_role,
+                                                     role=next_role,
+                                                     dfs_scale=dfs_scale,
+                                                     depth=depth+1,
+                                                     maxdepth=maxdepth,
+                                                     minmax=-minmax)
             best_score = best_score * minmax
 
             if bscore is None or bscore < best_score:
@@ -224,12 +230,13 @@ class StateEval(object):
 
 
 
-def game_simulate(n = 13, search_depth = 2):
+def game_simulate(n = 13, dfs_scale = 1.0):
     s = GobangState(n, n)
     role = 1
     step = 0
     while not s.game_over:
-        pos, score = StateEval.min_max_search(s, role, role, search_depth)
+        pos, score = StateEval.min_max_search(s, root_role=role,
+                                              role=role, dfs_scale=dfs_scale)
         if pos is None:
             break
         s[pos] = role
@@ -286,5 +293,6 @@ def test_gen_pos():
 
 if __name__ == '__main__':
     # test_minmaxsearch()
-    game_simulate(19, 2)
+    # 减少 dfs_scale 可以加快搜索速度，但效果要差一些
+    game_simulate(13, dfs_scale=1)
     # test_gen_pos()
