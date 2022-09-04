@@ -7,4 +7,8 @@ package com.tracholar.demo.lambok;
 @MyGetterSetter
 public class MyTest {
     private String name;
+
+    public static void main(String[] args) {
+        System.out.println("Hello world!");
+    }
 }

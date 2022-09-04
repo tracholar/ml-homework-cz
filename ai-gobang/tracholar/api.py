@@ -11,6 +11,7 @@ class GobangState(object):
         self.ai = 1
         self.user = 2
         self.hist = []
+        self.last_action = None
 
     def copy(self):
         s = GobangState(self.width, self.height, self.myturn)
@@ -20,16 +21,16 @@ class GobangState(object):
         return s
 
     def place_ai(self, x, y):
-        if self.state[x][y] != 0:
+        if self[x, y] != 0:
             return False
-        self.state[x][y] = self.ai
+        self[x, y] = self.ai
         self.myturn = False
         return True
 
     def place_user(self, x, y):
-        if self.state[x][y] != 0:
+        if self[x, y] != 0:
             return False
-        self.state[x][y] = self.user
+        self[x, y] = self.user
         self.myturn = True
         return True
 
@@ -38,6 +39,7 @@ class GobangState(object):
 
     def __setitem__(self, key, value):
         self.state[key] = value
+        self.last_action = (key, value)
 
     def up_diag(self, i):
         return [self[i-k, k] for k in range(i+1)]
@@ -45,9 +47,12 @@ class GobangState(object):
     def down_diag(self, i):
         return [self[i+k, k] for k in range(self.height - i)]
 
-    def __str__(self):
+    def role_symbol(self, role):
         sym = [' ', '●', '○']
-        rows = ['{:2d}'.format(i) + (' '.join(sym[i] for i in x)) + '|' for i,x in enumerate(self.state)]
+        return sym[role]
+
+    def __str__(self):
+        rows = ['{:2d}'.format(i) + (' '.join(self.role_symbol(i) for i in x)) + '|' for i,x in enumerate(self.state)]
         line = ' ' + ''.join('{:2d}'.format(i) for i in range(self.width))
         rows.insert(0, line)
         rows.append(line)
@@ -226,21 +231,20 @@ class StateEval(object):
             return True
         return False
 
-
-
-
-
 def game_simulate(n = 13, dfs_scale = 1.0):
     s = GobangState(n, n)
     role = 1
     step = 0
     while not s.game_over:
+        t0 = time.time()
         pos, score = StateEval.min_max_search(s, root_role=role,
                                               role=role, dfs_scale=dfs_scale)
         if pos is None:
             break
         s[pos] = role
-        print('Step:', step, 'pos:', pos, 'min_max score:', score)
+        print('Step:', step, 'Role:', s.role_symbol(role) ,
+              'pos:', pos, 'min_max score:', score,
+              'time:', int(time.time() - t0))
         print(s)
         role = StateEval.change_role(role) # 换一个人
         step += 1
@@ -294,5 +298,5 @@ def test_gen_pos():
 if __name__ == '__main__':
     # test_minmaxsearch()
     # 减少 dfs_scale 可以加快搜索速度，但效果要差一些
-    game_simulate(13, dfs_scale=1)
+    game_simulate(13, dfs_scale=0.00001)
     # test_gen_pos()
