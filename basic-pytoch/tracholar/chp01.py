@@ -4,7 +4,6 @@ import sys
 import torch
 from torch import nn
 from torch.utils.data import DataLoader
-import torch.nn.utils.prune as prune
 from torchvision import datasets
 from torchvision.transforms import ToTensor
 
@@ -105,13 +104,9 @@ for _ in tqdm(range(epoch)):
     test(test_dataloader, model, loss_fn)
 print('Done!')
 
-prune.random_unstructured(model.linear_relu_stack, name='weight', amount=0.3)
 
-params = model.state_dict()
-for p in params:
-    params[p] = params[p].half()
-torch.save(params, 'model.f16.pth')
-print('Save model to model.f16.pth')
+torch.save(model.state_dict(), 'model.pth')
+print('Save model to model.pth')
 
 
 model = NeuralNetwork()

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # coding:utf-8
 import torch
 import numpy as np
@@ -14,3 +15,5 @@ print(torch.matmul(t1.T, t2))
 print(t1.mean())
 print(t1.add_(5))
 print(t1.numpy())
+=======
+>>>>>>> parent of 34b0b92 (update)
