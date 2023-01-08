@@ -9,8 +9,6 @@ features = {'price':[[1.], [5.]],
             'name' : [['Tensorflow', 'Keras', 'RNN', 'LSTM', 'CNN'], ['LSTM', 'CNN', 'Tensorflow', 'Keras', 'RNN']]
             }
 
-
-
 f_names = tf.feature_column.categorical_column_with_hash_bucket('name', 1000)
 f_names_emb = tf.feature_column.embedding_column(f_names, 16)
 
